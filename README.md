@@ -29,7 +29,6 @@ Illustration of Progress
 As a student who may start to lose motivation while doing work, being able to see how much work you ahve achieved or how long you have been working for could motivate them to keep working. This will be done is 2 ways, firstly a progress bar that visualises the number of tasks completed and seondy a graph to illustrate the number of hours spent wokring compared to resting. 
 
 Cleo the Cat:
-illustrations and animations-- integrated into the design/theme  of our app
 As a student that thinks that to-do list apps are generally boring, these app can be made more interactive and attractive with the use of a character. Cleo the cat is the charater integrated throughout the app in illustrations and animations. For example the reminder feature mentioned earlier will have an animation of Cleo to idicate that the study or rest period is over. Giving the users a compainion creates a sense of attachement and hence the app seems less dull.
 
 Customizability:
