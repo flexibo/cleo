@@ -10,13 +10,13 @@ Another struggle for students is staying focused in a world full of distractions
 
 **Features and applications:**
 
-TodoList
+TodoList:
 As a student with many tasks and assignments so it is important to stay organised and on track so they may use a to-do list to aid them. Our app allows students display their tasks on the screen for convenience. 
 
-Subtasks 
+Subtasks:
 As a student who might have difficulty starting on a task that may feel daunting, having subtasks that they created will help make the task itself feel more manageable, and have a more detailed plan on what they want to work on first. Our app encourses students to take this step by making it more _____???. 
 
-Timer
+Timer:
 As a student working for long periods of time, it's important to maintain focus throughout. This can be done with the use of timers that follow a study-rest cycle that allows for sufficient break which can help prevent fatigue. Futhermore consistency in a student's studing patterns build habit and after time might mean students find it even easier to focus.
 
 Extention of Period:
