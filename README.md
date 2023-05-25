@@ -25,7 +25,7 @@ As a student who is studying who is focused on their current task, it might be c
 Reminders:
 As a student that procrastinates on work by gaming, as their rest period comes to an end, there will be a reminder for the student to go back to work. After 15-30 seconds, if the student ignores the reminder, it will force close the game (will visually show through cat animation), so that the user will be snapped out of the “in game trance” and will be more likely to go back to work. The same applies for students who gets disctracted while they are supposed to be working.
 
-Illustration of Progress 
+Progress tracking:
 As a student who may start to lose motivation while doing work, being able to see how much work you ahve achieved or how long you have been working for could motivate them to keep working. This will be done is 2 ways, firstly a progress bar that visualises the number of tasks completed and seondy a graph to illustrate the number of hours spent wokring compared to resting. 
 
 Cleo the Cat:
