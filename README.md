@@ -1,6 +1,6 @@
 # Cleo's Creators
 
-#Motivation
+# Motivation
 
 Many students struggle with time management. It is common for students to use to-do lists as a way to keep track of their work in order to make better use of their time. However, we find that the to-do lists apps available to students can be improved to better aid students in other aspects that they stuggle with such as finding motivation and maintaining focus. 
 
