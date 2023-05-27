@@ -6,7 +6,7 @@ Students struggle with building up the motvation to get a task done before they 
 
 Another struggle for students is staying focused in a world full of distractions. From gaming to social media there are so many things that can distract you from your work. Students find it very hard to resist the temptations of a distraction and feel as though we cannot rely on our own self-discipline.
 
-# Features and applications
+# Features
 
 ## TodoList
 As a student with many tasks and assignments so it is important to stay organised and on track so they may use a to-do list to aid them. Our app allows students display their tasks on the screen for convenience. 
@@ -31,6 +31,9 @@ As a student that thinks that to-do list apps are generally boring, these app ca
 
 ## Customizability
 As a student who might have differing wants and needs, being able to customize (like which timer they prefer on using, or whether to show notification when work/break time is over) will help suit the student’s needs in the way that they see fit.
+
+## User Stories
+
 
 # Design
 
