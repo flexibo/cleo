@@ -62,7 +62,7 @@ Once the interval for study or break is over, there will be a reminder for stude
 ## Progress tracking
 This feature consists of 2 components. Firstly,  a progress bar that visualises the number of tasks completed with respect to the total number of tasks to be completed. Secondly, a graph to illustrate the student’s number of hours spent working compared to resting. 
 
-#Calendar 
+## Calendar 
 Once a task has been created with deadlines, they can be viewed  in a calendar format. Weeks are colour coded to show how much workload there is in each week (red - heavy workload, blue - light workload). This encourages users to distribute their workload evenly throughout the months, and not have too much workload in just one week. 
 
 ## Cleo the Cat
