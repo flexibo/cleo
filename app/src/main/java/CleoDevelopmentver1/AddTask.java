@@ -20,6 +20,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import java.util.ArrayList;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
 
 
 /**
@@ -67,6 +70,21 @@ public class AddTask implements ActionListener {
         button3.addActionListener(this);
         
         taskTextField.setPreferredSize(new Dimension(300,40));
+        taskTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent event) {
+                if (taskTextField.getText().equals("Main Task")) {
+                    taskTextField.setText("");
+                }
+            }
+            
+            @Override
+            public void focusLost(FocusEvent event) {
+                if (taskTextField.getText().equals("")) {
+                    taskTextField.setText("Main Task");
+                }
+            }
+        });
         deadlineTextField.setPreferredSize(new Dimension(200,40));
         
         JLabel label3 = new JLabel("SubTasks");
