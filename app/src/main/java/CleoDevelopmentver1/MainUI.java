@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 public class MainUI extends JFrame implements ActionListener {
     //ImageIcon image = new ImageIcon("src/main/resources/image0.jpg");
     JButton button = new JButton("Add Task");
+    JButton button2 = new JButton("Timer");
     //JTextField textField = new JTextField();
     static ArrayList<MainTask> tasks = new ArrayList<>();
     final static DefaultListModel<String> myTaskList = new DefaultListModel<>();
@@ -42,6 +43,7 @@ public class MainUI extends JFrame implements ActionListener {
     final static DefaultListModel<String> myPriorityList = new DefaultListModel<>();
     static JList<String> priorityList = new JList<>(myPriorityList);
     JLabel priorityTitle = new JLabel("Priority");
+    //public JLabel showTime = new JLabel("hello");
     
     
     
@@ -82,9 +84,14 @@ public class MainUI extends JFrame implements ActionListener {
         button.setFocusable(false);
         button.addActionListener(this);
         
+        button2.setBounds(0, 300, 100, 50);
+        button2.setFocusable(false);
+        button2.addActionListener(this);
+        
         //textField.setPreferredSize(new Dimension(250, 40));
         //this.add(textField);
         this.add(button);
+        this.add(button2);
         
         JMenuBar menuBar = new JMenuBar();
         JMenu importMenu = new JMenu("File");
@@ -115,6 +122,10 @@ public class MainUI extends JFrame implements ActionListener {
             //System.out.println(textField.getText());
             new AddTask();
             System.out.println("hi");
+        }
+        
+        if (e.getSource() == button2) {
+            new TimerSettingsUI();
         }
     }
     
