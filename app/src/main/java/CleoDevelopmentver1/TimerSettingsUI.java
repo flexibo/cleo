@@ -33,15 +33,15 @@ public class TimerSettingsUI implements ChangeListener, ActionListener {
     //panel 1: start/end session timer
     JPanel panel1 = new JPanel(); 
     JLabel label = new JLabel("Timer");
-    JLabel showTime = new JLabel();
+    JLabel showTime = new JLabel("00:00");
     JLabel currentStage = new JLabel();
     JButton button1 = new JButton("Start Session");
     JButton button2 = new JButton("End Session");
     TimerSpecification defaultPomodoro = new TimerSpecification("Pomodoro Timer", 25,5);
     TimerSpecification[] options = {defaultPomodoro};
     JComboBox comboBox = new JComboBox(options);
-    Timer timer = new Timer(100, this); // timer with faster speed for testing purposes
-    //Timer timer = new Timer(1000, this);  //actual timer
+    Timer timer = new Timer(1000, this); // timer with faster speed for testing purposes
+    
     
     //stuff for interval timer
     int k = 0;
@@ -209,31 +209,34 @@ public class TimerSettingsUI implements ChangeListener, ActionListener {
         }
         
         if (e.getSource() == timer) {
-            k++;
+            
             showTime.setText(String.valueOf(mins(k) + ":" + secs(k)));
             //JLabel mainUIShowTime = new JLabel();
             //mainUIShowTime.setText(String.valueOf(mins(k) + ":" + secs(k)));
+            k++;
+            currentStage.setText(isWorking? "Work Period" : "Rest Period");
             
-            if(extendedWork && k == 5 + studyDurationInt) {
+            
+            if(extendedWork && k == 5 + studyDurationInt + 1) {
                 extendedWork = false;
                 timer.stop();
                 moveToRest();
             }
-            else if(extendedRest && k == 5 + restDurationInt) {
+            else if(extendedRest && k == 5 + restDurationInt + 1) {
                 extendedRest = false;
                 timer.stop();
                 moveToWork();
             }
             
             
-            else if(isWorking && k  == studyDurationInt) {
+            else if(isWorking && k  == studyDurationInt + 1) {
                 timer.stop();
                 moveToRest();
                 //isWorking = false;
                 //System.out.println(k);
             }
             
-            else if (!isWorking && k == restDurationInt) {
+            else if (!isWorking && k == restDurationInt + 1) {
                 timer.stop();
                 //isWorking = true;
                 moveToWork();
