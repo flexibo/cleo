@@ -51,7 +51,7 @@ public class AddTask implements ActionListener {
     //Task task = new Task();
     
     
-    AddTask() {
+    public AddTask() {
         frame.setTitle("Add a new task");
         frame.setSize(620, 420);
         frame.setLayout(new FlowLayout(3));

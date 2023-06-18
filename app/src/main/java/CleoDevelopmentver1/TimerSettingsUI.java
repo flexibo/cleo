@@ -4,6 +4,7 @@
  */
 package CleoDevelopmentver1;
 
+import Model.TimerSpecification;
 import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.Dimension;
@@ -80,7 +81,7 @@ public class TimerSettingsUI implements ChangeListener, ActionListener {
     
     
     
-    TimerSettingsUI() {
+    public TimerSettingsUI() {
         frame.setTitle("Timer");
         frame.setSize(620, 420);
         frame.setLayout(null);
