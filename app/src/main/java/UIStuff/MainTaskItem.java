@@ -5,8 +5,7 @@
 package UIStuff;
 
 import Model.MainTask;
-import Model.Task;
-import com.google.common.primitives.Ints;
+import Model.SubTask;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,79 +19,73 @@ import javax.swing.JProgressBar;
  */
 public class MainTaskItem extends javax.swing.JPanel {
     
+    final private MainTask mainTask;
     
-    /**
-     * Creates new form MainTaskItem
-     */
+    private ArrayList<SubTaskItem> subTaskItems;
+    private int subTasksSize;
     
-    private MainTask mainTask;
-    private JProgressBar bar = new JProgressBar() {
+    final private JProgressBar bar = new JProgressBar() {
             @Override
             protected void paintBorder(Graphics g) {
                 // Override to remove border painting
             }
         };
-    private ArrayList<SubTaskItem> subTaskItems;
-    private ArrayList<Task> subTasks;
-    private int subTasksSize;
-    private boolean subTasksDoneHistory[];
     
-    
+     /**
+     * Creates new form MainTaskItem
+     */
     public MainTaskItem(MainTask mainTask) {
         initComponents();
         dueDate.setText(mainTask.deadline);
         priority.setText(String.valueOf(mainTask.priority));
         task.setText(mainTask.task);
+        
         this.mainTask = mainTask;
         this.subTaskItems = new ArrayList();
-        this.subTasks = mainTask.subTasks;
-        this.subTasksSize = mainTask.subTasks.size();
-        this.subTasksDoneHistory = new boolean[subTasksSize];
+        this.subTasksSize = mainTask.numOfSubTasks();
+        
+        for (int i = 0; i< subTasksSize; i++) {
+            subTaskItems.add(new SubTaskItem(this, i));
+        }
         
         setOpaque(false);
         
         bar.setBounds(10,40,500,2);
         
         updateProgressBar();
-        add(bar);
-        
-        for (int i = 0; i< subTasksSize; i++) {
-            Task subtask = subTasks.get(i);
-            subTaskItems.add(new SubTaskItem(this, subtask));
-        }
-        
-        
+        add(bar); 
     }
-    
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        g2.setColor(new Color(235,255,250));
-        g2.fillRoundRect(0,0, getWidth(), getHeight(), 10,10);
-        
-        super.paintComponent(g);
-    }
+   
     
     public ArrayList<SubTaskItem> getSubTaskItems() {
         return subTaskItems;
     }
     
-    public void updateProgressBar() {
+        
+    /**
+     * Get the subTask object of the mainTask object
+     * @param index index of subTask in the mainTask object
+     * @return The queried subTask
+     */
+    
+    public SubTask getSubTask(int index) {
+        return mainTask.getSubTask(index);
+    }
+
+     
+    final public void updateProgressBar() {
         int completedWeight = 0;
         int totalWeight = 0;
-        int completed = 0;
         for (int i = 0; i < subTasksSize ;i++) {
-            Task subTask = subTasks.get(i);
-            totalWeight += subTask.weight;
-            if (subTask.done) {
-                completedWeight += subTask.weight;
-                completed++;
+            int weight = subTaskItems.get(i).getWeight();
+            boolean done = subTaskItems.get(i).getDone();
+            totalWeight += weight;
+            if (done) {
+                completedWeight += weight;
             }
         }
 
-        if (completed == mainTask.subTasks.size())
+        if (totalWeight == completedWeight)
         {
             task.setSelected(true);
             toggleDone(true);
@@ -105,24 +98,14 @@ public class MainTaskItem extends javax.swing.JPanel {
              
         
         bar.setValue((completedWeight*100)/(totalWeight));
-        
- 
-        //System.out.println((completedWeight*100)/totalWeight);
     }
+    
+    
     
     private void toggleDone(boolean bool) {
         mainTask.done = bool;
-        
-        if (bool == true){
-            task.setForeground(Color.GRAY);
-            priority.setForeground(Color.GRAY);
-            dueDate.setForeground(Color.GRAY);
-        } else {
-            task.setForeground(Color.BLACK);
-            priority.setForeground(Color.BLACK);
-            dueDate.setForeground(Color.BLACK);
-        }
-        
+        showDone(bool);
+
     }
 
     /**
@@ -177,23 +160,46 @@ public class MainTaskItem extends javax.swing.JPanel {
     private void taskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskActionPerformed
         // TODO add your handling code here:
         toggleDone(task.isSelected());
-        
+                
         if (task.isSelected()){
             for (int i = 0; i < subTasksSize; i++) {
-                subTasksDoneHistory[i] = subTasks.get(i).done;
-                subTasks.get(i).done = true; 
                 subTaskItems.get(i).toggleDone(true);
             }
-            bar.setValue(100);
         } else {
             for (int i = 0; i < subTasksSize; i++) {
-                subTaskItems.get(i).toggleDone(subTasksDoneHistory[i]);
-            }
-            updateProgressBar();
+                subTaskItems.get(i).toggleDone(false);
+            } 
         }
+        
+        updateProgressBar();
     }//GEN-LAST:event_taskActionPerformed
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        g2.setColor(new Color(235,255,250));
+        g2.fillRoundRect(0,0, getWidth(), getHeight(), 10,10);
+        
+        super.paintComponent(g);
+    }
     
+       /**
+     * Show visually if the task is completed or not on the UI.
+     */
+    private void showDone(boolean bool) {
+        if (bool == true){
+            task.setForeground(Color.GRAY);
+            priority.setForeground(Color.GRAY);
+            dueDate.setForeground(Color.GRAY);
+        } else {
+            task.setForeground(Color.BLACK);
+            priority.setForeground(Color.BLACK);
+            dueDate.setForeground(Color.BLACK);
+        }
+    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dueDate;

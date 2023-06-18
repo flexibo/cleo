@@ -5,7 +5,7 @@
 package Components;
 
 import Model.MainTask;
-import Model.Task;
+import Model.SubTask;
 import UIStuff.MainTaskItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -27,7 +27,6 @@ public class TaskView extends javax.swing.JPanel {
         setLayout(new FlowLayout());
         
         setPreferredSize(new Dimension(570, 2000));
-        System.err.println("yutyui");
         
         /**
          * For testing purposes
@@ -48,12 +47,12 @@ public class TaskView extends javax.swing.JPanel {
 
     
     private void initData(ArrayList<MainTask> mainTasks) {
-        ArrayList<Task> subtasks = new ArrayList();
-        for (int i = 1; i < 5; i ++) {
-            subtasks.add(new Task("Subtask " + i, i + "/7/2023", i));
-        }
-        
         for (int i = 1; i < 10; i++) {
+            ArrayList<SubTask> subtasks = new ArrayList();
+            for (int j = 1; j < 5; j ++) {
+                subtasks.add(new SubTask("Subtask " + j, j + "/7/2023", j));
+            }
+            
             mainTasks.add(new MainTask("Task " + i, i + "/7/2023", 2, subtasks));
         }
     }

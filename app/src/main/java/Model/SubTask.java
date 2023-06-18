@@ -4,13 +4,25 @@
  */
 package Model;
 
+import UIStuff.SubTaskItem;
+
 /**
  *
  * @author sidneylawther
  */
 public class SubTask extends Task {
 
+    private SubTaskItem item;
+    
     public SubTask(String name, String deadline, int weight) {
         super(name,deadline,weight);
+    }
+    
+    public void setItem(SubTaskItem item) {
+        this.item = item;
+    }
+    
+    public SubTaskItem getItem() {
+        return this.item;
     }
 }

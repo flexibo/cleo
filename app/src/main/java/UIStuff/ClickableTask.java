@@ -5,6 +5,7 @@
 package UIStuff;
 
 import Model.MainTask;
+import Model.SubTask;
 import Model.Task;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -57,44 +58,6 @@ public class ClickableTask extends javax.swing.JPanel {
             }
         });
  
-    }
-    
-    public ClickableTask() {
-        initComponents();
-        
-        MainTask mainTask = new MainTask("test", "23/12/2012", 3);
-        mainTask.subTasks.add(new Task("test", "20/12/2012", 3));
-        mainTask.subTasks.add(new Task("iamapotatowagon", "21/12/2012", 3));
-        mainTask.subTasks.add(new Task("test3", "22/12/2012", 3));
-        
-        setPreferredSize(new java.awt.Dimension(550, 30));
-        
-        setLayout(new FlowLayout());
-        
-        MainTaskItem mainTaskItem = new MainTaskItem(mainTask);
-        add(mainTaskItem);
-        
-        JPanel subTaskPanels = new JPanel();
-        for (int i = 0; i < mainTask.subTasks.size(); i++) {
-            subTaskPanels.add(new SubTaskItem(mainTaskItem, mainTask.subTasks.get(i)));
-        }
-        subTaskPanels.setPreferredSize(new Dimension(550, 50 * mainTask.subTasks.size()));
-        
-        subTaskPanels.setLayout(new FlowLayout());
-        subTaskPanels.setOpaque(false);
-        subTaskPanels.setVisible(true);
-        add(subTaskPanels);
-        
-        
-        jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/downArrow.png"));
-        jLabel1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                toggleVisibility(subTaskPanels);
-            }
-        });
-        
-        
     }
     
     public void toggleVisibility(JPanel panel) {

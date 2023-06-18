@@ -4,13 +4,11 @@
  */
 package UIStuff;
 
-import Model.MainTask;
-import Model.Task;
+import Model.SubTask;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
 
 /**
  *
@@ -18,45 +16,57 @@ import java.util.ArrayList;
  */
 public class SubTaskItem extends javax.swing.JPanel {
 
-    Task subt;
-    MainTaskItem mainItem;
+    final private SubTask subTaskObject;
+    final private MainTaskItem mainTaskItem;
+    boolean prevDone;
+    
     /**
-     * Creates new form SubTaskItem
+     * Creates new form SubTaskItem.
+     * @param mainTaskItem 
+     * @param index index of the subTask array of the mainTask object.
      */
-    public SubTaskItem(MainTaskItem mainItem, Task subt) {
+    protected SubTaskItem(MainTaskItem mainTaskItem, int index) {
         initComponents();
-        this.mainItem = mainItem;
-        this.subt = subt;
-        dueDate.setText(subt.deadline);
-        subtask.setText(subt.task);
-        setOpaque(false);
+        this.mainTaskItem = mainTaskItem;
+        this.subTaskObject = mainTaskItem.getSubTask(index);
+        this.prevDone = false;
+        
+        dueDate.setText(subTaskObject.deadline);
+        subtask.setText(subTaskObject.task);
+        this.setOpaque(false);
     }
 
-    
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(new Color(250,255,255));
-        g2.fillRoundRect(0,0, getWidth(), getHeight(), 10,10);
-        
-        super.paintComponent(g);
-    }
-    
-    public void toggleDone(boolean bool) {
-        subt.done = bool;
-        subtask.setSelected(bool);
+    /**
+     * Sets the subTask object and item to be (not) done, also saves Boolean state before change. 
+     * @param bool set true if task is done, and false otherwise.
+     */
+    protected void toggleDone(boolean bool) {
+ 
+        //TODO: simplify this code somehow
         
         if (bool){
-            subtask.setForeground(Color.GRAY);
-            dueDate.setForeground(Color.GRAY);
+            prevDone = subTaskObject.done;
+            subTaskObject.done = true;
+            showDone(true);
+            subtask.setSelected(true);
+        } else if (prevDone){
+            subTaskObject.done = true;
+            showDone(true);
+            subtask.setSelected(true);
         } else {
-            subtask.setForeground(Color.BLACK);
-            dueDate.setForeground(Color.BLACK);
+            showDone(false);
+            subTaskObject.done = false;
+            subtask.setSelected(false);
         }
     } 
     
-
+    protected boolean getDone() {
+        return subTaskObject.done;
+    }
     
+    protected int getWeight() {
+        return subTaskObject.weight;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,19 +113,43 @@ public class SubTaskItem extends javax.swing.JPanel {
 
     private void subtaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtaskActionPerformed
         // TODO add your handling code here:
+        
         if (subtask.isSelected()) {
+            showDone(true);
+            subTaskObject.done = true;
+        } else {
+            showDone(false);
+            subTaskObject.done = false;
+        }
+        
+        mainTaskItem.updateProgressBar();
+    }//GEN-LAST:event_subtaskActionPerformed
+
+    /**
+     * Show visually if the task is completed or not on the UI.
+     */
+    private void showDone(boolean bool) {
+        if (bool) {
             subtask.setForeground(Color.GRAY);
             dueDate.setForeground(Color.GRAY);
-            subt.done = true;
         } else {
             subtask.setForeground(Color.BLACK);
             dueDate.setForeground(Color.BLACK);
-            subt.done = false;
         }
-              
-        mainItem.updateProgressBar();
-    }//GEN-LAST:event_subtaskActionPerformed
-
+    }
+    
+    /**
+     * Designing how the SubTaskItem should look like. 
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(new Color(250,255,255));
+        g2.fillRoundRect(0,0, getWidth(), getHeight(), 10,10);
+        
+        super.paintComponent(g);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dueDate;
