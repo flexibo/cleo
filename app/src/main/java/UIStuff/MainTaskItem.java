@@ -4,8 +4,8 @@
  */
 package UIStuff;
 
-import Model.ModelMainTask;
-import Model.ModelTask;
+import Model.MainTask;
+import Model.Task;
 import com.google.common.primitives.Ints;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -25,7 +25,7 @@ public class MainTaskItem extends javax.swing.JPanel {
      * Creates new form MainTaskItem
      */
     
-    private ModelMainTask mainTask;
+    private MainTask mainTask;
     private JProgressBar bar = new JProgressBar() {
             @Override
             protected void paintBorder(Graphics g) {
@@ -33,12 +33,12 @@ public class MainTaskItem extends javax.swing.JPanel {
             }
         };
     private ArrayList<SubTaskItem> subTaskItems;
-    private ArrayList<ModelTask> subTasks;
+    private ArrayList<Task> subTasks;
     private int subTasksSize;
     private boolean subTasksDoneHistory[];
     
     
-    public MainTaskItem(ModelMainTask mainTask) {
+    public MainTaskItem(MainTask mainTask) {
         initComponents();
         dueDate.setText(mainTask.deadline);
         priority.setText(String.valueOf(mainTask.priority));
@@ -57,7 +57,7 @@ public class MainTaskItem extends javax.swing.JPanel {
         add(bar);
         
         for (int i = 0; i< subTasksSize; i++) {
-            ModelTask subtask = subTasks.get(i);
+            Task subtask = subTasks.get(i);
             subTaskItems.add(new SubTaskItem(this, subtask));
         }
         
@@ -84,7 +84,7 @@ public class MainTaskItem extends javax.swing.JPanel {
         int totalWeight = 0;
         int completed = 0;
         for (int i = 0; i < subTasksSize ;i++) {
-            ModelTask subTask = subTasks.get(i);
+            Task subTask = subTasks.get(i);
             totalWeight += subTask.weight;
             if (subTask.done) {
                 completedWeight += subTask.weight;

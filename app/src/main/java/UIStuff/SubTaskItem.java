@@ -4,8 +4,8 @@
  */
 package UIStuff;
 
-import Model.ModelMainTask;
-import Model.ModelTask;
+import Model.MainTask;
+import Model.Task;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,12 +18,12 @@ import java.util.ArrayList;
  */
 public class SubTaskItem extends javax.swing.JPanel {
 
-    ModelTask subt;
+    Task subt;
     MainTaskItem mainItem;
     /**
      * Creates new form SubTaskItem
      */
-    public SubTaskItem(MainTaskItem mainItem, ModelTask subt) {
+    public SubTaskItem(MainTaskItem mainItem, Task subt) {
         initComponents();
         this.mainItem = mainItem;
         this.subt = subt;

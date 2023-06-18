@@ -4,7 +4,6 @@
  */
 package Components;
 
-import Model.ModelMenu;
 import event.EventMenuSelected;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -58,12 +57,12 @@ public class Menu extends javax.swing.JPanel {
     }
     
     private void init() {
-        //listMenu1.addItem(new ModelMenu("1", "Dashboard", ModelMenu.MenuType.MENU));
-        listMenu1.addItem(new ModelMenu("2", "Tasks", ModelMenu.MenuType.MENU));
-        listMenu1.addItem(new ModelMenu("3", "Progress", ModelMenu.MenuType.MENU));
-        listMenu1.addItem(new ModelMenu("4", "Calendar", ModelMenu.MenuType.MENU));
-        listMenu1.addItem(new ModelMenu("5", "Timer", ModelMenu.MenuType.MENU));
-        listMenu1.addItem(new ModelMenu("6", "Settings", ModelMenu.MenuType.MENU));
+        //listMenu1.addItem(new Menu("1", "Dashboard", Menu.MenuType.MENU));
+        listMenu1.addItem(new Model.Menu("2", "Tasks", Model.Menu.MenuType.MENU));
+        listMenu1.addItem(new Model.Menu("3", "Progress", Model.Menu.MenuType.MENU));
+        listMenu1.addItem(new Model.Menu("4", "Calendar", Model.Menu.MenuType.MENU));
+        listMenu1.addItem(new Model.Menu("5", "Timer", Model.Menu.MenuType.MENU));
+        listMenu1.addItem(new Model.Menu("6", "Settings", Model.Menu.MenuType.MENU));
     }
 
     /**

@@ -6,15 +6,15 @@ package Model;
 
 /**
  *
- * @author peach
+ * @author sidneylawther
  */
-public class ModelTask {
+public class Task {
     public String task;
     public String deadline;
     public int weight; 
     public boolean done;
     
-    public ModelTask(String task, String date, int weight) {
+    public Task(String task, String date, int weight) {
         this.task = task;
         this.deadline = date;
         this.weight = weight; 

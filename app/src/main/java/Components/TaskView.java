@@ -4,8 +4,8 @@
  */
 package Components;
 
-import Model.ModelMainTask;
-import Model.ModelTask;
+import Model.MainTask;
+import Model.Task;
 import UIStuff.MainTaskItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class TaskView extends javax.swing.JPanel {
 
-    public ArrayList<ModelMainTask> mainTasks = new ArrayList();
+    public ArrayList<MainTask> mainTasks = new ArrayList();
             
     /**
      * Creates new form TaskView
@@ -47,14 +47,14 @@ public class TaskView extends javax.swing.JPanel {
     }
 
     
-    private void initData(ArrayList<ModelMainTask> mainTasks) {
-        ArrayList<ModelTask> subtasks = new ArrayList();
+    private void initData(ArrayList<MainTask> mainTasks) {
+        ArrayList<Task> subtasks = new ArrayList();
         for (int i = 1; i < 5; i ++) {
-            subtasks.add(new ModelTask("Subtask " + i, i + "/7/2023", i));
+            subtasks.add(new Task("Subtask " + i, i + "/7/2023", i));
         }
         
         for (int i = 1; i < 10; i++) {
-            mainTasks.add(new ModelMainTask("Task " + i, i + "/7/2023", 2, subtasks));
+            mainTasks.add(new MainTask("Task " + i, i + "/7/2023", 2, subtasks));
         }
     }
     /**

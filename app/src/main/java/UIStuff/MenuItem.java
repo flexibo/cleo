@@ -4,7 +4,7 @@
  */
 package UIStuff;
 
-import Model.ModelMenu;
+import Model.Menu;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -25,13 +25,13 @@ public class MenuItem extends javax.swing.JPanel {
     private boolean selected;
     private boolean over;
     
-    public MenuItem(ModelMenu data) {
+    public MenuItem(Menu data) {
         initComponents();
         setOpaque(false);
-        if (data.getType() == ModelMenu.MenuType.MENU) {
+        if (data.getType() == Menu.MenuType.MENU) {
             labelIcon.setIcon(data.toIcon());
             labalName.setText(data.getName());
-        } else if (data.getType() == ModelMenu.MenuType.TITLE) {
+        } else if (data.getType() == Menu.MenuType.TITLE) {
             labelIcon.setText(data.getName());
             labelIcon.setFont(new Font("sansserif", 1, 12));
             labalName.setVisible(false);

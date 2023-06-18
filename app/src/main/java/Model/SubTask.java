@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package CleoDevelopmentver1;
+package Model;
 
 /**
  *
@@ -10,7 +10,7 @@ package CleoDevelopmentver1;
  */
 public class SubTask extends Task {
 
-    SubTask(String name, String deadline, String weight) {
+    public SubTask(String name, String deadline, int weight) {
         super(name,deadline,weight);
     }
 }

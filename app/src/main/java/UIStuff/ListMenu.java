@@ -4,7 +4,7 @@
  */
 package UIStuff;
 
-import Model.ModelMenu;
+import Model.Menu;
 import event.EventMenuSelected;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
@@ -41,9 +41,9 @@ public class ListMenu<E extends Object> extends JList<E> {
                 if (SwingUtilities.isLeftMouseButton(e)){
                     int index = locationToIndex(e.getPoint());
                     Object o = model.getElementAt(index);
-                    if(o instanceof ModelMenu) {
-                        ModelMenu menu = (ModelMenu)o;
-                        if (menu.getType() == ModelMenu.MenuType.MENU) {
+                    if(o instanceof Menu) {
+                        Menu menu = (Menu)o;
+                        if (menu.getType() == Menu.MenuType.MENU) {
                             selectedIndex = index;
                             if (event != null) {
                                 event.selected(index);
@@ -69,9 +69,9 @@ public class ListMenu<E extends Object> extends JList<E> {
                 int index = locationToIndex(e.getPoint());
                 if (index != overIndex) {
                     Object o = model.getElementAt(index);
-                    if (o instanceof ModelMenu) {
-                        ModelMenu menu = (ModelMenu) o;
-                        if (menu.getType() == ModelMenu.MenuType.MENU) {
+                    if (o instanceof Menu) {
+                        Menu menu = (Menu) o;
+                        if (menu.getType() == Menu.MenuType.MENU) {
                             overIndex = index;
                         }
                         repaint();
@@ -86,11 +86,11 @@ public class ListMenu<E extends Object> extends JList<E> {
         return new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-              ModelMenu data;
-              if (value instanceof ModelMenu) {
-                  data = (ModelMenu) value;
+              Menu data;
+              if (value instanceof Menu) {
+                  data = (Menu) value;
               } else {
-                  data = new ModelMenu("", value + "", ModelMenu.MenuType.MENU);
+                  data = new Menu("", value + "", Menu.MenuType.MENU);
               }
               
               MenuItem item = new MenuItem(data);
@@ -103,7 +103,7 @@ public class ListMenu<E extends Object> extends JList<E> {
         };
     }
     
-    public void addItem(ModelMenu data) {
+    public void addItem(Menu data) {
         model.addElement(data);
     }
 }

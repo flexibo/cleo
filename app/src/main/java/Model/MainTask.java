@@ -8,32 +8,32 @@ import java.util.ArrayList;
 
 /**
  *
- * @author peach
+ * @author sidneylawther
  */
-public class ModelMainTask extends ModelTask {
+public class MainTask extends Task {
     public int priority;
-    public ArrayList<ModelTask> subTasks; 
+    public ArrayList<Task> subTasks; 
     
-    public ModelMainTask(String name, String date, int priority) {
+    public MainTask(String name, String date, int priority) {
         super(name, date, 0);
         this.priority = priority;
         this.subTasks = new ArrayList<>();
     }
     
-    public ModelMainTask(String name, String date, int priority, ArrayList<ModelTask> subtasks) {
+    public MainTask(String name, String date, int priority, ArrayList<Task> subtasks) {
         super(name, date, 0);
         this.priority = priority;
         this.subTasks = subtasks;
     }
     
-    public void addSubTask(ModelTask subTask) {
+    public void addSubTask(Task subTask) {
         this.subTasks.add(subTask);
     }
     
     public void updateWeight() {
         int sumWeight = 0;
         for (int i = 0; i < subTasks.size(); i++) {
-            ModelTask subtask = subTasks.get(i);
+            Task subtask = subTasks.get(i);
             sumWeight += subtask.weight;
         }
         

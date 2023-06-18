@@ -5,22 +5,19 @@
 package CleoDevelopmentver1;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import Model.MainTask;
+import Model.Task;
+
 /**
  *
  * @author sidneylawther
@@ -131,7 +128,7 @@ public class MainUI extends JFrame implements ActionListener {
     
     private  void initializeTasks() {
         for (int i = 1; i < 6; i++) {
-            this.tasks.add(new MainTask("Task " + i, i + "/7/2023", "1"));
+            this.tasks.add(new MainTask("Task " + i, i + "/7/2023", 1));
         }
         
         for (int i = 0; i < this.tasks.size();  i++) {
@@ -142,10 +139,9 @@ public class MainUI extends JFrame implements ActionListener {
             myDeadlineList.addElement(this.tasks.get(i).deadline);
          }
         for (int i = 0; i < this.tasks.size();  i++) {
-            myPriorityList.addElement(this.tasks.get(i).priority);
+            myPriorityList.addElement(String.valueOf(this.tasks.get(i).priority));
         }
        
     }
     
 }
-

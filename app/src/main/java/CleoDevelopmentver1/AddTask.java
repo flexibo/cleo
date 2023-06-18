@@ -4,8 +4,8 @@
  */
 package CleoDevelopmentver1;
 
-import static CleoDevelopmentver1.MainUI.deadlineList;
-import static CleoDevelopmentver1.MainUI.taskList;
+import Model.SubTask;
+import Model.MainTask;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -162,20 +162,15 @@ public class AddTask implements ActionListener {
         }
         if (e.getSource() == button3) {
             //add main task to to-do list & add subtasks into the main task
-            MainTask mainTask = new MainTask(taskTextField.getText(), deadlineTextField.getText(), (String) comboBox.getSelectedItem());
-            MainUI.tasks.add(mainTask);
-            MainUI.myTaskList.addElement(taskTextField.getText());
-            MainUI.myDeadlineList.addElement(deadlineTextField.getText());
-            MainUI.myPriorityList.addElement((String) comboBox.getSelectedItem());
-            
+            MainTask mainTask = new MainTask(taskTextField.getText(), deadlineTextField.getText(), (int) comboBox.getSelectedItem());
+
             System.out.println(deadlines.get(1).getText());
             for (int i = 0; i < deadlines.size(); i++) {
                 String subTaskTitle = subtasks.get(i).getText();
                 String deadline = deadlines.get(i).getText();
-                String weight = (String) weights.get(i).getSelectedItem();
+                int weight = (int) weights.get(i).getSelectedItem();
                 
                 SubTask subTask = new SubTask(subTaskTitle, deadline, weight);
-                mainTask.subTasks.add(subTask);
                 
             }
             

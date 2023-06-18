@@ -4,8 +4,8 @@
  */
 package UIStuff;
 
-import Model.ModelMainTask;
-import Model.ModelTask;
+import Model.MainTask;
+import Model.Task;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -62,10 +62,10 @@ public class ClickableTask extends javax.swing.JPanel {
     public ClickableTask() {
         initComponents();
         
-        ModelMainTask mainTask = new ModelMainTask("test", "23/12/2012", 3);
-        mainTask.subTasks.add(new ModelTask("test", "20/12/2012", 3));
-        mainTask.subTasks.add(new ModelTask("iamapotatowagon", "21/12/2012", 3));
-        mainTask.subTasks.add(new ModelTask("test3", "22/12/2012", 3));
+        MainTask mainTask = new MainTask("test", "23/12/2012", 3);
+        mainTask.subTasks.add(new Task("test", "20/12/2012", 3));
+        mainTask.subTasks.add(new Task("iamapotatowagon", "21/12/2012", 3));
+        mainTask.subTasks.add(new Task("test3", "22/12/2012", 3));
         
         setPreferredSize(new java.awt.Dimension(550, 30));
         

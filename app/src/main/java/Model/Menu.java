@@ -6,13 +6,12 @@ package Model;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.border.TitledBorder;
 
 /**
  *
  * @author peach
  */
-public class ModelMenu {
+public class Menu {
     String icon;
     String name;
     MenuType type;
@@ -45,13 +44,13 @@ public class ModelMenu {
         this.type = type;
     }
     
-    public ModelMenu(String icon, String name, MenuType type) {
+    public Menu(String icon, String name, MenuType type) {
         this.icon = icon;
         this.name = name;
         this.type = type;
     }
     
-    public ModelMenu() {
+    public Menu() {
         
     }
     
