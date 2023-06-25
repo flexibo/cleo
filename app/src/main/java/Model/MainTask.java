@@ -6,6 +6,7 @@ package Model;
 
 import UIStuff.MainTaskItem;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -13,23 +14,25 @@ import java.util.ArrayList;
  */
 public class MainTask extends Task {
     public int priority;
-    public ArrayList<SubTask> subTasks;
+    private ArrayList<SubTask> subTasks;
     private MainTaskItem item;
     
-    public MainTask(String name, String date, int priority) {
+    public MainTask(String name, Date date, int priority) {
         super(name, date, 0);
         this.priority = priority;
         this.subTasks = new ArrayList<>();
     }
     
-    public MainTask(String name, String date, int priority, ArrayList<SubTask> subtasks) {
+    public MainTask(String name, Date date, int priority, ArrayList<SubTask> subtasks) {  
         super(name, date, 0);
         this.priority = priority;
         this.subTasks = subtasks;
+        updateWeight();
     }
     
     public void addSubTask(SubTask subTask) {
         this.subTasks.add(subTask);
+        updateWeight();
     }
     
     public void updateWeight() {

@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JProgressBar;
 
@@ -36,7 +38,8 @@ public class MainTaskItem extends javax.swing.JPanel {
      */
     public MainTaskItem(MainTask mainTask) {
         initComponents();
-        dueDate.setText(mainTask.deadline);
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        dueDate.setText(df.format(mainTask.deadline));
         priority.setText(String.valueOf(mainTask.priority));
         task.setText(mainTask.task);
         

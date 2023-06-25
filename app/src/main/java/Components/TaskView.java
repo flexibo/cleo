@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class TaskView extends javax.swing.JPanel {
 
-    public ArrayList<MainTask> mainTasks = new ArrayList();
+    private static ArrayList<MainTask> mainTasks;
             
     /**
      * Creates new form TaskView
@@ -26,36 +26,29 @@ public class TaskView extends javax.swing.JPanel {
         initComponents();
         setLayout(new FlowLayout());
         
-        setPreferredSize(new Dimension(570, 2000));
-        
-        /**
-         * For testing purposes
-         */
-        initData(mainTasks);
-        
-        
-        for (int i=0; i < mainTasks.size(); i++ ){
+        setOpaque(false);
+        setVisible(true);
+    }
+    
+    public void setTasks(ArrayList<MainTask> mainTasks) {
+        TaskView.mainTasks = mainTasks; 
+
+        updateTasks();
+        System.out.println(mainTasks.size());
+    }
+    
+    public void updateTasks() {
+        removeAll();
+        //System.out.println(mainTasks.size());
+         for (int i=0; i < mainTasks.size(); i++ ){
             MainTaskItem taskItem = new MainTaskItem(mainTasks.get(i));
             UIStuff.ClickableTask clickableTask = new UIStuff.ClickableTask(taskItem);
             add(clickableTask);
         } 
-        
-        
-        setOpaque(false);
         setVisible(true);
     }
-
     
-    private void initData(ArrayList<MainTask> mainTasks) {
-        for (int i = 1; i < 10; i++) {
-            ArrayList<SubTask> subtasks = new ArrayList();
-            for (int j = 1; j < 5; j ++) {
-                subtasks.add(new SubTask("Subtask " + j, j + "/7/2023", j));
-            }
-            
-            mainTasks.add(new MainTask("Task " + i, i + "/7/2023", 2, subtasks));
-        }
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

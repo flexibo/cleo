@@ -11,6 +11,9 @@ import Panel.TasksPanel;
 import Panel.TimerPanel;
 import event.EventMenuSelected;
 import java.awt.Color;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 /**
@@ -19,40 +22,36 @@ import javax.swing.JComponent;
  */
 public class Main extends javax.swing.JFrame {
 
-    /**
+    
+    TasksPanel taskPanel ;
+/**
      * Creates new form Main
      */
-    
-    TasksPanel taskPanel = new TasksPanel();
-    ProgressPanel progressPanel = new ProgressPanel();
-    CalendarPanel calendarPanel = new CalendarPanel();
-    TimerPanel timerPanel = new TimerPanel();
-    SettingsPanel settingsPanel = new SettingsPanel();
-    
-    public Main() {
+    ProgressPanel progressPanel;
+    CalendarPanel calendarPanel;
+    TimerPanel timerPanel;
+    SettingsPanel settingsPanel;
+    public Main() throws ParseException {
+        this.taskPanel = new TasksPanel();
+        this.progressPanel = new ProgressPanel();
+        this.timerPanel = new TimerPanel();
+        settingsPanel = new SettingsPanel();
         initComponents();
         setBackground(new Color(0,0,0,0));
         
         // To move the application using the menu
-        setPanel(new TasksPanel());
+        setPanel(taskPanel);
         
         menu.initMoving(Main.this);
-        menu.addEventMenuSelected(new EventMenuSelected() {
-            @Override
-            public void selected(int index) {
-                if (index == 0) {
-                    setPanel(taskPanel);
-                } else if (index == 1) {
-                    setPanel(progressPanel);
-                } else if (index == 2) {
-                    setPanel(calendarPanel);
-                } else if (index == 3) {
-                    setPanel(timerPanel);
-                } else if (index == 4) {
-                    setPanel(settingsPanel);
-                }
+        menu.addEventMenuSelected((int index) -> {
+            switch (index) {
+                case 0 -> setPanel(taskPanel);
+                case 1 -> setPanel(progressPanel);
+                case 2 -> setPanel(new CalendarPanel());
+                case 3 -> setPanel(timerPanel);
+                case 4 -> setPanel(settingsPanel);
+                default ->setPanel(taskPanel);
             }
-            
         });
         
         setVisible(true);
@@ -94,12 +93,12 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,7 +154,11 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                try {
+                    new Main().setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

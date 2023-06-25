@@ -5,6 +5,14 @@
 package Panel;
 
 import CleoDevelopmentver1.AddTask;
+import CleoDevelopmentver1.AddTaskUI;
+import Model.MainTask;
+import Model.SubTask;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -12,13 +20,46 @@ import CleoDevelopmentver1.AddTask;
  */
 public class TasksPanel extends javax.swing.JPanel {
 
+    private static ArrayList<MainTask> mainTasks;
+    
     /**
      * Creates new form FormTask
      */
-    public TasksPanel() {
+    public TasksPanel() throws ParseException {
         initComponents();
+        initData();
+        
+        taskView1.setTasks(mainTasks);
+        jScrollPane1.getViewport().setPreferredSize(taskView1.getPreferredSize());
+    }
+    
+        
+    private void initData() throws ParseException {
+        DateFormat df  = new SimpleDateFormat("dd/MM/yyyy");  
+        
+        if (mainTasks == null) {
+            mainTasks = new ArrayList();
+            for (int i = 1; i < 10; i++) {
+                ArrayList<SubTask> subtasks = new ArrayList();
+                for (int j = 1; j < 5; j ++) {
+                    subtasks.add(new SubTask("Subtask " + j, df.parse(j + "/7/2023"), j));
+                }
+            
+                this.mainTasks.add(new MainTask("Task " + i, df.parse(i + "/7/2023"), 2, subtasks));
+            }
+        }
     }
 
+    public static void addTask(MainTask mainTask) {
+        mainTasks.add(mainTask);
+        taskView1.updateTasks();
+    }
+    
+    public static ArrayList<MainTask> getMainTasks() {
+        
+        return TasksPanel.mainTasks;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,9 +73,11 @@ public class TasksPanel extends javax.swing.JPanel {
         taskView1 = new Components.TaskView();
         jButton1 = new javax.swing.JButton();
 
+        setMaximumSize(new java.awt.Dimension(1000, 500));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(1000, 812));
+        setPreferredSize(new java.awt.Dimension(1000, 500));
 
+        taskView1.setPreferredSize(new java.awt.Dimension(570, 200));
         jScrollPane1.setViewportView(taskView1);
 
         jButton1.setText("+");
@@ -52,32 +95,31 @@ public class TasksPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new AddTask();
+        new AddTaskUI();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private Components.TaskView taskView1;
+    private static Components.TaskView taskView1;
     // End of variables declaration//GEN-END:variables
 }

@@ -46,7 +46,7 @@ public class ClickableTask extends javax.swing.JPanel {
         
         subTaskPanels.setLayout(new FlowLayout());
         subTaskPanels.setOpaque(false);
-        subTaskPanels.setVisible(true);
+        toggleVisibility(subTaskPanels);
         add(subTaskPanels);
         
         
@@ -62,10 +62,10 @@ public class ClickableTask extends javax.swing.JPanel {
     
     public void toggleVisibility(JPanel panel) {
         if (panel.isVisible()) {
-            jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/upArrow.png"));
+            jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/downArrow.png"));
             setPreferredSize(new java.awt.Dimension(600, 55));
         } else{
-            jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/downArrow.png"));
+            jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/upArrow.png"));
             setPreferredSize(new java.awt.Dimension(600, 50 * size + 100));
         }
         

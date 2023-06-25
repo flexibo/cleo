@@ -3,14 +3,16 @@
  */
 package CleoDevelopmentver1;
 
+import java.text.ParseException;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         System.out.println(new App().getGreeting());
-        new MainUI();
+        //new MainUI();
         new Main();
     }
 }

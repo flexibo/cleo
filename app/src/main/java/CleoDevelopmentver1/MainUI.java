@@ -16,7 +16,7 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import Model.MainTask;
-import Model.Task;
+
 
 /**
  *
@@ -75,7 +75,7 @@ public class MainUI extends JFrame implements ActionListener {
         this.add(priorityList);
         this.add(priorityTitle);
         
-        initializeTasks();
+        //initializeTasks();
         
         button.setBounds(0, 0, 100, 50);
         button.setFocusable(false);
@@ -117,7 +117,7 @@ public class MainUI extends JFrame implements ActionListener {
         
         if (e.getSource() == button) {
             //System.out.println(textField.getText());
-            new AddTask();
+            new AddTaskUI();
             System.out.println("hi");
         }
         
@@ -126,6 +126,7 @@ public class MainUI extends JFrame implements ActionListener {
         }
     }
     
+    /*
     private  void initializeTasks() {
         for (int i = 1; i < 6; i++) {
             this.tasks.add(new MainTask("Task " + i, i + "/7/2023", 1));
@@ -143,5 +144,5 @@ public class MainUI extends JFrame implements ActionListener {
         }
        
     }
-    
+    */
 }

@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -31,7 +33,8 @@ public class SubTaskItem extends javax.swing.JPanel {
         this.subTaskObject = mainTaskItem.getSubTask(index);
         this.prevDone = false;
         
-        dueDate.setText(subTaskObject.deadline);
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        dueDate.setText(df.format(subTaskObject.deadline));
         subtask.setText(subTaskObject.task);
         this.setOpaque(false);
     }

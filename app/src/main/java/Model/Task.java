@@ -4,17 +4,19 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author sidneylawther
  */
 public class Task {
     public String task;
-    public String deadline;
+    public Date deadline;
     public int weight; 
     public boolean done;
     
-    public Task(String task, String date, int weight) {
+    public Task(String task, Date date, int weight) {
         this.task = task;
         this.deadline = date;
         this.weight = weight; 

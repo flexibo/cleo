@@ -5,6 +5,7 @@
 package Model;
 
 import UIStuff.SubTaskItem;
+import java.util.Date;
 
 /**
  *
@@ -14,7 +15,7 @@ public class SubTask extends Task {
 
     private SubTaskItem item;
     
-    public SubTask(String name, String deadline, int weight) {
+    public SubTask(String name, Date deadline, int weight) {
         super(name,deadline,weight);
     }
     
