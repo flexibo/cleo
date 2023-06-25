@@ -39,9 +39,9 @@ public class TasksPanel extends javax.swing.JPanel {
         
         if (mainTasks == null) {
             mainTasks = new ArrayList();
-            for (int i = 1; i < 10; i++) {
+            for (int i = 1; i < 4; i++) {
                 ArrayList<SubTask> subtasks = new ArrayList();
-                for (int j = 1; j < 5; j ++) {
+                for (int j = 1; j < 3; j ++) {
                     subtasks.add(new SubTask("Subtask " + j, df.parse(j + "/7/2023"), j));
                 }
             

@@ -3,6 +3,7 @@
  */
 package CleoDevelopmentver1;
 
+import JSON.JsonDecoder;
 import java.text.ParseException;
 
 public class App {
@@ -13,6 +14,9 @@ public class App {
     public static void main(String[] args) throws ParseException {
         System.out.println(new App().getGreeting());
         //new MainUI();
+        //new JsonDecoder();
+                
         new Main();
+
     }
 }
