@@ -73,14 +73,6 @@ public class Cell extends JButton {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             
-        if(isToday) {
-            g2.setColor(new Color(102,51,255));
-            
-            int x = getWidth()/2-16;
-            int y = getHeight()/2-17;
-            g2.fillRoundRect(x, y, 35, 35, 100, 100);
-        }
-        
         if(weekWeight > 0 && weekWeight <= 15) {
             g2.setColor(new Color(130, 228, 255));
             g2.fillRect(0, 0, getWidth(), getHeight());
@@ -98,6 +90,16 @@ public class Cell extends JButton {
             g2.fillRect(0, 0, getWidth(), getHeight());
         }
         
+        if(isToday) {
+            Graphics2D g3 = (Graphics2D) g;
+            g3.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g3.setColor(new Color(102,51,255));
+            
+            int x = getWidth()/2-16;
+            int y = getHeight()/2-17;
+            g3.fillRoundRect(x, y, 35, 35, 100, 100);
+        }
+                
         super.paintComponent(g); 
     }
     
