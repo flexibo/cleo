@@ -4,20 +4,69 @@
  */
 package Panel;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.time.LocalDate;
+
+ 
+
+
+
 /**
  *
  * @author peach
  */
 public class ProgressPanel extends javax.swing.JPanel {
+    
+    public static ArrayList<Model.Day> data = new ArrayList<>();
     public static int timeStudy = 0;
     public static int timeRest = 0;
+    
+    //int numDaysMonth = LocalDate.now().lengthOfMonth();
+    //int numDaysYear = LocalDate.now().lengthOfYear();
+    
+    
+
+    
+    
+    
 
     /**
      * Creates new form FormProgressTracker
      */
     public ProgressPanel() {
         initComponents();
+        
+        
+        // default is day view
+        DayView.addLegend("Work Duration", new Color(255, 204, 204));
+        DayView.addLegend("Rest Duration", new Color(204, 204, 255));
+        
+        //test data
+        
+        
+        data.add(new Model.Day(275, 50, LocalDate.of(2023, 6, 18)));
+        data.add(new Model.Day(250, 10, LocalDate.of(2023, 6, 19)));
+        data.add(new Model.Day(120, 70, LocalDate.of(2023, 6, 20)));
+        data.add(new Model.Day(75, 20, LocalDate.of(2023, 6, 21)));
+        data.add(new Model.Day(50, 5, LocalDate.of(2023, 6, 22)));
+        data.add(new Model.Day(360, 25, LocalDate.of(2023, 6, 23)));
+        data.add(new Model.Day(250, 15, LocalDate.of(2023, 6, 24)));
+        data.add(new Model.Day(0, 0, LocalDate.of(2023, 6, 25)));
+        
+        //data.add(new Model.Day(250, 15, LocalDate.of(2022, 6, 26)));
+
+        
+        //refresh();
+        //generateDayView(data);
+        generateWeekView(data);
+        
+
+        
+        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,6 +80,11 @@ public class ProgressPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        DayView = new Components.ProgressGraph();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setOpaque(false);
 
@@ -42,49 +96,164 @@ public class ProgressPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Time Resting: " + this.timeRest);
 
+        jButton1.setText("Day View");
+
+        jButton3.setText("Month View");
+
+        jButton4.setText("Year View");
+
+        jButton2.setText("Week View");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(165, 165, 165)
+                        .addComponent(jButton1)
+                        .addGap(69, 69, 69)
+                        .addComponent(jButton2)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(DayView, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE))))
+                .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(68, 68, 68)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addComponent(DayView, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(366, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
-    public static void updateStudy() {
+    
+    
+    
+    public static void updateStudy(int k) {
+        Model.Day today = data.get(data.size() - 1);
+        
+        ProgressPanel.timeStudy = ProgressPanel.timeStudy + k;
+        //data.get(data.size() - 1).durationStudy = data.get(data.size() - 1).durationStudy + k;
         jLabel2.setText("Time Studying: "+ ProgressPanel.timeStudy);
+        
     }
     
-    public static void updateRest() {
+    public static void updateRest(int k) {
+        Model.Day today = data.get(data.size() - 1);
+        ProgressPanel.timeRest = ProgressPanel.timeRest + k;
+        data.get(data.size() - 1).durationRest = data.get(data.size() - 1).durationRest + k;
         jLabel3.setText("Time Resting: "+ ProgressPanel.timeRest);
     }
+    
+    private ArrayList<Model.Day> getToday() { 
+        return getData(1);
+    }
+    
+    private ArrayList<Model.Day> getWeek() {
+        return getData(7);
+    }
+    
+    /*private ArrayList<Model.Day> getMonth() {
+        return getData(numDaysMonth);
+    }
+    
+    private ArrayList<Model.Day> getYear() {
+        return getData(numDaysYear);
+    }*/
+    
+    
+    private ArrayList<Model.Day> getData(int i) {
+        ArrayList<Model.Day> result = new ArrayList<>();
+        for (int k = 0; k< i; k++) {
+            result.add(data.get(data.size() - k - 1));
+        }
+        return result;
+    }
+    
+    private void generateDayView(ArrayList<Model.Day> data) {
+        ArrayList<Model.Day> refined = getToday();
+        
+        for (int i = 0; i < refined.size(); i++) {
+            int pos = refined.size() - i  - 1 ;
+            int hoursStudy = refined.get(pos).durationStudy;
+            int hoursRest = refined.get(pos).durationRest;
+            LocalDate date = refined.get(pos).date;
+            DayView.addData(new ChartStuff.ModelChart(date.toString(), new double[]{hoursStudy, hoursRest}));
+
+        }
+    }
+    
+    private void generateWeekView(ArrayList<Model.Day> data) {
+        ArrayList<Model.Day> refined = getWeek();
+
+        for (int i = 0; i < refined.size(); i++) {
+            int pos = refined.size() - i  - 1;
+            int hoursStudy = refined.get(pos).durationStudy;
+            int hoursRest = refined.get(pos).durationRest;
+            LocalDate date = refined.get(pos).date;
+            DayView.addData(new ChartStuff.ModelChart(date.getDayOfWeek().toString(), new double[]{hoursStudy, hoursRest}));
+        }
+    }
+    
+    public static void addDate(LocalDate newDate) {
+        if (!data.get(data.size() - 1).date.equals(newDate)) {
+            data.add(new Model.Day(0, 0 , newDate));
+        }
+    }
+    
+    /*private static void refresh() {
+            timeStudy = data.get(0).durationStudy;
+            timeRest = data.get(0).durationRest;
+            jLabel2.setText("Time Studying: " + this.timeStudy);
+            jLabel3.setText("Time Resting: " + this.timeRest);
+            
+        
+    }*/
+    
+    
+
             
             
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Components.ProgressGraph DayView;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    public static javax.swing.JLabel jLabel2;
+    private static javax.swing.JLabel jLabel2;
     private static javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,7 +24,7 @@ public class Main extends javax.swing.JFrame {
      */
     
     TasksPanel taskPanel = new TasksPanel();
-    ProgressPanel progressPanel = new ProgressPanel();
+    public ProgressPanel progressPanel = new ProgressPanel();
     CalendarPanel calendarPanel = new CalendarPanel();
     TimerPanel timerPanel = new TimerPanel();
     SettingsPanel settingsPanel = new SettingsPanel();
@@ -44,6 +44,7 @@ public class Main extends javax.swing.JFrame {
                     setPanel(taskPanel);
                 } else if (index == 1) {
                     setPanel(progressPanel);
+                    
                 } else if (index == 2) {
                     setPanel(calendarPanel);
                 } else if (index == 3) {
