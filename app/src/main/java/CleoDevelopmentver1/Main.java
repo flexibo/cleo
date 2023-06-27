@@ -9,6 +9,7 @@ import Panel.ProgressPanel;
 import Panel.SettingsPanel;
 import Panel.TasksPanel;
 import Panel.TimerPanel;
+import Panel.ProgressPanel1; //
 import event.EventMenuSelected;
 import java.awt.Color;
 import java.text.ParseException;
@@ -27,13 +28,14 @@ public class Main extends javax.swing.JFrame {
 /**
      * Creates new form Main
      */
-    ProgressPanel progressPanel;
+    ProgressPanel1 progressPanel;
     CalendarPanel calendarPanel;
     TimerPanel timerPanel;
     SettingsPanel settingsPanel;
     public Main() throws ParseException {
         this.taskPanel = new TasksPanel();
-        this.progressPanel = new ProgressPanel();
+        //this.progressPanel = new ProgressPanel();
+        this.progressPanel = new ProgressPanel1();
         this.timerPanel = new TimerPanel();
         settingsPanel = new SettingsPanel();
         initComponents();
@@ -46,7 +48,7 @@ public class Main extends javax.swing.JFrame {
         menu.addEventMenuSelected((int index) -> {
             switch (index) {
                 case 0 -> setPanel(taskPanel);
-                case 1 -> setPanel(progressPanel);
+                case 1 -> setPanel(progressPanel); 
                 case 2 -> setPanel(new CalendarPanel());
                 case 3 -> setPanel(timerPanel);
                 case 4 -> setPanel(settingsPanel);
