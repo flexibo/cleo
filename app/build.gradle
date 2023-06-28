@@ -28,9 +28,10 @@ dependencies {
     // https://mvnrepository.com/artifact/com.toedter/jcalendar
     implementation group: 'com.toedter', name: 'jcalendar', version: '1.1.4'
 
-    implementation 'org.json:json:20230618'
 
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'org.json:json:20230618'
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 application {

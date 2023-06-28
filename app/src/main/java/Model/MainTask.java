@@ -12,10 +12,9 @@ import java.util.Date;
  *
  * @author sidneylawther
  */
-public class MainTask extends Task {
+public class MainTask extends Task implements Comparable<MainTask>{
     public int priority;
-    private ArrayList<SubTask> subTasks;
-    private MainTaskItem item;
+    public ArrayList<SubTask> subTasks;
     
     public MainTask(String name, Date date, int priority) {
         super(name, date, 0);
@@ -45,13 +44,7 @@ public class MainTask extends Task {
         this.weight = sumWeight;
     }
     
-    public void setItem(MainTaskItem item) {
-        this.item = item;
-    }
-    
-    public MainTaskItem getItem() {
-        return this.item; 
-    }
+
     
     public SubTask getSubTask(int i) {
         return subTasks.get(i);
@@ -59,5 +52,10 @@ public class MainTask extends Task {
     
     public int numOfSubTasks() {
         return subTasks.size();
+    }
+
+    @Override
+    public int compareTo(MainTask t) {
+        return deadline.compareTo(t.deadline);
     }
 }
