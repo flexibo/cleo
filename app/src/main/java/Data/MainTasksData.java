@@ -5,7 +5,6 @@
 package Data;
 
 import Model.MainTask;
-import Model.SubTask;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -15,13 +14,7 @@ import org.json.JSONArray;
 
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
