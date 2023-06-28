@@ -66,7 +66,7 @@ public class ClickableTask extends javax.swing.JPanel {
             setPreferredSize(new java.awt.Dimension(600, 55));
         } else{
             jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/upArrow.png"));
-            setPreferredSize(new java.awt.Dimension(600, 50 * size + 100));
+            setPreferredSize(new java.awt.Dimension(600, 50 * size + 80));
         }
         
         

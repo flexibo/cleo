@@ -13,17 +13,9 @@ import java.util.Date;
  */
 public class SubTask extends Task {
 
-    private SubTaskItem item;
     
     public SubTask(String name, Date deadline, int weight) {
         super(name,deadline,weight);
     }
     
-    public void setItem(SubTaskItem item) {
-        this.item = item;
-    }
-    
-    public SubTaskItem getItem() {
-        return this.item;
-    }
 }

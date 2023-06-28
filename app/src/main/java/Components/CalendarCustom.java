@@ -25,7 +25,9 @@ public class CalendarCustom extends javax.swing.JPanel {
     public CalendarCustom() {
         initComponents();
         thisMonth();
+        
         slide.show(new DateComponent(6, 2023), SlidePanel.AnimateType.TO_RIGHT);
+        
         showMonthYear();
         
     }
