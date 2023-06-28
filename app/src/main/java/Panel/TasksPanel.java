@@ -32,7 +32,6 @@ public class TasksPanel extends javax.swing.JPanel {
         taskView1.setTasks(mainTasks);
         jScrollPane1.getViewport().setPreferredSize(taskView1.getPreferredSize());
     }
-   
 
     public static void addTask(MainTask mainTask) {
         MainTasksData.addTask(mainTask);
