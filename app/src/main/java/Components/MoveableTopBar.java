@@ -106,7 +106,7 @@ public class MoveableTopBar extends javax.swing.JPanel {
     private void closeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButton1ActionPerformed
         // TODO add your handling code here:
         frame.dispose();
-        System.exit(0);
+        //System.exit(0);
     }//GEN-LAST:event_closeButton1ActionPerformed
 
     private void minimizeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeButton1ActionPerformed
