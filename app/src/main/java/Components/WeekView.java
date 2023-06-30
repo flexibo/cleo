@@ -2,19 +2,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Panel;
+package Components;
+
+import java.awt.Color;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author sidneylawther
  */
-public class TimerPanel extends javax.swing.JPanel {
+public class WeekView extends javax.swing.JPanel {
 
     /**
-     * Creates new form TimerPanel
+     * Creates new form WeekView
      */
-    public TimerPanel() {
+    public WeekView() {
         initComponents();
+        initComponents();
+        progressGraph1.addLegend("Work Duration", new Color(255, 204, 204));
+        progressGraph1.addLegend("Rest Duration", new Color(204, 204, 255));
+    }
+    
+    public void generateGraph(ArrayList<Model.Day> data) {
+        for (int i = 0; i < data.size(); i++) {
+            int hoursStudy = data.get(i).durationStudy;
+            int hoursRest = data.get(i).durationRest;
+            LocalDate date = data.get(i).date;
+            progressGraph1.addData(new ChartStuff.ModelChart(date.getDayOfWeek().toString(), new double[]{hoursStudy, hoursRest}));
+        }
+        
+    }
+    
+    public void removeData() {
+        progressGraph1.clear();
     }
 
     /**
@@ -26,34 +47,28 @@ public class TimerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        createTimer11 = new Components.CreateTimer1();
-        startTimer11 = new Components.StartTimer1();
+        progressGraph1 = new Components.ProgressGraph();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(startTimer11, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createTimer11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(progressGraph1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(startTimer11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(createTimer11, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(574, 574, 574))
+                .addComponent(progressGraph1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Components.CreateTimer1 createTimer11;
-    private Components.StartTimer1 startTimer11;
+    private Components.ProgressGraph progressGraph1;
     // End of variables declaration//GEN-END:variables
 }
