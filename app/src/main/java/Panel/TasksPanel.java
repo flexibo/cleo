@@ -5,39 +5,26 @@
 package Panel;
 
 import CleoDevelopmentver1.AddTask;
-import CleoDevelopmentver1.AddTaskUI;
 import Data.MainTasksData;
-import Model.MainTask;
-import Model.SubTask;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
  * @author peach
  */
 public class TasksPanel extends javax.swing.JPanel {
-
-    
     /**
      * Creates new form FormTask
      */
     public TasksPanel() {
         initComponents();
-        ArrayList<MainTask> mainTasks = MainTasksData.getMainTasks();
-        
-        taskView1.setTasks(mainTasks);
-        jScrollPane1.getViewport().setPreferredSize(taskView1.getPreferredSize());
+        taskView1.setTasks(MainTasksData.getMainTasks());
     }
 
-    public static void addTask(MainTask mainTask) {
-        MainTasksData.addTask(mainTask);
+    public void refresh() {
         taskView1.updateTasks();
+        revalidate();
+        repaint();
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,21 +35,28 @@ public class TasksPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollPaneWin111 = new RavenScrollBar.ScrollPaneWin11();
         taskView1 = new Components.TaskView();
-        jButton1 = new javax.swing.JButton();
+        customColorButton1 = new UIStuff.CustomColorButton();
+        deleteDoneTasksButton = new UIStuff.CustomColorButton();
 
         setMaximumSize(new java.awt.Dimension(1000, 500));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1000, 500));
 
-        taskView1.setPreferredSize(new java.awt.Dimension(570, 200));
-        jScrollPane1.setViewportView(taskView1);
+        scrollPaneWin111.setViewportView(taskView1);
 
-        jButton1.setText("+");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        customColorButton1.setText("Add Task");
+        customColorButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                customColorButton1ActionPerformed(evt);
+            }
+        });
+
+        deleteDoneTasksButton.setText("Delete Done Tasks");
+        deleteDoneTasksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteDoneTasksButtonActionPerformed(evt);
             }
         });
 
@@ -72,33 +66,44 @@ public class TasksPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(customColorButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteDoneTasksButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(customColorButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
+                        .addComponent(deleteDoneTasksButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void customColorButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customColorButton1ActionPerformed
         new AddTask();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_customColorButton1ActionPerformed
+
+    private void deleteDoneTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoneTasksButtonActionPerformed
+        // TODO add your handling code here:
+        MainTasksData.deleteDoneTasks();
+        refresh();
+    }//GEN-LAST:event_deleteDoneTasksButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private static Components.TaskView taskView1;
+    private UIStuff.CustomColorButton customColorButton1;
+    private UIStuff.CustomColorButton deleteDoneTasksButton;
+    private RavenScrollBar.ScrollPaneWin11 scrollPaneWin111;
+    private Components.TaskView taskView1;
     // End of variables declaration//GEN-END:variables
 }

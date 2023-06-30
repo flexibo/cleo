@@ -36,6 +36,14 @@ public class MainTasksData {
         saveTasks();
     }
     
+    public static void deleteDoneTasks() {
+        for(int i = 0; i < mainTasks.size(); i++) {
+            if (mainTasks.get(i).done) {
+                deleteTask(i);
+            }
+        }
+    }
+    
     public static void deleteTask(int index) {
         mainTasks.remove(index);
         saveTasks();
@@ -76,7 +84,7 @@ public class MainTasksData {
         System.out.println("saved");
         JsonEncode.saveJsonToFile(json, FILEPATH);
     }
-    
+   
    
 
     /*

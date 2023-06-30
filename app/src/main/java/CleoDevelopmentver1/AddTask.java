@@ -4,18 +4,13 @@
  */
 package CleoDevelopmentver1;
 
+import Manage.ManagePanel;
 import Model.MainTask;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Date;
-import javax.swing.JFrame;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 /**
  *
  * @author peach
@@ -30,6 +25,7 @@ public class AddTask extends javax.swing.JFrame {
         initComponents();
         mainTask = new MainTask();
         subTasksComponent.setMainTask(mainTask);
+        subTasksComponent.setCal(calendarCustom1);
         
         setBackground(new Color(0,0,0,0));
         moveableTopBar2.initMoving(AddTask.this);
@@ -53,16 +49,13 @@ public class AddTask extends javax.swing.JFrame {
         
                 
         // Add a property change listener to the JCalendar
-        dateChooser.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                // Get the selected date from the JCalendar
-                    Date selectedDate = dateChooser.getDate();
-
-                    // Save the selected date or perform any other desired action
-                    mainTask.setDeadline(selectedDate);
-                    System.out.println("deadline saved " + selectedDate);
-            }
+        dateChooser.addPropertyChangeListener((PropertyChangeEvent evt) -> {
+            // Get the selected date from the JCalendar
+            Date selectedDate = dateChooser.getDate();
+            
+            // Save the selected date or perform any other desired action
+            mainTask.setDeadline(selectedDate);
+            System.out.println("deadline saved " + selectedDate);
         });
         
         priorityChooser.addChangeListener((ChangeEvent e) -> {
@@ -215,6 +208,8 @@ public class AddTask extends javax.swing.JFrame {
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         // TODO add your handling code here:
         calendarCustom1.refresh();
+        ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+        ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
     }//GEN-LAST:event_refreshButtonActionPerformed
 
 

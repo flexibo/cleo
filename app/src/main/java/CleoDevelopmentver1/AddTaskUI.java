@@ -182,9 +182,6 @@ public class AddTaskUI implements ActionListener {
             
             
             
-           
-            TasksPanel.addTask(mainTask);
-            
         }
     }
    

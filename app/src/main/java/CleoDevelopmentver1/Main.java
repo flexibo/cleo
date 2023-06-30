@@ -4,19 +4,12 @@
  */
 package CleoDevelopmentver1;
 
-import Model.MainTask;
+import Manage.ManagePanel;
 import Panel.CalendarPanel;
 import Panel.ProgressPanel1;
-import Panel.SettingsPanel;
 import Panel.TasksPanel;
 import Panel.TimerPanel;
 import java.awt.Color;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 /**
@@ -26,19 +19,21 @@ import javax.swing.JComponent;
 public class Main extends javax.swing.JFrame {
 
     
-    TasksPanel taskPanel ;
+   
 /**
      * Creates new form Main
      */
+    TasksPanel taskPanel ;
     ProgressPanel1 progressPanel;
     CalendarPanel calendarPanel;
     TimerPanel timerPanel;
-    SettingsPanel settingsPanel;
-    public Main() throws ParseException {
-        this.taskPanel = new TasksPanel();
-        this.progressPanel = new ProgressPanel1();
-        this.timerPanel = new TimerPanel();
-        settingsPanel = new SettingsPanel();
+    
+    public Main() {
+        ManagePanel.initPanels();
+        taskPanel = ManagePanel.getTasksPanel();
+        progressPanel = ManagePanel.getProgressPanel();
+        calendarPanel = ManagePanel.getCalendarPanel();
+        timerPanel = ManagePanel.getTimerPanel();
         
         initComponents();
         setBackground(new Color(0,0,0,0));
@@ -51,9 +46,8 @@ public class Main extends javax.swing.JFrame {
             switch (index) {
                 case 0 -> setPanel(taskPanel);
                 case 1 -> setPanel(progressPanel);
-                case 2 -> setPanel(new CalendarPanel());
+                case 2 -> setPanel(calendarPanel);
                 case 3 -> setPanel(timerPanel);
-                case 4 -> setPanel(settingsPanel);
                 default ->setPanel(taskPanel);
             }
         });
@@ -128,44 +122,7 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Main().setVisible(true);
-                } catch (ParseException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel mainPanel;

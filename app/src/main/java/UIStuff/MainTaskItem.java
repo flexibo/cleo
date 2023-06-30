@@ -51,7 +51,7 @@ public class MainTaskItem extends javax.swing.JPanel {
             subTaskItems.add(new SubTaskItem(this, i));
         }
         
-        setOpaque(false);
+        setOpaque(true);
         
         bar.setBounds(10,40,500,2);
         

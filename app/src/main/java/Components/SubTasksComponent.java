@@ -5,6 +5,7 @@
 package Components;
 
 import Data.MainTasksData;
+import Manage.ManagePanel;
 import Model.MainTask;
 import Model.SubTask;
 import java.awt.Color;
@@ -25,8 +26,9 @@ public class SubTasksComponent extends javax.swing.JPanel {
      */
     private int numOfSubtasks = 1;
     private MainTask mainTask;
-    private ArrayList<SubTaskInput> subTaskInputs;
-    private Timer timer;
+    private final ArrayList<SubTaskInput> subTaskInputs;
+    private final Timer timer;
+    private CalendarCustom cal;
     
     final private Color REDWARNING = new Color(153, 2, 60);
     final private Color YELLOWWARNING = new Color(204, 136, 0);
@@ -38,6 +40,7 @@ public class SubTasksComponent extends javax.swing.JPanel {
         subTaskInputs = new ArrayList<>();
        
         SubTaskInput subTaskInput = new SubTaskInput();
+        
         subTaskInputs.add(subTaskInput);
         jPanel1.add(subTaskInput);
         
@@ -202,8 +205,11 @@ public class SubTasksComponent extends javax.swing.JPanel {
             MainTasksData.addTask(mainTask);
             
             setWarningText("<html> Main Task:" + mainTask.getTask() 
-                    + " has been added with " + mainTask.subTasks.size() + " subtasks. Please refresh the calendar to view new heatmap." , GREENWARNING, 5);
+                    + " has been added with " + mainTask.subTasks.size(), GREENWARNING, 5);
             
+            cal.refresh();
+            ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+            ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
          } else {
             setWarningText("<html>Please input a main task and choose the deadline</html>", YELLOWWARNING, 4);
         }
@@ -211,8 +217,13 @@ public class SubTasksComponent extends javax.swing.JPanel {
        
     }//GEN-LAST:event_confirmButtonActionPerformed
 
+    public void setCal(CalendarCustom cal) {
+        this.cal = cal;
+    }
+    
     public void setMainTask(MainTask mainTask) {
         this.mainTask = mainTask;
+        
     }
     
     private void setWarningText(String string, Color color) {

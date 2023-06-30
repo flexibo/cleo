@@ -80,7 +80,6 @@
     <Component class="UIStuff.CustomColorButton" name="addButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Sub Task"/>
-        <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
@@ -89,7 +88,6 @@
     <Component class="UIStuff.CustomColorButton" name="confirmButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirm"/>
-        <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmButtonActionPerformed"/>
