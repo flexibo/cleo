@@ -5,7 +5,6 @@ package CleoDevelopmentver1;
 
 import Data.MainTasksData;
 import java.io.IOException;
-import JSON.JsonDecoder;
 import java.text.ParseException;
 
 public class App {
@@ -19,6 +18,5 @@ public class App {
         //new JsonDecoder();
                 
         new Main();
-
     }
 }

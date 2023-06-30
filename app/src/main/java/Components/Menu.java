@@ -77,7 +77,6 @@ public class Menu extends javax.swing.JPanel {
         panelMoving = new javax.swing.JPanel();
         listMenu1 = new UIStuff.ListMenu<>();
         jLabel1 = new javax.swing.JLabel();
-        fileButton2 = new UIStuff.FileButton();
 
         panelMoving.setOpaque(false);
 
@@ -89,8 +88,6 @@ public class Menu extends javax.swing.JPanel {
         jLabel1.setToolTipText("");
         jLabel1.setPreferredSize(new java.awt.Dimension(248, 168));
 
-        fileButton2.setText("fileButton2");
-
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);
         panelMovingLayout.setHorizontalGroup(
@@ -99,13 +96,8 @@ public class Menu extends javax.swing.JPanel {
                 .addComponent(listMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelMovingLayout.createSequentialGroup()
-                .addGroup(panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelMovingLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelMovingLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(fileButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         panelMovingLayout.setVerticalGroup(
@@ -114,10 +106,8 @@ public class Menu extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(listMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(fileButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addComponent(listMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -170,7 +160,6 @@ public class Menu extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private UIStuff.FileButton fileButton2;
     private javax.swing.JLabel jLabel1;
     private UIStuff.ListMenu<String> listMenu1;
     private javax.swing.JPanel panelMoving;

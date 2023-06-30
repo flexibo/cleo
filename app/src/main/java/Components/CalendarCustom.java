@@ -6,6 +6,7 @@ package Components;
 
 import UIStuff.SlidePanel;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,13 +26,17 @@ public class CalendarCustom extends javax.swing.JPanel {
     public CalendarCustom() {
         initComponents();
         thisMonth();
-        
-        slide.show(new DateComponent(6, 2023), SlidePanel.AnimateType.TO_RIGHT);
-        
-        showMonthYear();
-        
     }
 
+    
+    public void refresh() {
+        LocalDate currentDate = LocalDate.now();
+        slide.show(new DateComponent(currentDate.getMonthValue(), currentDate.getYear()), SlidePanel.AnimateType.TO_RIGHT);
+        
+        System.out.println("Refreshed Calendar");
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,8 +72,10 @@ public class CalendarCustom extends javax.swing.JPanel {
 
         cmdNext.setIcon(new javax.swing.ImageIcon("src/main/java/TempIcons/next.png"));
         cmdNext.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        cmdNext.setBorderPainted(false);
         cmdNext.setContentAreaFilled(false);
         cmdNext.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cmdNext.setFocusPainted(false);
         cmdNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdNextActionPerformed(evt);
@@ -77,8 +84,10 @@ public class CalendarCustom extends javax.swing.JPanel {
 
         cmdBack.setIcon(new javax.swing.ImageIcon("src/main/java/TempIcons/back.png"));
         cmdBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        cmdBack.setBorderPainted(false);
         cmdBack.setContentAreaFilled(false);
         cmdBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cmdBack.setFocusPainted(false);
         cmdBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdBackActionPerformed(evt);

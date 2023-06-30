@@ -15,6 +15,7 @@ public class CalendarPanel extends javax.swing.JPanel {
      */
     public CalendarPanel() {
         initComponents();
+        calendarCustom1.refresh();
     }
 
     /**

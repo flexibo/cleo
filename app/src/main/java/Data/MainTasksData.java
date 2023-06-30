@@ -55,10 +55,10 @@ public class MainTasksData {
         Gson gson = new Gson();
         Type mainTaskListType = new TypeToken<ArrayList<MainTask>>() {}.getType();
         JSONObject json = JsonEncode.readJsonFromFile(FILEPATH);
-        
-        JSONArray mainTasksJSONArray = (JSONArray) json.get(KEY);
-        
-        mainTasks = gson.fromJson(mainTasksJSONArray.toString(), mainTaskListType);
+        if (json != null) {
+            JSONArray mainTasksJSONArray = (JSONArray) json.get(KEY);
+            mainTasks = gson.fromJson(mainTasksJSONArray.toString(), mainTaskListType);
+        }
     }
         
     private static void saveTasks() {

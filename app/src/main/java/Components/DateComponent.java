@@ -106,9 +106,10 @@ public class DateComponent extends javax.swing.JLayeredPane {
                 cal.add(Calendar.DATE, 1); // up 1 day
             }
         }
+        
+        
     }
-    
-    
+
     
     
     private Today getToday() {
