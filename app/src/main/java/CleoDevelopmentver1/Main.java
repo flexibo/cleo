@@ -5,7 +5,7 @@
 package CleoDevelopmentver1;
 
 import Panel.CalendarPanel;
-import Panel.ProgressPanel;
+import Panel.ProgressPanel1;
 import Panel.SettingsPanel;
 import Panel.TasksPanel;
 import Panel.TimerPanel;
@@ -27,13 +27,13 @@ public class Main extends javax.swing.JFrame {
 /**
      * Creates new form Main
      */
-    ProgressPanel progressPanel;
+    ProgressPanel1 progressPanel;
     CalendarPanel calendarPanel;
     TimerPanel timerPanel;
     SettingsPanel settingsPanel;
     public Main() throws ParseException {
         this.taskPanel = new TasksPanel();
-        this.progressPanel = new ProgressPanel();
+        this.progressPanel = new ProgressPanel1();
         this.timerPanel = new TimerPanel();
         settingsPanel = new SettingsPanel();
         initComponents();
