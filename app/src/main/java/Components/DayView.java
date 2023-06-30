@@ -13,28 +13,28 @@ import java.util.ArrayList;
  * @author sidneylawther
  */
 public class DayView extends javax.swing.JPanel {
-    public static ArrayList<Model.Day> data = new ArrayList<>();
-    
-    
+
+    /**
+     * Creates new form DayView
+     */
     public DayView() {
         initComponents();
-        DayView.addLegend("Work Duration", new Color(255, 204, 204));
-        DayView.addLegend("Rest Duration", new Color(204, 204, 255));
-        
+        progressGraph1.addLegend("Work Duration", new Color(255, 204, 204));
+        progressGraph1.addLegend("Rest Duration", new Color(204, 204, 255));
     }
     
-    public void generatePlot(ArrayList<Model.Day> data) {
-        for (int i = 0; i <data.size(); i++) {
-            Model.Day today = data.get(i);
-            int hoursStudy = today.durationStudy;
-            int hoursRest = today.durationRest;
-            LocalDate date = today.date;
-            DayView.addData(new ChartStuff.ModelChart(date.getDayOfWeek().toString(), new double[]{hoursStudy, hoursRest}));
+    public void generateGraph(ArrayList<Model.Day> data) {
+        for (int i = 0; i < data.size(); i++) {
+            int hoursStudy = data.get(i).durationStudy;
+            int hoursRest = data.get(i).durationRest;
+            LocalDate date = data.get(i).date;
+            progressGraph1.addData(new ChartStuff.ModelChart(date.toString(), new double[]{hoursStudy, hoursRest}));
         }
     }
     
-    
-    
+    public void removeData() {
+        progressGraph1.clear();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,28 +45,28 @@ public class DayView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        DayView = new Components.ProgressGraph();
+        progressGraph1 = new Components.ProgressGraph();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(DayView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(progressGraph1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(DayView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(progressGraph1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Components.ProgressGraph DayView;
+    private Components.ProgressGraph progressGraph1;
     // End of variables declaration//GEN-END:variables
 }

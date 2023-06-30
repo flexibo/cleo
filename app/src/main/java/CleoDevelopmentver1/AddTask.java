@@ -4,27 +4,76 @@
  */
 package CleoDevelopmentver1;
 
+import Manage.ManagePanel;
+import Model.MainTask;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import javax.swing.JFrame;
-
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Date;
+import javax.swing.event.ChangeEvent;
 /**
  *
  * @author peach
  */
 public class AddTask extends javax.swing.JFrame {
 
+    private MainTask mainTask;
     /**
      * Creates new form AddTask
      */
     public AddTask() {
         initComponents();
-        setBackground(new Color(0,0,0,0));
-        setVisible(true);
+        mainTask = new MainTask();
+        subTasksComponent.setMainTask(mainTask);
+        subTasksComponent.setCal(calendarCustom1);
         
+        setBackground(new Color(0,0,0,0));
+        moveableTopBar2.initMoving(AddTask.this);
+        moveableTopBar2.setFrame(AddTask.this);
+        
+        
+        mainTextBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (mainTextBox.getText() == null ? mainTask.task != null : !mainTextBox.getText().equals(mainTask.task)) {
+                    mainTask.setTask( mainTextBox.getText());
+                    System.out.println("task saved: " + mainTextBox.getText());
+                }
+            }
+        });
+
+        mainTextBox.addActionListener((java.awt.event.ActionEvent evt) -> {
+            mainTask.setTask( mainTextBox.getText());
+            System.out.println("task saved: " + mainTextBox.getText());
+        });
+        
+                
+        // Add a property change listener to the JCalendar
+        dateChooser.addPropertyChangeListener((PropertyChangeEvent evt) -> {
+            // Get the selected date from the JCalendar
+            Date selectedDate = dateChooser.getDate();
+            
+            // Save the selected date or perform any other desired action
+            mainTask.setDeadline(selectedDate);
+            System.out.println("deadline saved " + selectedDate);
+        });
+        
+        priorityChooser.addChangeListener((ChangeEvent e) -> {
+            // Get the selected value from the JSpinner
+            int selectedValue = (int) priorityChooser.getValue();
+            
+            // Save the selected value or perform any other desired action
+            System.out.println("Selected value: " + selectedValue);
+        });
+        
+        
+        calendarCustom1.refresh();
+        
+        setVisible(true);
+        setLocationRelativeTo(null);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,33 +85,104 @@ public class AddTask extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new UIStuff.PanelBorder();
-        panelMoving = new javax.swing.JPanel();
+        moveableTopBar2 = new Components.MoveableTopBar();
+        mainTextBox = new UIStuff.ColoredTextBox();
+        jLabel1 = new javax.swing.JLabel();
+        priorityChooser = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        calendarCustom1 = new Components.CalendarCustom();
+        subTasksComponent = new Components.SubTasksComponent();
+        dateChooser = new com.toedter.calendar.JDateChooser();
+        refreshButton = new UIStuff.CustomColorButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
-        panelMoving.setLayout(panelMovingLayout);
-        panelMovingLayout.setHorizontalGroup(
-            panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
-        );
-        panelMovingLayout.setVerticalGroup(
-            panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 141, Short.MAX_VALUE)
-        );
+        panelBorder1.setBackground(new java.awt.Color(255, 237, 245));
+
+        mainTextBox.setText("coloredTextBox1");
+        mainTextBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainTextBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Main Task");
+
+        priorityChooser.setModel(new javax.swing.SpinnerNumberModel(1, 1, 5, 1));
+
+        jLabel2.setText("Deadline");
+
+        jLabel3.setText("Priority");
+
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelMoving, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(moveableTopBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 1235, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mainTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(priorityChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(subTasksComponent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(calendarCustom1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 262, Short.MAX_VALUE))
+                .addComponent(moveableTopBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)))
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(mainTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(priorityChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(subTasksComponent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(calendarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -73,69 +193,37 @@ public class AddTask extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddTask.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void mainTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainTextBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainTextBoxActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddTask().setVisible(true);
-            }
-        });
-    }
-    private int x;
-    private int y; 
-    
-    
-    public void initMoving(JFrame frame) {
-        panelMoving.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                x = me.getX();
-                y = me.getY();
-            }
-        });
-        
-        panelMoving.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override 
-            public void mouseDragged(MouseEvent me) {
-                frame.setLocation(me.getXOnScreen()-x, me.getYOnScreen()-y);
-            }
-        });
-    }
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        // TODO add your handling code here:
+        calendarCustom1.refresh();
+        ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+        ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Components.CalendarCustom calendarCustom1;
+    private com.toedter.calendar.JDateChooser dateChooser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private UIStuff.ColoredTextBox mainTextBox;
+    private Components.MoveableTopBar moveableTopBar2;
     private UIStuff.PanelBorder panelBorder1;
-    private javax.swing.JPanel panelMoving;
+    private javax.swing.JSpinner priorityChooser;
+    private UIStuff.CustomColorButton refreshButton;
+    private Components.SubTasksComponent subTasksComponent;
     // End of variables declaration//GEN-END:variables
 }

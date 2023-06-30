@@ -9,6 +9,8 @@ import Model.SubTask;
 import UIStuff.MainTaskItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 /**
@@ -18,13 +20,15 @@ import java.util.ArrayList;
 public class TaskView extends javax.swing.JPanel {
 
     private static ArrayList<MainTask> mainTasks;
+    private GridBagConstraints c;
             
     /**
      * Creates new form TaskView
      */
     public TaskView() {
         initComponents();
-        setLayout(new FlowLayout());
+        setLayout(new GridBagLayout());
+        c = new GridBagConstraints();
         
         setOpaque(false);
         setVisible(true);
@@ -39,11 +43,13 @@ public class TaskView extends javax.swing.JPanel {
     
     public void updateTasks() {
         removeAll();
+        c.gridy = 0;
         //System.out.println(mainTasks.size());
          for (int i=0; i < mainTasks.size(); i++ ){
             MainTaskItem taskItem = new MainTaskItem(mainTasks.get(i));
             UIStuff.ClickableTask clickableTask = new UIStuff.ClickableTask(taskItem);
-            add(clickableTask);
+            c.gridy++;
+            add(clickableTask,c);
         } 
         setVisible(true);
     }

@@ -4,11 +4,11 @@
  */
 package Components;
 
+import Data.MainTasksData;
 import Model.Cell;
 import Model.MainTask;
 import Model.SubTask;
 import Model.Today;
-import Panel.TasksPanel;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,8 +25,6 @@ public class DateComponent extends javax.swing.JLayeredPane {
      * Creates new form DateComponent
      */
     
-
-    
     private int month;
     private int year;
     private HashMap<String, Integer> weightWeekMap; 
@@ -34,7 +32,7 @@ public class DateComponent extends javax.swing.JLayeredPane {
     
     public DateComponent(int month, int year) {
         initComponents();
-        mainTasks = TasksPanel.getMainTasks();
+        mainTasks = MainTasksData.getMainTasks();
         
         this.month = month;
         this.year = year;
@@ -108,9 +106,10 @@ public class DateComponent extends javax.swing.JLayeredPane {
                 cal.add(Calendar.DATE, 1); // up 1 day
             }
         }
+        
+        
     }
-    
-    
+
     
     
     private Today getToday() {

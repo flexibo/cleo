@@ -102,7 +102,7 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
         
         if (e.getSource() == button5) {  
             //ProgressPanel.timeStudy = ProgressPanel.timeStudy + k;
-            ProgressPanel.updateStudy(k);
+            ProgressPanel1.updateStudy(k);
             k = 0;
             timer.start();
             isWorking = false;
@@ -119,7 +119,7 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
         }
         if (e.getSource() == button7) { //move to work
             //ProgressPanel.timeRest = ProgressPanel.timeRest + k;
-            ProgressPanel.updateRest(k);
+            ProgressPanel1.updateRest(k);
             k = 0;
             timer.start();
             isWorking = true;
@@ -184,29 +184,30 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(187, 187, 187)
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(131, 131, 131))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(168, 168, 168)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(168, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jButton1)
                         .addGap(44, 44, 44)
-                        .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,9 +220,9 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
                     .addComponent(jLabel6))
                 .addGap(28, 28, 28)
                 .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -235,7 +236,8 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
         TimerSpecification timerUsed = (TimerSpecification) jComboBox1.getSelectedItem();
         studyDurationInt = timerUsed.studyTime;
         restDurationInt = timerUsed.breakTime;
-        Panel.ProgressPanel.addDate(LocalDate.now());
+        System.out.println(LocalDate.now());
+        Panel.ProgressPanel1.addDate(LocalDate.now());
         timer.start();
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -245,10 +247,10 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
         timer.stop();
         if (isWorking) {
             //ProgressPanel.timeStudy = ProgressPanel.timeStudy + k;
-            ProgressPanel.updateStudy(k);
+            ProgressPanel1.updateStudy(k);
         } else if (!isWorking) {
             //ProgressPanel.timeRest = ProgressPanel.timeRest + k;
-            ProgressPanel.updateRest(k);
+            ProgressPanel1.updateRest(k);
         }
         
         k = 0;

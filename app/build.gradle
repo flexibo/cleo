@@ -6,6 +6,7 @@
  * User Manual available at https://docs.gradle.org/8.0-rc-1/userguide/building_java_projects.html
  */
 
+
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
@@ -16,6 +17,7 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
@@ -25,9 +27,15 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.toedter/jcalendar
     implementation group: 'com.toedter', name: 'jcalendar', version: '1.1.4'
+    implementation group: 'com.kenai.nbpwr', name: 'org-jdesktop-animation-timing', version: '1.0-201002281504'
+    implementation group: 'com.miglayout', name: 'miglayout-swing', version: '5.1'
 
+    implementation files('libs/DateChooser.jar')
+    implementation files('libs/jcalendar-1.4.jar')
+
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'org.json:json:20230618'
-    implementation 'org.json:json:20171018'
+    implementation 'com.google.code.gson:gson:2.10.1'
 }
 
 application {

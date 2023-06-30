@@ -36,7 +36,7 @@ public class SubTaskItem extends javax.swing.JPanel {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         dueDate.setText(df.format(subTaskObject.deadline));
         subtask.setText(subTaskObject.task);
-        this.setOpaque(false);
+        setOpaque(false);
     }
 
     /**
@@ -148,8 +148,6 @@ public class SubTaskItem extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(new Color(250,255,255));
-        g2.fillRoundRect(0,0, getWidth(), getHeight(), 10,10);
         
         super.paintComponent(g);
     }

@@ -68,7 +68,11 @@ public class ProgressGraph extends javax.swing.JPanel {
         }
     }
     
-    
+    public void clear() {
+        blankPlotChart1.setLabelCount(0);
+        model.clear();
+        repaint();
+    }
     
 
     /**

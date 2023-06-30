@@ -157,13 +157,16 @@ public class AddTaskUI implements ActionListener {
             
             MainTask mainTask = null;
             try {
+                
                 mainTask = new MainTask(taskTextField.getText(), df.parse(deadlineTextField.getText()), Integer.parseInt((String)comboBox.getSelectedItem()));
+                
             } catch (ParseException ex) {
+                
                 Logger.getLogger(AddTaskUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            System.out.println(deadlines.get(1).getText());
+            
             for (int i = 0; i < deadlines.size(); i++) {
+                System.out.println("test");
                 String subTaskTitle = subtasks.get(i).getText();
                 Date deadline = null;
                 try {
@@ -177,9 +180,7 @@ public class AddTaskUI implements ActionListener {
                 mainTask.addSubTask(subTask);
             }
             
-            mainTask.updateWeight();
             
-            TasksPanel.addTask(mainTask);
             
         }
     }
