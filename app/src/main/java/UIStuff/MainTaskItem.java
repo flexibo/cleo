@@ -99,8 +99,12 @@ public class MainTaskItem extends javax.swing.JPanel {
             toggleDone(false);
         }
              
+        if (totalWeight != 0) {
+            bar.setValue((completedWeight*100)/(totalWeight));
+        } else {
+            bar.setValue(100);
+        }
         
-        bar.setValue((completedWeight*100)/(totalWeight));
     }
     
     

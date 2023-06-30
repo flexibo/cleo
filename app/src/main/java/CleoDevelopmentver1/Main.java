@@ -4,14 +4,17 @@
  */
 package CleoDevelopmentver1;
 
+import Model.MainTask;
 import Panel.CalendarPanel;
 import Panel.ProgressPanel1;
 import Panel.SettingsPanel;
 import Panel.TasksPanel;
 import Panel.TimerPanel;
-import event.EventMenuSelected;
 import java.awt.Color;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -36,6 +39,7 @@ public class Main extends javax.swing.JFrame {
         this.progressPanel = new ProgressPanel1();
         this.timerPanel = new TimerPanel();
         settingsPanel = new SettingsPanel();
+        
         initComponents();
         setBackground(new Color(0,0,0,0));
         

@@ -6,6 +6,7 @@ package Panel;
 
 import CleoDevelopmentver1.AddTask;
 import CleoDevelopmentver1.AddTaskUI;
+import Data.MainTasksData;
 import Model.MainTask;
 import Model.SubTask;
 import java.text.DateFormat;
@@ -20,45 +21,23 @@ import java.util.Date;
  */
 public class TasksPanel extends javax.swing.JPanel {
 
-    private static ArrayList<MainTask> mainTasks;
     
     /**
      * Creates new form FormTask
      */
-    public TasksPanel() throws ParseException {
+    public TasksPanel() {
         initComponents();
-        initData();
+        ArrayList<MainTask> mainTasks = MainTasksData.getMainTasks();
         
         taskView1.setTasks(mainTasks);
         jScrollPane1.getViewport().setPreferredSize(taskView1.getPreferredSize());
     }
-    
-        
-    private void initData() throws ParseException {
-        DateFormat df  = new SimpleDateFormat("dd/MM/yyyy");  
-        
-        if (mainTasks == null) {
-            mainTasks = new ArrayList();
-            for (int i = 1; i < 10; i++) {
-                ArrayList<SubTask> subtasks = new ArrayList();
-                for (int j = 1; j < 5; j ++) {
-                    subtasks.add(new SubTask("Subtask " + j, df.parse(j + "/7/2023"), j));
-                }
-            
-                this.mainTasks.add(new MainTask("Task " + i, df.parse(i + "/7/2023"), 2, subtasks));
-            }
-        }
-    }
 
     public static void addTask(MainTask mainTask) {
-        mainTasks.add(mainTask);
+        MainTasksData.addTask(mainTask);
         taskView1.updateTasks();
     }
     
-    public static ArrayList<MainTask> getMainTasks() {
-        
-        return TasksPanel.mainTasks;
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,7 +92,7 @@ public class TasksPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new AddTaskUI();
+        new AddTask();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
