@@ -192,7 +192,7 @@ public class SubTasksComponent extends javax.swing.JPanel {
                 for (int i = 0; i < numOfSubtasks; i++) {
                 SubTaskInput subTaskInput = subTaskInputs.get(i);
                 if (!subTaskInput.isAdded()) {
-                    if (!" ".equals(subTaskInput.getTask())) {
+                    if (!subTaskInput.getTask().trim().isEmpty()) {
                         mainTask.addSubTask(new SubTask(subTaskInput.getTask(), subTaskInput.getDate(), subTaskInput.getWeight()));
                         subTaskInput.toggleAdded();
                     }
