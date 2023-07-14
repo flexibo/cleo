@@ -28,11 +28,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="slide" max="32767" attributes="0"/>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Component id="jLayeredPane2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Component id="slide" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -76,7 +76,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cmdBack" min="-2" pref="54" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="monthYearLabel" pref="561" max="32767" attributes="0"/>
+                  <Component id="monthYearLabel" pref="483" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cmdNext" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -146,7 +146,7 @@
               <Font name="SansSerif" size="30" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="33" red="66" type="rgb"/>
+              <Color blue="3d" green="28" red="b5" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Month - Year"/>

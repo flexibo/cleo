@@ -26,8 +26,8 @@ public class TimerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        createTimer11 = new Components.CreateTimer1();
-        startTimer11 = new Components.StartTimer1();
+        createTimer11 = new Components.CreateTimer();
+        startTimer11 = new Components.StartTimer();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,7 +53,7 @@ public class TimerPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Components.CreateTimer1 createTimer11;
-    private Components.StartTimer1 startTimer11;
+    private Components.CreateTimer createTimer11;
+    private Components.StartTimer startTimer11;
     // End of variables declaration//GEN-END:variables
 }

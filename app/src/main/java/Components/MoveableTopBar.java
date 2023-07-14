@@ -31,8 +31,27 @@ public class MoveableTopBar extends javax.swing.JPanel {
         initComponents();
     }
     
+        
+    private int x;
+    private int y; 
+
     public void setFrame(JFrame frame) {
         this.frame = frame;
+        
+        panelMoving.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                x = me.getX();
+                y = me.getY();
+            }
+        });
+        
+        panelMoving.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override 
+            public void mouseDragged(MouseEvent me) {
+                frame.setLocation(me.getXOnScreen()-x, me.getYOnScreen()-y);
+            }
+        });
     } 
 
     /**
@@ -126,27 +145,6 @@ public class MoveableTopBar extends javax.swing.JPanel {
         super.paintChildren(g);
     }
     
-    
-    
-    private int x;
-    private int y; 
-
-    public void initMoving(JFrame frame) {
-        panelMoving.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                x = me.getX();
-                y = me.getY();
-            }
-        });
-        
-        panelMoving.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override 
-            public void mouseDragged(MouseEvent me) {
-                frame.setLocation(me.getXOnScreen()-x, me.getYOnScreen()-y);
-            }
-        });
-    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,6 +4,7 @@
  */
 package Data;
 
+import Manage.ManagePanel;
 import Model.MainTask;
 import com.google.gson.Gson;
 
@@ -15,6 +16,8 @@ import org.json.JSONArray;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 import java.util.Collections;
+import java.util.Date;
+import org.json.JSONException;
 
 /**
  *
@@ -34,25 +37,44 @@ public class MainTasksData {
         mainTasks.add(mainTask);
         sortList();
         saveTasks();
+        System.out.println("size: " + mainTasks.size());
+        Manage.ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+        Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
     }
     
     public static void deleteDoneTasks() {
-        for(int i = 0; i < mainTasks.size(); i++) {
+        int count = 0;
+        for(int i = 0; i < mainTasks.size(); i++) {            
             if (mainTasks.get(i).done) {
+                count++;
                 deleteTask(i);
             }
         }
+        Manage.ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+        Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
     }
     
     public static void deleteTask(int index) {
         mainTasks.remove(index);
         saveTasks();
+        Manage.ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+        Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
     }
     
     public static void editTask(MainTask mainTask, int index) {
         mainTasks.set(index, mainTask);
         sortList();
         saveTasks();
+        Manage.ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+        Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
+    }
+    
+    public static int size() {
+        return mainTasks.size();
+    }
+    
+    public static int indexOf(MainTask task) {
+        return mainTasks.indexOf(task);
     }
     
     private static void sortList() {
@@ -64,56 +86,34 @@ public class MainTasksData {
         Type mainTaskListType = new TypeToken<ArrayList<MainTask>>() {}.getType();
         JSONObject json = JsonEncode.readJsonFromFile(FILEPATH);
         if (json != null) {
-            JSONArray mainTasksJSONArray = (JSONArray) json.get(KEY);
-            mainTasks = gson.fromJson(mainTasksJSONArray.toString(), mainTaskListType);
-        }
+            try {
+                JSONArray mainTasksJSONArray = (JSONArray) json.get(KEY);
+                mainTasks = gson.fromJson(mainTasksJSONArray.toString(), mainTaskListType);
+            } catch (JSONException e) {
+                mainTasks = new ArrayList<>();
+                mainTasks.add(new MainTask("dummy Task", new Date(), 3));
+                saveTasks();
+                loadTasks();
+            }  
+        } 
     }
         
     private static void saveTasks() {
         Gson gson = new Gson();
-        JSONObject json = new JSONObject();
-        
-        JSONArray mainTasksJson = new JSONArray();
-        for (MainTask task : mainTasks) {
-            String taskJson = gson.toJson(task);
-            mainTasksJson.put(new JSONObject(taskJson));
-        }
-        
-        json.put(KEY, mainTasksJson);
-        
-        System.out.println("saved");
-        JsonEncode.saveJsonToFile(json, FILEPATH);
-    }
-   
-   
+        JSONObject json = JsonEncode.readJsonFromFile(FILEPATH);
 
-    /*
-    public static void initData() {
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        if (json != null) {
+            JSONArray tasksJSONArray = json.optJSONArray(KEY);
 
-        if (mainTasks == null) {
-            mainTasks = new ArrayList<>();
-            for (int i = 1; i < 6; i++) {
-                ArrayList<SubTask> subtasks = new ArrayList<>();
-                for (int j = 1; j < 6; j++) {
-                    try {
-                        subtasks.add(new SubTask("Subtask " + j, df.parse(j + "/7/2023"), j));
-                    } catch (ParseException ex) {
-                        Logger.getLogger(MainTasksData.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
+            tasksJSONArray = new JSONArray();
 
-                MainTask mainTask = null;
-                try {
-                    mainTask = new MainTask("Task " + i, df.parse(i + "/7/2023"), 2, subtasks);
-                } catch (ParseException ex) {
-                    Logger.getLogger(MainTasksData.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                mainTasks.add(mainTask);
+            for (MainTask task : mainTasks) {
+                String timerJson = gson.toJson(task);
+                tasksJSONArray.put(new JSONObject(timerJson));
             }
+
+            json.put(KEY, tasksJSONArray);
+            JsonEncode.saveJsonToFile(json, FILEPATH);
         }
-        
-        saveTasks();
     }
-    */
 }

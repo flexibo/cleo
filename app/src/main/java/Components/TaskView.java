@@ -4,14 +4,17 @@
  */
 package Components;
 
+import Data.MainTasksData;
+import Manage.ManagePanel;
 import Model.MainTask;
 import Model.SubTask;
-import UIStuff.MainTaskItem;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import UIStuff.ClickableTask;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JLabel;
+import org.joda.time.DateTimeComparator;
 
 /**
  *
@@ -20,7 +23,7 @@ import java.util.ArrayList;
 public class TaskView extends javax.swing.JPanel {
 
     private static ArrayList<MainTask> mainTasks;
-    private GridBagConstraints c;
+    private final GridBagConstraints c;
             
     /**
      * Creates new form TaskView
@@ -34,26 +37,67 @@ public class TaskView extends javax.swing.JPanel {
         setVisible(true);
     }
     
-    public void setTasks(ArrayList<MainTask> mainTasks) {
-        TaskView.mainTasks = mainTasks; 
-
-        updateTasks();
-        System.out.println(mainTasks.size());
+    public void setTasks(Date date) {
+        removeAll();
+        DateTimeComparator dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
+        
+        c.gridy = 0;
+        mainTasks = MainTasksData.getMainTasks();
+        for (int i=0; i < mainTasks.size(); i++ ){
+            if (dateTimeComparator.compare(date, mainTasks.get(i).deadline)== 0) {
+                ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i, false);
+                c.gridy++;
+                add(clickableTask,c);
+            } else {
+                for (SubTask subtask : mainTasks.get(i).subTasks) {
+                    if (dateTimeComparator.compare(date, subtask.deadline)== 0) {
+                        ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i, false);
+                        c.gridy++;
+                        add(clickableTask,c);
+                    }
+                }
+            } 
+        } 
+        
+        if (c.gridy == 0)
+            noTasks();
+        else {
+            revalidate();
+            repaint();
+            setVisible(true);
+        }
     }
     
+
     public void updateTasks() {
         removeAll();
         c.gridy = 0;
-        //System.out.println(mainTasks.size());
-         for (int i=0; i < mainTasks.size(); i++ ){
-            MainTaskItem taskItem = new MainTaskItem(mainTasks.get(i));
-            UIStuff.ClickableTask clickableTask = new UIStuff.ClickableTask(taskItem);
+        mainTasks = MainTasksData.getMainTasks();
+        
+        if (!mainTasks.isEmpty()) {
+             for (int i=0; i < mainTasks.size(); i++ ){
+            ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i, true);
             c.gridy++;
             add(clickableTask,c);
-        } 
-        setVisible(true);
+            } 
+            revalidate();
+            repaint();
+            setVisible(true);
+        } else
+            noTasks();
     }
     
+    public void noTasks() {
+        removeAll();
+        c.gridy = 0;
+        JLabel noTasksLabel = new JLabel("No Tasks Due Today");
+        
+        add(noTasksLabel, c);
+        
+        revalidate();
+        repaint();
+        setVisible(true);
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

@@ -87,8 +87,8 @@ public class ListMenu<E extends Object> extends JList<E> {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
               Menu data;
-              if (value instanceof Menu) {
-                  data = (Menu) value;
+              if (value instanceof Menu menu) {
+                  data = menu;
               } else {
                   data = new Menu("", value + "", Menu.MenuType.MENU);
               }

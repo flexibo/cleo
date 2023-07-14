@@ -4,7 +4,9 @@
 package CleoDevelopmentver1;
 
 import Data.MainTasksData;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 
 public class App {
@@ -17,6 +19,29 @@ public class App {
         //new MainUI();
         //new JsonDecoder();
                 
+        new Test("animated/test.gif");
+        new Test("animated/test2.gif");
+        new Test("animated/cleo_idle.gif");
+        new Test("animated/cleo_sit.gif");
+        new Test("animated/cleo_sleep.gif");
+        
+        
+        try {
+            String line;
+            Process p = Runtime.getRuntime().exec
+    (System.getenv("windir") +"\\system32\\"+"tasklist.exe");
+            BufferedReader input =
+                    new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = input.readLine()) != null) {
+                //if (line.toLowerCase().contains("TETR.IO.exe") )
+                    System.out.println(line); //<-- Parse data here.
+            }
+            input.close();
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+        
         new Main();
+        
     }
 }

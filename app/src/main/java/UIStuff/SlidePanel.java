@@ -32,6 +32,7 @@ public class SlidePanel extends javax.swing.JPanel {
     public SlidePanel() {
         initComponents();
         setLayout(null);
+        setOpaque(false);
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent ce) {

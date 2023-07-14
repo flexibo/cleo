@@ -4,21 +4,24 @@
  */
 package Panel;
 
+import Components.TaskView;
+
 /**
  *
  * @author peach
  */
 public class CalendarPanel extends javax.swing.JPanel {
 
+    public TaskView taskView; 
     /**
      * Creates new form FormCalendar
      */
     public CalendarPanel() {
         initComponents();
-        calendarCustom1.refresh();
+        this.taskView = taskView1;
     }
 
-    public void refresh() {
+    public void refreshCal() {
         calendarCustom1.refresh();
     }
     /**
@@ -31,29 +34,38 @@ public class CalendarPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         calendarCustom1 = new Components.CalendarCustom();
+        scrollPaneWin111 = new RavenScrollBar.ScrollPaneWin11();
+        taskView1 = new Components.TaskView();
 
         setOpaque(false);
+
+        scrollPaneWin111.setViewportView(taskView1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(calendarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(calendarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(calendarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(calendarCustom1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Components.CalendarCustom calendarCustom1;
+    private RavenScrollBar.ScrollPaneWin11 scrollPaneWin111;
+    private Components.TaskView taskView1;
     // End of variables declaration//GEN-END:variables
 }

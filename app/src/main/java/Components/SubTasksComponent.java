@@ -4,14 +4,10 @@
  */
 package Components;
 
-import Data.MainTasksData;
-import Manage.ManagePanel;
-import Model.MainTask;
 import Model.SubTask;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
@@ -19,40 +15,27 @@ import javax.swing.Timer;
  *
  * @author peach
  */
-public class SubTasksComponent extends javax.swing.JPanel {
+public class SubTasksComponent extends javax.swing.JLayeredPane {
 
     /**
      * Creates new form SubTasksInput
      */
-    private int numOfSubtasks = 1;
-    private MainTask mainTask;
     private final ArrayList<SubTaskInput> subTaskInputs;
-    private final Timer timer;
-    private CalendarCustom cal;
-    
-    final private Color REDWARNING = new Color(153, 2, 60);
-    final private Color YELLOWWARNING = new Color(204, 136, 0);
-    final private Color GREENWARNING = new Color(0, 145, 10);
-    
+
     
     public SubTasksComponent() {
         initComponents();
+        
         subTaskInputs = new ArrayList<>();
        
         SubTaskInput subTaskInput = new SubTaskInput();
         
         subTaskInputs.add(subTaskInput);
-        jPanel1.add(subTaskInput);
-        
-        numOfSubtasks = subTaskInputs.size();
-        jPanel1.setLayout(new GridLayout(numOfSubtasks, 1));
+        jLayeredPane1.add(subTaskInput);
+  
+        jLayeredPane1.setLayout(new GridLayout(subTaskInputs.size(), 1));
         
         warning.setBackground(new Color(0,0,0,0));
-        
-        timer = new Timer(2000, (ActionEvent e) -> {
-            warning.setText("");
-        });
-        timer.setRepeats(false);
         
     }
 
@@ -66,43 +49,46 @@ public class SubTasksComponent extends javax.swing.JPanel {
     private void initComponents() {
 
         addButton = new UIStuff.CustomColorButton();
-        confirmButton = new UIStuff.CustomColorButton();
         scrollPaneWin111 = new RavenScrollBar.ScrollPaneWin11();
-        jPanel1 = new javax.swing.JPanel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
-        deleteTask = new UIStuff.CustomColorButton();
+        deleteButton = new UIStuff.CustomColorButton();
         warning = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         addButton.setText("Add Sub Task");
-        addButton.setBorderPainted(false);
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
             }
         });
 
-        confirmButton.setText("Confirm");
-        confirmButton.setBorderPainted(false);
-        confirmButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmButtonActionPerformed(evt);
-            }
-        });
-
+        scrollPaneWin111.setBackground(new java.awt.Color(250, 232, 233));
         scrollPaneWin111.setFocusable(false);
 
-        jPanel1.setFocusable(false);
-        jPanel1.setLayout(new java.awt.GridLayout(10, 1));
-        scrollPaneWin111.setViewportView(jPanel1);
+        jLayeredPane1.setBackground(new java.awt.Color(250, 232, 233));
+        jLayeredPane1.setForeground(new java.awt.Color(250, 232, 233));
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 448, Short.MAX_VALUE)
+        );
+
+        scrollPaneWin111.setViewportView(jLayeredPane1);
 
         jLabel1.setText("SubTask");
 
-        deleteTask.setText("Delete Sub Task");
-        deleteTask.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setText("Delete Sub Task");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteTaskActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -111,6 +97,14 @@ public class SubTasksComponent extends javax.swing.JPanel {
         jLabel2.setText("Deadline");
 
         jLabel3.setText("Weight");
+
+        setLayer(addButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setLayer(scrollPaneWin111, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setLayer(deleteButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setLayer(warning, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -133,8 +127,7 @@ public class SubTasksComponent extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deleteTask, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(warning, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -143,111 +136,82 @@ public class SubTasksComponent extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteTask, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(warning, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(92, 92, 92)))
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        numOfSubtasks++;
-        jPanel1.setLayout(new GridLayout(numOfSubtasks, 1));
+        jLayeredPane1.setLayout(new GridLayout(subTaskInputs.size()+1, 1));
         SubTaskInput subTaskInput = new SubTaskInput();
         subTaskInputs.add(subTaskInput);
-        jPanel1.add(subTaskInput);
+        jLayeredPane1.add(subTaskInput);
         System.out.println("subtask added");
-        jPanel1.revalidate();
-        jPanel1.repaint();
+        jLayeredPane1.revalidate();
+        jLayeredPane1.repaint();
     }//GEN-LAST:event_addButtonActionPerformed
 
-    private void deleteTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTaskActionPerformed
-        if (numOfSubtasks > 1) {
-            numOfSubtasks--;
-            jPanel1.setLayout(new GridLayout(numOfSubtasks, 1));
-            jPanel1.remove(subTaskInputs.get(numOfSubtasks - 1));
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        if (subTaskInputs.size() > 1) {
+            jLayeredPane1.setLayout(new GridLayout(subTaskInputs.size()-1, 1));
+            jLayeredPane1.remove(subTaskInputs.get(subTaskInputs.size() - 1));
             subTaskInputs.remove(subTaskInputs.size() - 1);
              System.out.println("subtask removed");
-            jPanel1.revalidate();
-            jPanel1.repaint();
-        } else {
-            setWarningText("<html>1 SubTask minimum</html>", REDWARNING);
+            jLayeredPane1.revalidate();
+            jLayeredPane1.repaint();
         }
-    }//GEN-LAST:event_deleteTaskActionPerformed
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-
-        if (mainTask.task != null && mainTask.deadline != null) {
-                for (int i = 0; i < numOfSubtasks; i++) {
-                SubTaskInput subTaskInput = subTaskInputs.get(i);
-                if (!subTaskInput.isAdded()) {
-                    if (!subTaskInput.getTask().trim().isEmpty()) {
-                        mainTask.addSubTask(new SubTask(subTaskInput.getTask(), subTaskInput.getDate(), subTaskInput.getWeight()));
-                        subTaskInput.toggleAdded();
-                    }
-                }
+    public ArrayList<SubTask> getSubtasks() {
+        ArrayList<SubTask> subtasks = new ArrayList();
+        for (int i = 0; i < subTaskInputs.size(); i++) {
+            SubTaskInput subTaskInput = subTaskInputs.get(i);
+            if (!subTaskInput.getTask().trim().isEmpty() && subTaskInput.getDate() != null) {
+                subtasks.add(new SubTask(subTaskInput.getTask(), subTaskInput.getDate(), subTaskInput.getWeight()));
             }
-
-            MainTasksData.addTask(mainTask);
-            
-            setWarningText("<html> Main Task:" + mainTask.getTask() 
-                    + " has been added with " + mainTask.subTasks.size(), GREENWARNING, 5);
-            
-            cal.refresh();
-            ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
-            ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
-         } else {
-            setWarningText("<html>Please input a main task and choose the deadline</html>", YELLOWWARNING, 4);
         }
-       
-       
-    }//GEN-LAST:event_confirmButtonActionPerformed
-
-    public void setCal(CalendarCustom cal) {
-        this.cal = cal;
-    }
-    
-    public void setMainTask(MainTask mainTask) {
-        this.mainTask = mainTask;
         
+        return subtasks;
     }
     
-    private void setWarningText(String string, Color color) {
-        warning.setText(string);
-        warning.setForeground(color);
-        timer.start();
+    public void setSubtasks(ArrayList<SubTask> subtasks) {
+        jLayeredPane1.removeAll();
+        jLayeredPane1.setLayout(new GridLayout(subtasks.size(), 1));
+        for (SubTask subTask : subtasks) {
+            SubTaskInput subTaskInput = new SubTaskInput(subTask);
+            jLayeredPane1.add(subTaskInput);
+            subTaskInputs.add(subTaskInput);
+        }
+        
+        jLayeredPane1.revalidate();
+        jLayeredPane1.repaint();
     }
-    
-    private void setWarningText(String string, Color color, int delay) {
-        warning.setText(string);
-        warning.setForeground(color);
-        timer.setDelay(delay * 1000);
-        timer.start();
-    }
-
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private UIStuff.CustomColorButton addButton;
-    private UIStuff.CustomColorButton confirmButton;
-    private UIStuff.CustomColorButton deleteTask;
+    private UIStuff.CustomColorButton deleteButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private RavenScrollBar.ScrollPaneWin11 scrollPaneWin111;
     private javax.swing.JLabel warning;
     // End of variables declaration//GEN-END:variables

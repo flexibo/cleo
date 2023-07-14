@@ -33,27 +33,27 @@ public class ManagePanel {
     public final static int TIMER_PANEL = 4;
     
     public static void initPanels() {
+        tasksPanel = new TasksPanel();
         calendarPanel = new CalendarPanel();
         progressPanel = new ProgressPanel1();
-        tasksPanel = new TasksPanel();
         timerPanel = new TimerPanel();
     }
     
     public static void refreshPanel(int panel) {
         switch (panel) {
-            case CALENDAR_PANEL -> calendarPanel.refresh();
+            case CALENDAR_PANEL -> calendarPanel.refreshCal();
             case PROGRESS_PANEL -> {
             }
-            case TASKS_PANEL -> {tasksPanel.refresh();}
+            case TASKS_PANEL -> {tasksPanel.refresh(); System.out.println("sdf");}
             case TIMER_PANEL -> {
             }
             default -> {
             }
         }
-        //progressPanel.refresh();
-        //timerPanel.refresh();
+        //progressPanel.refreshCal();
+        //timerPanel.refreshCal();
     }
-
+    
     public static CalendarPanel getCalendarPanel() {
         return calendarPanel;
     }

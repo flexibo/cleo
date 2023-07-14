@@ -5,11 +5,16 @@
 package Components;
 
 import Data.MainTasksData;
+import Manage.ManagePanel;
 import Model.Cell;
 import Model.MainTask;
 import Model.SubTask;
 import Model.Today;
+import Panel.CalendarPanel;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,15 +30,16 @@ public class DateComponent extends javax.swing.JLayeredPane {
      * Creates new form DateComponent
      */
     
-    private int month;
-    private int year;
-    private HashMap<String, Integer> weightWeekMap; 
-    private ArrayList<MainTask> mainTasks;
+    private final int month;
+    private final int year;
+    private final HashMap<String, Integer> weightWeekMap; 
+    private final ArrayList<MainTask> mainTasks;
+    private Cell selectedCell = null;
     
     public DateComponent(int month, int year) {
         initComponents();
         mainTasks = MainTasksData.getMainTasks();
-        
+        setOpaque(false);
         this.month = month;
         this.year = year;
         weightWeekMap = new HashMap<>();
@@ -88,13 +94,21 @@ public class DateComponent extends javax.swing.JLayeredPane {
         for (Component com:getComponents()) {
             Cell cell = (Cell) com;
             if (!cell.isTitle()) {
+                if (cal.get(Calendar.DATE) == 1 && cal.get(Calendar.MONTH) + 1 == month){
+                    setSelected(cell);
+                }
+                
+                if (today.isToday(new Today(cal.get(Calendar.DATE), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR)))) {
+                    cell.setAsToday();
+                    setSelected(cell);
+                }
                 cell.setText(cal.get(Calendar.DATE) + "");
                 cell.setDate(cal.getTime());
                 cell.currentMonth(cal.get(Calendar.MONTH) == month - 1);
                 
-                if (today.isToday(new Today(cal.get(Calendar.DATE), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR)))) {
-                    cell.setAsToday();
-                }
+                cell.addActionListener((ActionEvent ae) -> {
+                    setSelected(cell);
+                });
                 
                 weekYear = cal.get(Calendar.WEEK_OF_YEAR) + "-" + cal.get(Calendar.YEAR);
                 
@@ -107,7 +121,20 @@ public class DateComponent extends javax.swing.JLayeredPane {
             }
         }
         
+    }
+    
+    private void setSelected(Cell cell) {
+        if (selectedCell != null)
+            selectedCell.setAsSelected(false);
+
+        selectedCell = cell;
+        selectedCell.setAsSelected(true);
         
+        CalendarPanel calPanel = ManagePanel.getCalendarPanel();
+        if (calPanel != null && cell.getDate() != null) {
+            calPanel.taskView.setTasks(cell.getDate());
+        }
+            
     }
 
     

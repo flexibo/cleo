@@ -18,9 +18,9 @@ import javax.swing.Timer;
  *
  * @author peach
  */
-public class CreateTimer1 extends javax.swing.JPanel /*implements ActionListener*/ {
+public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*/ {
     
-    public CreateTimer1() {
+    public CreateTimer() {
         initComponents();
         //setVisible(true);
     }
@@ -212,9 +212,9 @@ public class CreateTimer1 extends javax.swing.JPanel /*implements ActionListener
         TimerSpecification newCustomTimer = new TimerSpecification(jTextField3.getText(),/* StudySlider.getValue()*/ Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
         
         //jComboBox1.addItem(newCustomTimer);
-        StartTimer1.addTimer(newCustomTimer);
+        StartTimer.addTimer(newCustomTimer);
         
-        TimerSpecification currentlyChosen = (TimerSpecification) StartTimer1.jComboBox1.getSelectedItem();
+        TimerSpecification currentlyChosen = (TimerSpecification) StartTimer.jComboBox1.getSelectedItem();
         jTextField3.setText("Name of Custom Timer");
         StudySlider.setValue(currentlyChosen.studyTime);
         RestSlider.setValue(currentlyChosen.breakTime);

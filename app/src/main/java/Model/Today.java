@@ -66,4 +66,5 @@ public class Today {
     public boolean isToday(Today date) {
         return day == date.getDay() && month == date.getMonth() && year == date.getYear();
     }
+    
 }

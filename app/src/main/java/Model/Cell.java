@@ -5,9 +5,11 @@
 package Model;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,7 +23,11 @@ public class Cell extends JButton {
     private Date date;
     private boolean title;
     private boolean isToday;
+    private boolean selected;
     private int weekWeight;
+    private boolean curMonth;
+    private boolean subtask;
+    private boolean maintask;
     
     public Cell() {
         setContentAreaFilled(false);
@@ -43,11 +49,16 @@ public class Cell extends JButton {
         this.date = date;
     }
     
+    public Date getDate() {
+        return this.date;
+    }
+    
      public void setWeekWeight(int weekWeight) {
         this.weekWeight = weekWeight;
     }
     
     public void currentMonth(boolean act) {
+       this.curMonth = act;
        if (act){
            setForeground(new Color(68,68,68));
        } else {
@@ -57,7 +68,19 @@ public class Cell extends JButton {
     
     public void setAsToday(){
         this.isToday = true;
-        setForeground(Color.WHITE);
+    }
+    
+    public void setAsSelected(boolean bool) {
+        this.selected = bool;
+        if (bool)
+            setForeground(Color.WHITE);
+        else {
+            if (curMonth){
+                setForeground(new Color(68,68,68));
+            } else {
+                setForeground(new Color(168,169,169));
+            }
+        }
     }
     
     public void setWeightWeek(int weight){
@@ -91,17 +114,28 @@ public class Cell extends JButton {
         }
         
         if(isToday) {
+            g2.setColor(new Color(255, 74, 104));
+            setForeground(new Color(255, 196, 206));
+            setFont(new Font("SansSerif", Font.BOLD, 20));
+            int x = getWidth()/2-19;
+            int y = getHeight()/2-19;
+            g2.fillRoundRect(x, y, 40, 40, 100, 100);
+        }
+        if (selected) {
+            setForeground(Color.WHITE);
             Graphics2D g3 = (Graphics2D) g;
             g3.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g3.setColor(new Color(102,51,255));
+            g3.setColor(new Color(181, 40, 61));
             
             int x = getWidth()/2-16;
             int y = getHeight()/2-17;
             g3.fillRoundRect(x, y, 35, 35, 100, 100);
         }
+        
+        if (subtask) {
+            
+        }
                 
         super.paintComponent(g); 
     }
-    
-    
 }

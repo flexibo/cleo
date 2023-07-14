@@ -5,6 +5,7 @@
 package Components;
 
 import UIStuff.SlidePanel;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -25,7 +26,11 @@ public class CalendarCustom extends javax.swing.JPanel {
     
     public CalendarCustom() {
         initComponents();
+        
+        setOpaque(false);
         thisMonth();
+        
+        refresh();
     }
 
     
@@ -95,7 +100,7 @@ public class CalendarCustom extends javax.swing.JPanel {
         });
 
         monthYearLabel.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
-        monthYearLabel.setForeground(new java.awt.Color(102, 51, 255));
+        monthYearLabel.setForeground(new java.awt.Color(181, 40, 61));
         monthYearLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         monthYearLabel.setText("Month - Year");
 
@@ -111,7 +116,7 @@ public class CalendarCustom extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(cmdBack, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(monthYearLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+                .addComponent(monthYearLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmdNext, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -131,10 +136,10 @@ public class CalendarCustom extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(slide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLayeredPane2)
                 .addContainerGap())
+            .addComponent(slide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,6 +182,8 @@ public class CalendarCustom extends javax.swing.JPanel {
         calendar.setTime(new Date()); // today 
         month = calendar.get(Calendar.MONTH) + 1;
         year = calendar.get(Calendar.YEAR);
+        SimpleDateFormat df = new SimpleDateFormat("MMMM-YYYY");
+        monthYearLabel.setText(df.format(calendar.getTime()));
     }
     
     private void showMonthYear() {

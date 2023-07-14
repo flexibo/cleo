@@ -4,6 +4,7 @@
  */
 package Components;
 
+import Model.SubTask;
 import java.util.Date;
 
 /**
@@ -20,7 +21,13 @@ public class SubTaskInput extends javax.swing.JPanel {
     
     public SubTaskInput() {
         initComponents();
-        added = false;
+    }
+    
+    public SubTaskInput(SubTask subTask) {
+        initComponents();
+        coloredTextBox1.setText(subTask.task);
+        jDateChooser1.setDate(subTask.deadline);
+        jSpinner1.setValue(subTask.weight);
     }
 
     /**
@@ -76,14 +83,6 @@ public class SubTaskInput extends javax.swing.JPanel {
         return (int) jSpinner1.getValue();
     }
     
-    public void toggleAdded() {
-        added = true;
-    }
-    
-    public boolean isAdded() {
-        return added;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private UIStuff.ColoredTextBox coloredTextBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;

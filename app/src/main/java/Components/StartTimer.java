@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Components;
+import Data.TimerData;
 import Panel.*;
 import Model.TimerSpecification;
 import java.awt.FlowLayout;
@@ -14,13 +15,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.time.LocalDate;
+import javax.swing.DefaultComboBoxModel;
 
  
 /**
  *
  * @author peach
  */
-public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
+public class StartTimer extends javax.swing.JPanel implements ActionListener {
     Timer timer = new Timer(100, this);
     int k = 0;
     int studyDurationInt = 0;
@@ -28,6 +30,7 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
     boolean isWorking = true;
     boolean extendedWork = false;
     boolean extendedRest = false;
+    private static TimerSpecification[] options; 
     
     
     JFrame frame2 = new JFrame();
@@ -42,15 +45,12 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
     JButton button6 = new JButton("5 more minutes");
     JButton button7 = new JButton("Ready for Work!");
     
-    
-    Model.TimerSpecification defaultPomodoro = new Model.TimerSpecification("Pomodoro Timer", 25,5);
-    Model.TimerSpecification[] options = {defaultPomodoro};    
-    
 
     /**
      * Creates new form FormTimer
      */
-    public StartTimer1() {
+    public StartTimer() {
+        options = TimerData.getTimers();
         initComponents();
     }
     
@@ -191,14 +191,13 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(168, Short.MAX_VALUE))
+                            .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jButton1)
                         .addGap(44, 44, 44)
-                        .addComponent(jButton2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -261,7 +260,7 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         Model.TimerSpecification timerChosen =(TimerSpecification) jComboBox1.getSelectedItem();
-        CreateTimer1.setSlidersToTimer(timerChosen);
+        CreateTimer.setSlidersToTimer(timerChosen);
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -315,8 +314,10 @@ public class StartTimer1 extends javax.swing.JPanel implements ActionListener {
         frame3.setVisible(true);
     }
     
-    public static void addTimer(Model.TimerSpecification tS) {
-        jComboBox1.addItem(tS);
+    public static void addTimer(TimerSpecification tS) {
+        TimerData.addTimer(tS);
+        options = TimerData.getTimers();
+        jComboBox1.setModel(new DefaultComboBoxModel<>(options));
     }
     
     private static void updateTime(int k) {

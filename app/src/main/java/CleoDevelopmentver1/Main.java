@@ -10,6 +10,7 @@ import Panel.ProgressPanel1;
 import Panel.TasksPanel;
 import Panel.TimerPanel;
 import java.awt.Color;
+import java.awt.Frame;
 import javax.swing.JComponent;
 
 /**
@@ -39,13 +40,14 @@ public class Main extends javax.swing.JFrame {
         setBackground(new Color(0,0,0,0));
         
         // To move the application using the menu
-        setPanel(taskPanel);
+        setPanel(calendarPanel);
+        //setPanel(taskPanel);
         
         menu.initMoving(Main.this);
         menu.addEventMenuSelected((int index) -> {
             switch (index) {
                 case 0 -> setPanel(taskPanel);
-                case 1 -> setPanel(progressPanel);
+                case 1 -> setPanel(progressPanel); 
                 case 2 -> setPanel(calendarPanel);
                 case 3 -> setPanel(timerPanel);
                 default ->setPanel(taskPanel);
@@ -75,14 +77,32 @@ public class Main extends javax.swing.JFrame {
         panelBorder1 = new UIStuff.PanelBorder();
         menu = new Components.Menu();
         mainPanel = new javax.swing.JPanel();
+        minimizeButton1 = new UIStuff.MinimizeButton();
+        closeButton1 = new UIStuff.CloseButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        panelBorder1.setBackground(new java.awt.Color(214, 214, 214));
+        panelBorder1.setBackground(new java.awt.Color(255, 204, 204));
 
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.BorderLayout());
+
+        minimizeButton1.setBorderPainted(false);
+        minimizeButton1.setFocusPainted(false);
+        minimizeButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                minimizeButton1ActionPerformed(evt);
+            }
+        });
+
+        closeButton1.setBorderPainted(false);
+        closeButton1.setFocusPainted(false);
+        closeButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -90,16 +110,25 @@ public class Main extends javax.swing.JFrame {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 931, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(minimizeButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(closeButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(closeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(minimizeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -113,20 +142,30 @@ public class Main extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void closeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButton1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_closeButton1ActionPerformed
+
+    private void minimizeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeButton1ActionPerformed
+        // TODO add your handling code here:
+        setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_minimizeButton1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private UIStuff.CloseButton closeButton1;
     private javax.swing.JPanel mainPanel;
     private Components.Menu menu;
+    private UIStuff.MinimizeButton minimizeButton1;
     private UIStuff.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 }

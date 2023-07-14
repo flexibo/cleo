@@ -4,17 +4,23 @@
  */
 package UIStuff;
 
+import CleoDevelopmentver1.TaskEditor;
+import Data.MainTasksData;
 import Model.MainTask;
 import Model.SubTask;
 import Model.Task;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -26,8 +32,10 @@ public class ClickableTask extends javax.swing.JPanel {
      * Creates new form ClickableTask
      */
     int size;
-    public ClickableTask(MainTaskItem mainTaskItem) {
+    public ClickableTask(MainTask mainTask, int index, boolean enableMenu) {
         initComponents();
+        
+        MainTaskItem mainTaskItem = new MainTaskItem(mainTask);
         ArrayList<SubTaskItem> subtaskItems = mainTaskItem.getSubTaskItems();
         
         
@@ -57,10 +65,24 @@ public class ClickableTask extends javax.swing.JPanel {
                 toggleVisibility(subTaskPanels);
             }
         });
- 
+        
+        if (enableMenu){
+            JPopupMenu popupMenu = new JPopupMenu();
+            JMenuItem deleteItem = new JMenuItem("Delete task");
+            JMenuItem editItem = new JMenuItem("Edit task");
+            popupMenu.add(deleteItem);
+            popupMenu.add(editItem);
+            deleteItem.addActionListener((ActionEvent e) -> {
+                MainTasksData.deleteTask(index);
+            });
+            editItem.addActionListener((ActionEvent e) -> {
+                new TaskEditor(mainTask, index);
+            });
+            setComponentPopupMenu(popupMenu);
+        }
     }
     
-    public void toggleVisibility(JPanel panel) {
+    public final void toggleVisibility(JPanel panel) {
         if (panel.isVisible()) {
             jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/downArrow.png"));
             setPreferredSize(new java.awt.Dimension(600, 55));

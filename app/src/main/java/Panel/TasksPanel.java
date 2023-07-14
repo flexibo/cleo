@@ -4,8 +4,9 @@
  */
 package Panel;
 
-import CleoDevelopmentver1.AddTask;
+import CleoDevelopmentver1.TaskEditor;
 import Data.MainTasksData;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,7 +18,7 @@ public class TasksPanel extends javax.swing.JPanel {
      */
     public TasksPanel() {
         initComponents();
-        taskView1.setTasks(MainTasksData.getMainTasks());
+        taskView1.updateTasks();
     }
 
     public void refresh() {
@@ -67,11 +68,11 @@ public class TasksPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scrollPaneWin111, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(customColorButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteDoneTasksButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,13 +91,12 @@ public class TasksPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void customColorButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customColorButton1ActionPerformed
-        new AddTask();
+        new TaskEditor();
     }//GEN-LAST:event_customColorButton1ActionPerformed
 
     private void deleteDoneTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoneTasksButtonActionPerformed
         // TODO add your handling code here:
         MainTasksData.deleteDoneTasks();
-        refresh();
     }//GEN-LAST:event_deleteDoneTasksButtonActionPerformed
 
 
