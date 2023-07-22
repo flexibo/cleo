@@ -24,7 +24,11 @@ public class TimerData {
     
     public static TimerSpecification[] getTimers() {
         loadTimers();
-        TimerSpecification[] timerArray = timers.toArray(TimerSpecification[]::new);
+        TimerSpecification[] timerArray = {new TimerSpecification("Pomodoro Timer", 25, 5)};
+        if (timers != null) {
+           timerArray = timers.toArray(TimerSpecification[]::new); 
+        } 
+        
         return timerArray;
     }
     

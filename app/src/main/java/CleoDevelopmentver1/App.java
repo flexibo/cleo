@@ -25,7 +25,7 @@ public class App {
         new Test("animated/cleo_sit.gif");
         new Test("animated/cleo_sleep.gif");
         
-        
+        /*
         try {
             String line;
             Process p = Runtime.getRuntime().exec
@@ -40,6 +40,7 @@ public class App {
         } catch (Exception err) {
             err.printStackTrace();
         }
+*/
         
         new Main();
         

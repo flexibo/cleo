@@ -61,7 +61,6 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             //jLabel1.setText(String.valueOf(mins(k) + ":" + secs(k)));
             updateTime(k);
             currentStage.setText(isWorking? "Work Period" : "Rest Period");
-        
             
             
             
