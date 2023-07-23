@@ -24,16 +24,9 @@ public class ProgressGraphCurved extends javax.swing.JPanel {
     public ProgressGraphCurved() {
         initComponents();
         chart.setBackground(new Color(255, 255, 255));
-        //chart.setTitle("Chart Data");
-        chart.addLegend("Rest",  new Color(204, 204, 255),  new Color(204, 204, 255));
         chart.addLegend("Study", new Color(255, 204, 204), new Color(255, 204, 204));
+        chart.addLegend("Rest",  new Color(204, 204, 255),  new Color(204, 204, 255));
         chart.clear();
-        /*chart.addData(new ModelChart("January", new double[]{500, 50, 100}));
-        chart.addData(new ModelChart("February", new double[]{600, 300, 150}));
-        chart.addData(new ModelChart("March", new double[]{200, 50, 900}));
-        chart.addData(new ModelChart("April", new double[]{480, 700, 100}));
-        chart.addData(new ModelChart("May", new double[]{350, 540, 500}));
-        chart.addData(new ModelChart("June", new double[]{450, 800, 100}));*/
         chart.start();
     }
     
@@ -47,8 +40,8 @@ public class ProgressGraphCurved extends javax.swing.JPanel {
             int hoursStudy = data.get(i).durationStudy;
             int hoursRest = data.get(i).durationRest;
             LocalDate date = data.get(i).date;
-            if (date.getDayOfMonth() == date.lengthOfMonth() / 2) {
-                chart.addData(new ModelChart("", new double[]{hoursStudy, hoursRest}));
+            if (i == date.lengthOfMonth() / 2) {
+                chart.addData(new ModelChart(date.getMonth() + "", new double[]{hoursStudy, hoursRest}));
             } else {
                 chart.addData(new ModelChart("", new double[]{hoursStudy, hoursRest}));
             }
