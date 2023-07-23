@@ -42,6 +42,11 @@ public class TimerData {
         saveTimers();
     }
     
+    public static void deleteTimer(TimerSpecification timer) {
+        timers.remove(timer);
+        saveTimers();
+    }
+    
     public static void editTimer(TimerSpecification timer, int index) {
         timers.set(index, timer);
         saveTimers();

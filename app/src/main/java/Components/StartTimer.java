@@ -149,6 +149,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         jComboBox1 = new javax.swing.JComboBox<>(options);
         currentStage = new javax.swing.JLabel();
         circleProgressBar1 = new CircleProgress.CircleProgressBar();
+        jButton3 = new javax.swing.JButton();
 
         setOpaque(false);
 
@@ -179,6 +180,13 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         circleProgressBar1.setBackground(new java.awt.Color(242, 242, 242));
         circleProgressBar1.setForeground(new java.awt.Color(0, 0, 0));
 
+        jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,7 +206,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
                                     .addComponent(jLabel2)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(93, 93, 93)
-                                .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +222,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(65, 65, 65)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -266,6 +278,14 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         CreateTimer.setSlidersToTimer(timerChosen);
         jButton1.setEnabled(true);
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        TimerSpecification ts = (TimerSpecification) jComboBox1.getSelectedItem();
+        jComboBox1.removeItem(ts);
+        Data.TimerData.deleteTimer(ts);
+        System.out.println(jComboBox1.getSelectedIndex());
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
     //helper functions
@@ -346,6 +366,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     private javax.swing.JLabel currentStage;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     public static javax.swing.JComboBox<Model.TimerSpecification> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
