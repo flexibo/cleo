@@ -16,9 +16,9 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
   <SubComponents>
-    <Component class="Components.CreateTimer" name="createTimer11">
+    <Component class="Components.StartTimer" name="startTimer2">
     </Component>
-    <Component class="Components.StartTimer" name="startTimer1">
+    <Component class="Components.CreateTimer" name="createTimer2">
     </Component>
   </SubComponents>
 </Form>

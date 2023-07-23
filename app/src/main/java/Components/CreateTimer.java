@@ -101,7 +101,7 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -129,7 +129,7 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
                                 .addGap(74, 74, 74)
                                 .addComponent(jButton3)))
                         .addGap(88, 88, 88)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2))
         );
         layout.setVerticalGroup(
@@ -140,7 +140,7 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
                         .addGap(145, 145, 145)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(25, 25, 25)
                         .addComponent(jLabel3)
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -158,7 +158,7 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(jButton3)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

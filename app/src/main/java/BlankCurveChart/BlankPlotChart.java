@@ -78,13 +78,13 @@ public class BlankPlotChart extends JComponent {
     }
 
     private void init() {
-        initValues(0, 10);
-        addMouseMotionListener(new MouseMotionAdapter() {
+        initValues(0, 30);
+        /*addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent me) {
                 mouseMove((Graphics2D) getGraphics(), me);
             }
-        });
+        });*/
     }
 
     public void initValues(double minValues, double maxValues) {

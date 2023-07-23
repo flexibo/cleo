@@ -31,7 +31,7 @@ public class ProgressPanel1 extends javax.swing.JPanel {
         //data.add(new Model.Day(250, 15, LocalDate.of(2023, 5, 20)));
         data.add(new Model.Day(275, 50, LocalDate.of(2023, 4,26)));
         data.add(new Model.Day(0, 0, LocalDate.of(2023, 4,27)));
-        /*data.add(new Model.Day(275, 50, LocalDate.of(2023, 4,28)));
+        data.add(new Model.Day(275, 50, LocalDate.of(2023, 4,28)));
         data.add(new Model.Day(275, 50, LocalDate.of(2023, 4,29)));
         data.add(new Model.Day(275, 50, LocalDate.of(2023, 4,30)));
         data.add(new Model.Day(275, 50, LocalDate.of(2023, 5, 31)));
@@ -61,7 +61,13 @@ public class ProgressPanel1 extends javax.swing.JPanel {
         data.add(new Model.Day(250, 15, LocalDate.of(2023, 6, 24)));
         data.add(new Model.Day(250, 15, LocalDate.of(2023, 6, 25)));
         data.add(new Model.Day(250, 15, LocalDate.of(2023, 6, 26)));
-        data.add(new Model.Day(250, 15, LocalDate.of(2023, 6, 27)));*/
+        data.add(new Model.Day(250, 15, LocalDate.of(2023, 6, 27)));
+        
+        data.add(new Model.Day(250, 10, LocalDate.of(2023, 7, 2)));
+        data.add(new Model.Day(120, 70, LocalDate.of(2023, 7, 3)));
+        data.add(new Model.Day(75, 20, LocalDate.of(2023, 7, 4)));
+        data.add(new Model.Day(50, 5, LocalDate.of(2023, 7, 5)));
+        data.add(new Model.Day(360, 25, LocalDate.of(2023, 7, 6)));
 
         
         
@@ -91,8 +97,8 @@ public class ProgressPanel1 extends javax.swing.JPanel {
             dataRefined.add(data.get(data.size() - k));
             k = k - 1;
         }
-        dayView1.removeData();
-        dayView1.generateGraph(dataRefined);
+        dayView1.removeData(); // clear the graph
+        dayView1.generateGraph(dataRefined); // regenerate the graph
     }
     
     public static void updateWeekView(ArrayList<Model.Day> data) {
@@ -109,6 +115,7 @@ public class ProgressPanel1 extends javax.swing.JPanel {
     public static void updateMonthView(ArrayList<Model.Day> data) {
         ArrayList<Model.Day> dataRefined = new ArrayList<>();
         int k = LocalDate.now().lengthOfMonth();
+        //int k = 30;
         while (k != 0) {
             dataRefined.add(data.get(data.size() - k));
             k = k - 1;

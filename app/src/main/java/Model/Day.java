@@ -19,4 +19,8 @@ public class Day {
         this.date = date;
     }
     
+    public LocalDate getDate() {
+        return this.date;
+    }
+    
 }

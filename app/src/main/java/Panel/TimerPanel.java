@@ -26,16 +26,16 @@ public class TimerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        createTimer11 = new Components.CreateTimer();
-        startTimer1 = new Components.StartTimer();
+        startTimer2 = new Components.StartTimer();
+        createTimer2 = new Components.CreateTimer();
 
-        add(createTimer11);
-        add(startTimer1);
+        add(startTimer2);
+        add(createTimer2);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Components.CreateTimer createTimer11;
-    private Components.StartTimer startTimer1;
+    private Components.CreateTimer createTimer2;
+    private Components.StartTimer startTimer2;
     // End of variables declaration//GEN-END:variables
 }
