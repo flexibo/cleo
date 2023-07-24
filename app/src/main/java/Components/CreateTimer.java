@@ -167,16 +167,19 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // update the study duration textfield to reflect the slider
     private void StudySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_StudySliderStateChanged
         // TODO add your handling code here:
         jTextField1.setText(StudySlider.getValue() + "");
     }//GEN-LAST:event_StudySliderStateChanged
-
+    
+    // update the rest duration textfield to reflect the slider
     private void RestSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_RestSliderStateChanged
         // TODO add your handling code here:
         jTextField2.setText(RestSlider.getValue() + "");
     }//GEN-LAST:event_RestSliderStateChanged
 
+    // ensure that study duration entered into the text field is valid before updating slider to reflect text box
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         int val1 = Integer.parseInt(jTextField1.getText());
@@ -187,6 +190,7 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         }
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    // ensure that rest duration entered into the text field is valid before updating slider to reflect text box
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
         int val2 = Integer.parseInt(jTextField2.getText());
@@ -197,6 +201,7 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         }
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    // place holder for text field for name of custom timer
     private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
         // TODO add your handling code here:
         if (jTextField3.getText().equals("Name of Custom Timer")) {
@@ -212,11 +217,10 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         }
     }//GEN-LAST:event_jTextField3FocusLost
 
+    //create a timer with the specifications, add into combobox and reset values of slider & text field and rest fexi field
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         TimerSpecification newCustomTimer = new TimerSpecification(jTextField3.getText(),/* StudySlider.getValue()*/ Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
-        
-        //jComboBox1.addItem(newCustomTimer);
         StartTimer.addTimer(newCustomTimer);
         
         TimerSpecification currentlyChosen = (TimerSpecification) StartTimer.jComboBox1.getSelectedItem();
@@ -226,55 +230,6 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         jTextField1.setText(currentlyChosen.studyTime + "");
         jTextField2.setText(currentlyChosen.breakTime + "");
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    
-    //helper functions
-    private String mins(int k) {
-        if ((k / 60) < 10) {
-            return "0" + (k / 60);
-        } else {
-            return k / 60 + "";
-        }
-    }
-    
-    private String secs(int k) {
-        
-        if (k - ((k / 60) * 60) < 10) {
-            return "0" + (k - ((k / 60) * 60));
-        } else {
-            return k - ((k / 60) * 60) + "";
-        }
-    }
-    
-    /*private void moveToRest() {
-        
-        
-        //frame.setTitle("Timer");
-        frame2.setSize(300, 120);
-        frame2.setLayout(new FlowLayout(3));
-        
-        button4.addActionListener(this);
-        button5.addActionListener(this);
-        panel5.add(button4);
-        panel5.add(button5);
-        frame2.add(label3);
-        frame2.add(panel5);
-        frame2.setVisible(true);
-    }
-    
-    private void moveToWork() {
-        
-        frame3.setSize(300, 120);
-        frame3.setLayout(new FlowLayout(3));
-        
-        button6.addActionListener(this);
-        button7.addActionListener(this);
-        panel6.add(button6);
-        panel6.add(button7);
-        frame3.add(label4);
-        frame3.add(panel6);
-        frame3.setVisible(true);
-    }*/
 
     
     public static void setSlidersToTimer(TimerSpecification tS) {

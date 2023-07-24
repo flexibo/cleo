@@ -24,7 +24,8 @@ import javax.swing.DefaultComboBoxModel;
  * @author peach
  */
 public class StartTimer extends javax.swing.JPanel implements ActionListener {
-    Timer timer = new Timer(100, this);
+    //Stuff needed for the Timer and timer logic 
+    Timer timer = new Timer(100 * 60, this);
     int k = 0;
     static int studyDurationInt = 0;
     static int restDurationInt = 0;
@@ -34,7 +35,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     private static TimerSpecification[] options; 
     
     
-    
+    //**Components for notifications (appear at end of session)**//
     JFrame frame2 = new JFrame();
     JLabel label3 = new JLabel("Work Period over!");
     JPanel panel5 = new JPanel();
@@ -56,15 +57,14 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         initComponents();
     }
     
+    
+    // Timer logic eg updating the JLabel that indicates the time every minute //
     @Override
     public void actionPerformed(ActionEvent e) {     
         if (e.getSource() == timer) {
             k++;
-            //jLabel1.setText(String.valueOf(mins(k) + ":" + secs(k)));
             updateTime(k);
             currentStage.setText(isWorking? "Work Period" : "Rest Period");
-            
-            
             
             if(extendedWork && k == 5 + studyDurationInt) {
                 extendedWork = false;
@@ -81,28 +81,23 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             else if(isWorking && k  == studyDurationInt) {
                 timer.stop();
                 moveToRest();
-                //isWorking = false;
-                //System.out.println(k);
+                
             }
             
             else if (!isWorking && k == restDurationInt) {
                 timer.stop();
-                //isWorking = true;
-                moveToWork();
-                
-                
+                moveToWork();              
             }
             
-        // buttons that appear in the notifications
-        } if (e.getSource() == button4) { //extend study
+        
+        } if (e.getSource() == button4) { // user presses the button to extend study
             extendedWork = true;
             timer.start();
             frame2.dispose();
             button4.setEnabled(false);
         }
         
-        if (e.getSource() == button5) {  
-            //ProgressPanel.timeStudy = ProgressPanel.timeStudy + k;
+        if (e.getSource() == button5) {  // user choses to move into rest session
             ProgressPanel1.updateStudy(k);
             k = 0;
             timer.start();
@@ -110,7 +105,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             frame2.dispose();
             button4.setEnabled(true);
         }
-        if (e.getSource() == button6) { // extend rest
+        if (e.getSource() == button6) { // user presses the button to extend rest
             extendedRest = true;
             timer.start();
             frame3.dispose();
@@ -118,8 +113,8 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             
             
         }
-        if (e.getSource() == button7) { //move to work
-            //ProgressPanel.timeRest = ProgressPanel.timeRest + k;
+        if (e.getSource() == button7) { //user choses to move into work session
+            
             ProgressPanel1.updateRest(k);
             k = 0;
             timer.start();
@@ -250,7 +245,6 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         TimerSpecification timerUsed = (TimerSpecification) jComboBox1.getSelectedItem();
         studyDurationInt = timerUsed.studyTime;
         restDurationInt = timerUsed.breakTime;
-        System.out.println(LocalDate.now());
         Panel.ProgressPanel1.addDate(LocalDate.now());
         timer.start();
         jButton1.setEnabled(false);
@@ -260,10 +254,8 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         // TODO add your handling code here:
         timer.stop();
         if (isWorking) {
-            //ProgressPanel.timeStudy = ProgressPanel.timeStudy + k;
             ProgressPanel1.updateStudy(k);
         } else if (!isWorking) {
-            //ProgressPanel.timeRest = ProgressPanel.timeRest + k;
             ProgressPanel1.updateRest(k);
         }
         
@@ -307,10 +299,8 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     }
     
     
+    // notification frame for end of study session, users can either press the button to move to rest or extend work   
     private void moveToRest() {
-        
-        
-        frame2.setTitle("Timer");
         frame2.setSize(300, 120);
         frame2.setLayout(new FlowLayout(3));
         
@@ -323,6 +313,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         frame2.setVisible(true);
     }
     
+    // notification frame for end of rest session, users can either press the button to move to work or extend rest
     private void moveToWork() {
         
         frame3.setSize(300, 120);
@@ -337,14 +328,15 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         frame3.setVisible(true);
     }
     
+    //helper function tp update the combox box whena  new custom timer is created
     public static void addTimer(TimerSpecification tS) {
         TimerData.addTimer(tS);
         options = TimerData.getTimers();
         jComboBox1.setModel(new DefaultComboBoxModel<>(options));
     }
     
+    //updating the graphics used to display time as each minute passes
     private static void updateTime(int k) {
-        //jLabel1.setText(String.valueOf(mins(k) + ":" + secs(k)));
         circleProgressBar1.setText(String.valueOf(mins(k) + ":" + secs(k)));
         if (isWorking) {
             double persentage1 = ((double) k / (double) studyDurationInt);
