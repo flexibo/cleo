@@ -25,7 +25,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class StartTimer extends javax.swing.JPanel implements ActionListener {
     //Stuff needed for the Timer and timer logic 
-    Timer timer = new Timer(100 * 60, this);
+    Timer timer = new Timer(1000, this);
     int k = 0;
     static int studyDurationInt = 0;
     static int restDurationInt = 0;
@@ -243,8 +243,8 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         // TODO add your handling code here:
         currentStage.setText(isWorking? "Work Period" : "Rest Period");
         TimerSpecification timerUsed = (TimerSpecification) jComboBox1.getSelectedItem();
-        studyDurationInt = timerUsed.studyTime;
-        restDurationInt = timerUsed.breakTime;
+        studyDurationInt = timerUsed.studyTime * 60;
+        restDurationInt = timerUsed.breakTime * 60;
         Panel.ProgressPanel1.addDate(LocalDate.now());
         timer.start();
         jButton1.setEnabled(false);
@@ -337,6 +337,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     
     //updating the graphics used to display time as each minute passes
     private static void updateTime(int k) {
+        System.out.println(k);
         circleProgressBar1.setText(String.valueOf(mins(k) + ":" + secs(k)));
         if (isWorking) {
             double persentage1 = ((double) k / (double) studyDurationInt);
