@@ -4,6 +4,7 @@
  */
 package RavenScrollBar;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Insets;
@@ -19,6 +20,8 @@ import javax.swing.ScrollPaneLayout;
 public class ScrollPaneWin11 extends JScrollPane {
 
     public ScrollPaneWin11() {
+        setOpaque(false);
+        getViewport().setOpaque(false);
         getVerticalScrollBar().setUI(new ScrollBarWin11UI());
         getHorizontalScrollBar().setUI(new ScrollBarWin11UI());
         setBorder(null); 
@@ -43,7 +46,7 @@ public class ScrollPaneWin11 extends JScrollPane {
     }
 
     private class ScrollLayout extends ScrollPaneLayout {
-
+        
         @Override
         public void layoutContainer(Container parent) {
             super.layoutContainer(parent);

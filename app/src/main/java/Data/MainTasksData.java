@@ -67,6 +67,14 @@ public class MainTasksData {
         Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
     }
     
+    
+    public static void deleteTask(MainTask mainTask) {
+        mainTasks.remove(mainTask);
+        Manage.ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+        Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
+    }
+        
+        
     public static void editTask(MainTask mainTask, int index) {
         mainTasks.set(index, mainTask);
         sortList();
@@ -78,6 +86,10 @@ public class MainTasksData {
     public static void updateTask(MainTask task) {
         
         saveTasks();
+    }
+    
+    public static int getIndex(MainTask task) {
+        return mainTasks.indexOf(task);
     }
     
     public static int size() {
@@ -123,4 +135,6 @@ public class MainTasksData {
             JsonEncode.saveJsonToFile(json, FILEPATH);
         }
     }
+
+
 }

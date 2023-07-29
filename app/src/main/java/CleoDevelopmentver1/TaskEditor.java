@@ -51,6 +51,7 @@ public class TaskEditor extends javax.swing.JFrame {
         added = true;
         
         mainTextBox.setText(mainTask.task);
+        mainTextBox.setLimit(62);
         dateChooser.setDate(mainTask.deadline);
         priorityChooser.setValue(mainTask.priority);
         

@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
  
 /**
  *
@@ -22,6 +24,33 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
     
     public CreateTimer() {
         initComponents();
+
+        workDuration.setValue(25);
+        restDuration.setValue(5);
+        workDuration.addChangeListener((ChangeEvent e) -> {
+            int val1 = (int) workDuration.getValue();
+            if (val1 < 0) {
+                workDuration.setValue(0);
+                StudySlider.setValue(0);
+            } else if (val1 > 120){
+                workDuration.setValue(120);
+                StudySlider.setValue(120);
+            } else {
+                StudySlider.setValue(val1);
+            }
+        });
+        
+        restDuration.addChangeListener((ChangeEvent e) -> {
+            int val2 = (int) restDuration.getValue();
+            if (val2 < 0) {
+                RestSlider.setValue(0);
+            } else if (val2 > 120){
+                RestSlider.setValue(120);
+            } else {
+                RestSlider.setValue(val2);
+            }
+        });
+        
         //setVisible(true);
     }
 
@@ -41,10 +70,10 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         jLabel5 = new javax.swing.JLabel();
         StudySlider = new javax.swing.JSlider(0, 120, 25);
         RestSlider = new javax.swing.JSlider(0, 120, 5);
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        timerName = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        workDuration = new javax.swing.JSpinner();
+        restDuration = new javax.swing.JSpinner();
 
         jButton1.setText("jButton1");
 
@@ -68,27 +97,13 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
             }
         });
 
-        jTextField1.setText("25");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.setText("5");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.setText("Name of Custom Timer");
-        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+        timerName.setText("Name of Custom Timer");
+        timerName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField3FocusGained(evt);
+                timerNameFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField3FocusLost(evt);
+                timerNameFocusLost(evt);
             }
         });
 
@@ -107,35 +122,32 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
-                        .addGap(242, 242, 242))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(74, 74, 74)
-                                .addComponent(jButton3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                                 .addComponent(StudySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RestSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jLabel2))
+                                .addComponent(RestSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(74, 74, 74)
+                                        .addComponent(jButton3))
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addComponent(timerName, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(workDuration, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                            .addComponent(restDuration))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,84 +163,64 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(StudySlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addGap(2, 2, 2)
+                        .addComponent(workDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(RestSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(restDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(timerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(jButton3)))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // update the study duration textfield to reflect the slider
     private void StudySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_StudySliderStateChanged
         // TODO add your handling code here:
-        jTextField1.setText(StudySlider.getValue() + "");
+        workDuration.setValue(StudySlider.getValue());
     }//GEN-LAST:event_StudySliderStateChanged
     
     // update the rest duration textfield to reflect the slider
     private void RestSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_RestSliderStateChanged
         // TODO add your handling code here:
-        jTextField2.setText(RestSlider.getValue() + "");
+        restDuration.setValue(RestSlider.getValue());
     }//GEN-LAST:event_RestSliderStateChanged
 
-    // ensure that study duration entered into the text field is valid before updating slider to reflect text box
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-        int val1 = Integer.parseInt(jTextField1.getText());
-        if (val1 < 0) {
-            StudySlider.setValue(0);
-        } else {
-            StudySlider.setValue(val1);
-        }
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    // ensure that rest duration entered into the text field is valid before updating slider to reflect text box
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-        int val2 = Integer.parseInt(jTextField2.getText());
-        if (val2 < 0) {   
-            RestSlider.setValue(0);
-        } else {
-            RestSlider.setValue(val2);
-        }
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     // place holder for text field for name of custom timer
-    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
+    private void timerNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timerNameFocusGained
         // TODO add your handling code here:
-        if (jTextField3.getText().equals("Name of Custom Timer")) {
-                    jTextField3.setText("");
+        if (timerName.getText().equals("Name of Custom Timer")) {
+                    timerName.setText("");
                 }
             
-    }//GEN-LAST:event_jTextField3FocusGained
+    }//GEN-LAST:event_timerNameFocusGained
 
-    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+    private void timerNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timerNameFocusLost
         // TODO add your handling code here:
-        if (jTextField3.getText().equals("")) {
-            jTextField3.setText("Name of Custom Timer");
+        if (timerName.getText().equals("")) {
+            timerName.setText("Name of Custom Timer");
         }
-    }//GEN-LAST:event_jTextField3FocusLost
+    }//GEN-LAST:event_timerNameFocusLost
 
+    
     //create a timer with the specifications, add into combobox and reset values of slider & text field and rest fexi field
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        TimerSpecification newCustomTimer = new TimerSpecification(jTextField3.getText(),/* StudySlider.getValue()*/ Integer.parseInt(jTextField1.getText()), Integer.parseInt(jTextField2.getText()));
+        TimerSpecification newCustomTimer = new TimerSpecification(timerName.getText(),/* StudySlider.getValue()*/(int) workDuration.getValue(),(int) restDuration.getValue());
         StartTimer.addTimer(newCustomTimer);
         
         TimerSpecification currentlyChosen = (TimerSpecification) StartTimer.jComboBox1.getSelectedItem();
-        jTextField3.setText("Name of Custom Timer");
+        timerName.setText("Name of Custom Timer");
+
         StudySlider.setValue(currentlyChosen.studyTime);
         RestSlider.setValue(currentlyChosen.breakTime);
-        jTextField1.setText(currentlyChosen.studyTime + "");
-        jTextField2.setText(currentlyChosen.breakTime + "");
+        workDuration.setValue(currentlyChosen.studyTime);
+        restDuration.setValue(currentlyChosen.breakTime);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
@@ -236,6 +228,8 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         
         StudySlider.setValue(tS.studyTime);
         RestSlider.setValue(tS.breakTime);
+        workDuration.setValue(tS.studyTime);
+        restDuration.setValue(tS.breakTime);
     }
     
     
@@ -249,8 +243,8 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private static javax.swing.JSpinner restDuration;
+    private javax.swing.JTextField timerName;
+    private static javax.swing.JSpinner workDuration;
     // End of variables declaration//GEN-END:variables
 }

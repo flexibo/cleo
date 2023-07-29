@@ -4,14 +4,18 @@
  */
 package UIStuff;
 
+import CleoDevelopmentver1.TaskEditor;
 import Data.MainTasksData;
 import Model.SubTask;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -30,6 +34,9 @@ public class SubTaskItem extends javax.swing.JPanel {
      */
     protected SubTaskItem(MainTaskItem mainTaskItem, int index) {
         initComponents();
+        
+        subtask.setOpaque(false);
+        
         this.mainTaskItem = mainTaskItem;
         this.subTaskObject = mainTaskItem.getSubTask(index);
         showDone(subTaskObject.done);
@@ -39,9 +46,21 @@ public class SubTaskItem extends javax.swing.JPanel {
         
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         dueDate.setText(df.format(subTaskObject.deadline));
+        if (subTaskObject.task.length() > 70) {
+            System.out.println("I see you edited a subtask illegally... well no matter, I'll just cut down to 70 characters.");
+            subTaskObject.task = substring(subTaskObject.task, 70);
+            MainTasksData.saveTasks();
+        }
         subtask.setText(subTaskObject.task);
         setOpaque(false);
     }
+    
+    private String substring(String text, int length) {
+        String[] results = text.split("(?<=\\G.{" + length + "})");
+
+        return results[0];
+    }
+    
 
     /**
      * Sets the subTask object and item to be (not) done, also saves Boolean state before change. 
@@ -90,6 +109,7 @@ public class SubTaskItem extends javax.swing.JPanel {
         dueDate.setText("dueDate");
 
         subtask.setText("jCheckBox1");
+        subtask.setFocusable(false);
         subtask.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subtaskActionPerformed(evt);

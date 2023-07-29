@@ -32,7 +32,7 @@ public class TaskView extends javax.swing.JPanel {
         initComponents();
         setLayout(new GridBagLayout());
         c = new GridBagConstraints();
-        
+        initialText();
         setOpaque(false);
         setVisible(true);
     }
@@ -45,13 +45,13 @@ public class TaskView extends javax.swing.JPanel {
         mainTasks = MainTasksData.getMainTasks();
         for (int i=0; i < mainTasks.size(); i++ ){
             if (dateTimeComparator.compare(date, mainTasks.get(i).deadline)== 0) {
-                ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i, false);
+                ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
                 c.gridy++;
                 add(clickableTask,c);
             } else {
                 for (SubTask subtask : mainTasks.get(i).subTasks) {
                     if (dateTimeComparator.compare(date, subtask.deadline)== 0) {
-                        ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i, false);
+                        ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
                         c.gridy++;
                         add(clickableTask,c);
                     }
@@ -68,6 +68,12 @@ public class TaskView extends javax.swing.JPanel {
         }
     }
     
+    private String substring(String text, int length) {
+        String[] results = text.split("(?<=\\G.{" + length + "})");
+
+        return results[0];
+    }
+    
 
     public void updateTasks() {
         removeAll();
@@ -75,10 +81,15 @@ public class TaskView extends javax.swing.JPanel {
         mainTasks = MainTasksData.getMainTasks();
         
         if (!mainTasks.isEmpty()) {
-             for (int i=0; i < mainTasks.size(); i++ ){
-            ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i, true);
-            c.gridy++;
-            add(clickableTask,c);
+            for (int i=0; i < mainTasks.size(); i++ ){
+                if (mainTasks.get(i).task.length() > 62) {
+                        System.out.println("I see you edited a task illegally... well no matter, I'll just cut down to 62 characters.");
+                        mainTasks.get(i).task = substring(mainTasks.get(i).task, 62);
+                        MainTasksData.saveTasks();
+                }
+                ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
+                c.gridy++;
+                add(clickableTask,c);
             } 
             revalidate();
             repaint();
@@ -99,6 +110,13 @@ public class TaskView extends javax.swing.JPanel {
         setVisible(true);
     }
     
+    public void initialText() {
+        removeAll();
+        c.gridy = 0;
+        JLabel noTasksLabel = new JLabel("Click on any date to view subtasks or main tasks due that day.");
+        
+        add(noTasksLabel, c);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,6 +125,8 @@ public class TaskView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setOpaque(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

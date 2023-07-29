@@ -163,7 +163,7 @@ public class SubTasksComponent extends javax.swing.JLayeredPane {
         SubTaskInput subTaskInput = new SubTaskInput();
         subTaskInputs.add(subTaskInput);
         jLayeredPane1.add(subTaskInput);
-        System.out.println("subtask added");
+        System.out.println("subtask input box added");
         jLayeredPane1.revalidate();
         jLayeredPane1.repaint();
     }//GEN-LAST:event_addButtonActionPerformed
@@ -173,7 +173,7 @@ public class SubTasksComponent extends javax.swing.JLayeredPane {
             jLayeredPane1.setLayout(new GridLayout(subTaskInputs.size()-1, 1));
             jLayeredPane1.remove(subTaskInputs.get(subTaskInputs.size() - 1));
             subTaskInputs.remove(subTaskInputs.size() - 1);
-             System.out.println("subtask removed");
+             System.out.println("subtask input box removed");
             jLayeredPane1.revalidate();
             jLayeredPane1.repaint();
         }

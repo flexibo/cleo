@@ -21,9 +21,7 @@ public class TasksPanel extends javax.swing.JPanel {
     public TasksPanel() {
         initComponents();
         setOpaque(false);
-        scrollPaneWin111.setOpaque(false);
         taskView1.setOpaque(false);
-        taskView1.setBackground(new Color(0,0,0,0));
         taskView1.updateTasks();
         jLabel4.setIcon(new ImageIcon("animated/cleo_sleep.gif"));
         jLabel4.setVisible(true);

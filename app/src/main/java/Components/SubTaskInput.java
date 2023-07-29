@@ -21,10 +21,13 @@ public class SubTaskInput extends javax.swing.JPanel {
     
     public SubTaskInput() {
         initComponents();
+        coloredTextBox1.setLimit(70);
+        setOpaque(false);
     }
     
     public SubTaskInput(SubTask subTask) {
         initComponents();
+        coloredTextBox1.setLimit(70);
         coloredTextBox1.setText(subTask.task);
         jDateChooser1.setDate(subTask.deadline);
         jSpinner1.setValue(subTask.weight);

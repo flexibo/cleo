@@ -101,7 +101,7 @@
         <Component class="javax.swing.JButton" name="cmdNext">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(&quot;src/main/java/TempIcons/next.png&quot;)" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(&quot;TempIcons/next.png&quot;)" type="code"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -122,7 +122,7 @@
         <Component class="javax.swing.JButton" name="cmdBack">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.ImageIcon(&quot;src/main/java/TempIcons/back.png&quot;)" type="code"/>
+              <Connection code="new javax.swing.ImageIcon(&quot;TempIcons/back.png&quot;)" type="code"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">

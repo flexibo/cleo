@@ -26,10 +26,8 @@ public class CalendarCustom extends javax.swing.JPanel {
     
     public CalendarCustom() {
         initComponents();
-        
         setOpaque(false);
         thisMonth();
-        
         refresh();
     }
 
@@ -75,7 +73,7 @@ public class CalendarCustom extends javax.swing.JPanel {
             .addGap(0, 403, Short.MAX_VALUE)
         );
 
-        cmdNext.setIcon(new javax.swing.ImageIcon("src/main/java/TempIcons/next.png"));
+        cmdNext.setIcon(new javax.swing.ImageIcon("TempIcons/next.png"));
         cmdNext.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         cmdNext.setBorderPainted(false);
         cmdNext.setContentAreaFilled(false);
@@ -87,7 +85,7 @@ public class CalendarCustom extends javax.swing.JPanel {
             }
         });
 
-        cmdBack.setIcon(new javax.swing.ImageIcon("src/main/java/TempIcons/back.png"));
+        cmdBack.setIcon(new javax.swing.ImageIcon("TempIcons/back.png"));
         cmdBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         cmdBack.setBorderPainted(false);
         cmdBack.setContentAreaFilled(false);

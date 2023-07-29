@@ -4,6 +4,7 @@
  */
 package UIStuff;
 
+import CleoDevelopmentver1.TaskEditor;
 import Data.MainTasksData;
 import Model.MainTask;
 import Model.SubTask;
@@ -11,9 +12,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JProgressBar;
 
 /**
@@ -46,6 +50,8 @@ public class MainTaskItem extends javax.swing.JPanel {
         priority.setText(String.valueOf(mainTask.priority));
         task.setText(mainTask.task);
         
+        task.setOpaque(false);
+        
         this.mainTask = mainTask;
         this.subTaskItems = new ArrayList();
         this.subTasksSize = mainTask.numOfSubTasks();
@@ -61,6 +67,21 @@ public class MainTaskItem extends javax.swing.JPanel {
         
         updateProgressBar();
         add(bar); 
+        
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem deleteItem = new JMenuItem("Delete task");
+        JMenuItem editItem = new JMenuItem("Edit task");
+        popupMenu.add(deleteItem);
+        popupMenu.add(editItem);
+        int index = MainTasksData.getIndex(mainTask);
+        deleteItem.addActionListener((ActionEvent e) -> {
+            MainTasksData.deleteTask(index);
+        });
+        editItem.addActionListener((ActionEvent e) -> {
+            new TaskEditor(mainTask, index);
+        });
+        setComponentPopupMenu(popupMenu);
+        task.setComponentPopupMenu(popupMenu);
     }
    
     
@@ -136,6 +157,7 @@ public class MainTaskItem extends javax.swing.JPanel {
         priority.setText("priority");
 
         task.setText(" Task");
+        task.setFocusable(false);
         task.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 taskActionPerformed(evt);

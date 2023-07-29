@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 public class ListMenu<E extends Object> extends JList<E> {
     
     public final DefaultListModel model;
-    private int selectedIndex = -1;
+    private int selectedIndex = 0;
     private int overIndex = -1;
     private EventMenuSelected event;
     

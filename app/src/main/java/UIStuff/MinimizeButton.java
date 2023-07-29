@@ -33,7 +33,7 @@ public class MinimizeButton extends JButton {
             @Override
             public void mouseEntered(MouseEvent me) {
                 over = true;
-                backColor = new Color(255, 255, 255,30);
+                backColor = new Color(0, 0, 0,10);
             }
             @Override
             public void mouseExited(MouseEvent me) {
@@ -42,12 +42,12 @@ public class MinimizeButton extends JButton {
             }
             @Override
             public void mousePressed (MouseEvent me) {
-                backColor = new Color(255, 255, 255, 80);
+                backColor = new Color(0, 0, 0, 20);
             }
             @Override
             public void mouseReleased (MouseEvent me) {
                 if(over) {
-                    backColor = new Color(255, 255, 255,30);
+                    backColor = new Color(0, 0, 0,10);
                 } else {
                     backColor = new Color(0,0,0,0);
                 }

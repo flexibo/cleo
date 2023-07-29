@@ -56,7 +56,7 @@ public class Menu {
     
     
     public Icon toIcon() {
-        return new ImageIcon("src/main/java/TempIcons/" + icon + ".png");
+        return new ImageIcon("TempIcons/" + icon + ".png");
     }
     
 }

@@ -34,7 +34,7 @@ public class ClickableTask extends javax.swing.JPanel {
     int size;
     
     
-    public ClickableTask(MainTask mainTask, int index, boolean enableMenu) {
+    public ClickableTask(MainTask mainTask, int index) {
         initComponents();
         
         setOpaque(false);
@@ -70,20 +70,6 @@ public class ClickableTask extends javax.swing.JPanel {
             }
         });
         
-        if (enableMenu){
-            JPopupMenu popupMenu = new JPopupMenu();
-            JMenuItem deleteItem = new JMenuItem("Delete task");
-            JMenuItem editItem = new JMenuItem("Edit task");
-            popupMenu.add(deleteItem);
-            popupMenu.add(editItem);
-            deleteItem.addActionListener((ActionEvent e) -> {
-                MainTasksData.deleteTask(index);
-            });
-            editItem.addActionListener((ActionEvent e) -> {
-                new TaskEditor(mainTask, index);
-            });
-            setComponentPopupMenu(popupMenu);
-        }
     }
     
     public final void toggleVisibility(JPanel panel) {
