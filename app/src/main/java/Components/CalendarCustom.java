@@ -41,7 +41,7 @@ public class CalendarCustom extends javax.swing.JPanel {
         System.out.println("Refreshed Calendar");
     }
     
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

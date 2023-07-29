@@ -90,7 +90,7 @@ public class TaskView extends javax.swing.JPanel {
     public void noTasks() {
         removeAll();
         c.gridy = 0;
-        JLabel noTasksLabel = new JLabel("No Tasks Due Today");
+        JLabel noTasksLabel = new JLabel("No Tasks Due On This Day");
         
         add(noTasksLabel, c);
         

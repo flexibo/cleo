@@ -37,7 +37,6 @@ public class TaskEditor extends javax.swing.JFrame {
     public TaskEditor() {
         initComponents();
         init();
-        
         this.index = MainTasksData.size() - 1;
     }
     
@@ -246,6 +245,7 @@ public class TaskEditor extends javax.swing.JFrame {
             }
             
             cal.refresh();
+            ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
             dispose();
          } else {
              setWarningText("Please add a subtask", REDWARNING);

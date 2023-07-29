@@ -116,7 +116,7 @@ public class GameDetection {
             started = true;
         }
     }
-    public void endDetection() {
+    public void stopDetection() {
         terminateAllFrames();
         scheduler.shutdown();
         System.out.println("Ended Game Detection");

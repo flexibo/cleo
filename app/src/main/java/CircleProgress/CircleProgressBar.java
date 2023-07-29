@@ -39,10 +39,15 @@ public class CircleProgressBar extends JProgressBar{
         
         this.setLayout(new OverlayLayout(this));
         this.add(panel1);
+        setOpaque(false);
         
         this.setVisible(true);
         
         
+    }
+    
+    public void setColor(Color color) {
+        jLabel1.setForeground(color);
     }
     
     public void setText(String time) {

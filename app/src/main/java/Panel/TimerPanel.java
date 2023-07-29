@@ -30,6 +30,7 @@ public class TimerPanel extends javax.swing.JPanel {
         createTimer2 = new Components.CreateTimer();
 
         setBackground(new java.awt.Color(255, 204, 204));
+        setOpaque(false);
 
         startTimer2.setBackground(new java.awt.Color(255, 204, 204));
         add(startTimer2);

@@ -43,7 +43,6 @@ public class DateComponent extends javax.swing.JLayeredPane {
         this.month = month;
         this.year = year;
         weightWeekMap = new HashMap<>();
-         
         init();
     }
 
@@ -94,10 +93,6 @@ public class DateComponent extends javax.swing.JLayeredPane {
         for (Component com:getComponents()) {
             Cell cell = (Cell) com;
             if (!cell.isTitle()) {
-                if (cal.get(Calendar.DATE) == 1 && cal.get(Calendar.MONTH) + 1 == month){
-                    setSelected(cell);
-                }
-                
                 if (today.isToday(new Today(cal.get(Calendar.DATE), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR)))) {
                     cell.setAsToday();
                     setSelected(cell);

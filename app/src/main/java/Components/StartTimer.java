@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Components;
+import CircleProgress.CircleProgressBar;
 import Data.TimerData;
+import GameDetection.GameDetection;
 import Panel.*;
 import Model.TimerSpecification;
 import java.awt.Color;
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.DefaultComboBoxModel;
+import org.checkerframework.common.returnsreceiver.qual.This;
 
  
 /**
@@ -32,7 +35,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     static boolean isWorking = true;
     boolean extendedWork = false;
     boolean extendedRest = false;
+    private GameDetection gameDetection;
     private static TimerSpecification[] options; 
+    private static CircleProgressBar otherBar;
     
     
     //**Components for notifications (appear at end of session)**//
@@ -54,6 +59,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
      */
     public StartTimer() {
         options = TimerData.getTimers();
+        gameDetection = new GameDetection();
         initComponents();
     }
     
@@ -137,8 +143,8 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        startButton = new javax.swing.JButton();
+        stopButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>(options);
@@ -148,17 +154,17 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
 
         setOpaque(false);
 
-        jButton1.setText("Start");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        startButton.setText("Start");
+        startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                startButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Stop");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        stopButton.setText("Stop");
+        stopButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                stopButtonActionPerformed(evt);
             }
         });
 
@@ -174,6 +180,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
 
         circleProgressBar1.setBackground(new java.awt.Color(242, 242, 242));
         circleProgressBar1.setForeground(new java.awt.Color(0, 0, 0));
+        circleProgressBar1.setBorderPainted(false);
 
         jButton3.setText("Delete");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -209,9 +216,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(circleProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(startButton)
                                 .addGap(44, 44, 44)
-                                .addComponent(jButton2)))))
+                                .addComponent(stopButton)))))
                 .addGap(0, 73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -231,15 +238,15 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
                 .addComponent(circleProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(startButton)
+                    .addComponent(stopButton))
                 .addContainerGap(238, Short.MAX_VALUE))
         );
 
         circleProgressBar1.setString("");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         // TODO add your handling code here:
         currentStage.setText(isWorking? "Work Period" : "Rest Period");
         TimerSpecification timerUsed = (TimerSpecification) jComboBox1.getSelectedItem();
@@ -248,10 +255,11 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         //Panel.ProgressPanel.addDate(LocalDate.now());
         Data.DaysData.addDate(LocalDate.now());
         timer.start();
-        jButton1.setEnabled(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        gameDetection.startDetection();
+        startButton.setEnabled(false);
+    }//GEN-LAST:event_startButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         // TODO add your handling code here:
         timer.stop();
         if (isWorking) {
@@ -262,14 +270,15 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         
         k = 0;
         updateTime(k);
-        jButton1.setEnabled(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        gameDetection.stopDetection();
+        startButton.setEnabled(true);
+    }//GEN-LAST:event_stopButtonActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         Model.TimerSpecification timerChosen =(TimerSpecification) jComboBox1.getSelectedItem();
         CreateTimer.setSlidersToTimer(timerChosen);
-        jButton1.setEnabled(true);
+        startButton.setEnabled(true);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -277,7 +286,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         TimerSpecification ts = (TimerSpecification) jComboBox1.getSelectedItem();
         jComboBox1.removeItem(ts);
         Data.TimerData.deleteTimer(ts);
-        System.out.println(jComboBox1.getSelectedIndex());
+        //System.out.println(jComboBox1.getSelectedIndex());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
@@ -338,19 +347,27 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     
     //updating the graphics used to display time as each minute passes
     private static void updateTime(int k) {
-        System.out.println(k);
+        //System.out.println(k);
         circleProgressBar1.setText(String.valueOf(mins(k) + ":" + secs(k)));
+        otherBar.setText(String.valueOf(mins(k) + ":" + secs(k)));
         if (isWorking) {
             double persentage1 = ((double) k / (double) studyDurationInt);
             circleProgressBar1.setValue((int) Math.round(persentage1 * 100));
             circleProgressBar1.setForeground(new Color(255, 204, 204));
+            otherBar.setValue((int) Math.round(persentage1 * 100));
+            otherBar.setForeground(new Color(255, 204, 204));
 
         } else {
             double persentage2 = ((double) k / (double) restDurationInt);
             circleProgressBar1.setValue((int) Math.round(persentage2 * 100));
             circleProgressBar1.setForeground(new Color(204, 204, 255));
-
+            otherBar.setValue((int) Math.round(persentage2 * 100));
+            otherBar.setForeground(new Color(204, 204, 255));
         }
+    }
+    
+    public static void set(CircleProgressBar progressBar) {
+        StartTimer.otherBar = progressBar;
     }
     
   
@@ -358,11 +375,11 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static CircleProgress.CircleProgressBar circleProgressBar1;
     private javax.swing.JLabel currentStage;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     public static javax.swing.JComboBox<Model.TimerSpecification> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton startButton;
+    private javax.swing.JButton stopButton;
     // End of variables declaration//GEN-END:variables
 }

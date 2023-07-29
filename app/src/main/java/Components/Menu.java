@@ -4,6 +4,9 @@
  */
 package Components;
 
+import static Components.StartTimer.isWorking;
+import static Components.StartTimer.restDurationInt;
+import static Components.StartTimer.studyDurationInt;
 import event.EventMenuSelected;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -43,15 +46,16 @@ public class Menu extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
+        circleProgressBar1.setColor(new Color(255,255,255));
         //scaleImage();
         init();
         
         jLabel1.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/cat.png"));
+                jLabel1.setIcon(new ImageIcon("TempIcons/cat.png"));
             }
             public void mouseExited(MouseEvent e) {
-                jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/catbutt.png"));
+                jLabel1.setIcon(new ImageIcon("TempIcons/catbutt.png"));
             }
         });
     }
@@ -63,6 +67,10 @@ public class Menu extends javax.swing.JPanel {
         listMenu1.addItem(new Model.Menu("4", "Calendar", Model.Menu.MenuType.MENU));
         listMenu1.addItem(new Model.Menu("5", "Timer", Model.Menu.MenuType.MENU));
         //listMenu1.addItem(new Model.Menu("6", "Settings", Model.Menu.MenuType.MENU));
+        circleProgressBar1.setString("");
+        
+        StartTimer.set(circleProgressBar1);
+        
     }
 
     /**
@@ -77,16 +85,21 @@ public class Menu extends javax.swing.JPanel {
         panelMoving = new javax.swing.JPanel();
         listMenu1 = new UIStuff.ListMenu<>();
         jLabel1 = new javax.swing.JLabel();
+        circleProgressBar1 = new CircleProgress.CircleProgressBar();
 
         panelMoving.setOpaque(false);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("School Times", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/catbutt.png"));
+        jLabel1.setIcon(new ImageIcon("TempIcons/catbutt.png"));
         jLabel1.setText("Cleo");
         jLabel1.setToolTipText("");
         jLabel1.setPreferredSize(new java.awt.Dimension(248, 168));
+
+        circleProgressBar1.setForeground(new java.awt.Color(255, 255, 255));
+        circleProgressBar1.setBorderPainted(false);
+        circleProgressBar1.setOpaque(false);
 
         javax.swing.GroupLayout panelMovingLayout = new javax.swing.GroupLayout(panelMoving);
         panelMoving.setLayout(panelMovingLayout);
@@ -97,7 +110,9 @@ public class Menu extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelMovingLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(circleProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         panelMovingLayout.setVerticalGroup(
@@ -107,7 +122,9 @@ public class Menu extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(listMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(circleProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -157,9 +174,9 @@ public class Menu extends javax.swing.JPanel {
         });
     }
     
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private CircleProgress.CircleProgressBar circleProgressBar1;
     private javax.swing.JLabel jLabel1;
     private UIStuff.ListMenu<String> listMenu1;
     private javax.swing.JPanel panelMoving;
