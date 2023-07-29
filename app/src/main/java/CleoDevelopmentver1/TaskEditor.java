@@ -45,6 +45,8 @@ public class TaskEditor extends javax.swing.JFrame {
         initComponents();
         init();
         
+        jLabel4.setText("Edit your task here!");
+        
         this.index = index;
         this.mainTask = mainTask;
         added = true;
@@ -96,7 +98,7 @@ public class TaskEditor extends javax.swing.JFrame {
 
         panelBorder1.setBackground(new java.awt.Color(250, 232, 233));
 
-        mainTextBox.setText("coloredTextBox1");
+        mainTextBox.setText("Main Task");
         mainTextBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mainTextBoxActionPerformed(evt);
@@ -126,8 +128,6 @@ public class TaskEditor extends javax.swing.JFrame {
                 confirmButtonActionPerformed(evt);
             }
         });
-
-        warning.setText("jLabel5");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -238,19 +238,18 @@ public class TaskEditor extends javax.swing.JFrame {
          ArrayList<SubTask> subtasks = subTasksComponent.getSubtasks();
          mainTask = new MainTask(mainTextBox.getText(), dateChooser.getDate(), (int)priorityChooser.getValue(), subtasks);
          if (!subtasks.isEmpty()) {
-             System.out.println("sdfsdsdfsdff");
             if (!added) {
-                System.out.println("saaaa");
                 MainTasksData.addTask(mainTask);
                 added = true;
-                cal.refresh();
             } else {
-                
                 MainTasksData.editTask(mainTask, index);
-                cal.refresh();
             }
+            
+            cal.refresh();
+            dispose();
+         } else {
+             setWarningText("Please add a subtask", REDWARNING);
          }
-         System.out.println("sdfsdf");
     }//GEN-LAST:event_confirmButtonActionPerformed
 
 

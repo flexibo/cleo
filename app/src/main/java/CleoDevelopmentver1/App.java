@@ -3,46 +3,63 @@
  */
 package CleoDevelopmentver1;
 
-import Data.MainTasksData;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.ParseException;
 
 public class App {
     public String getGreeting() {
-        return "Hello World!";
+        return "Welcome to Cleo App!";
     }
 
     public static void main(String[] args) throws ParseException, IOException {
         System.out.println(new App().getGreeting());
+        new Main();
         //new MainUI();
         //new JsonDecoder();
                 
-        new Test("animated/test.gif");
-        new Test("animated/test2.gif");
-        new Test("animated/cleo_idle.gif");
-        new Test("animated/cleo_sit.gif");
-        new Test("animated/cleo_sleep.gif");
+        //new BouncingFrame("animated/test.gif");
+        //new BouncingFrame("animated/test2.gif");
+        //new BouncingFrame("animated/cleo_idle.gif", 155, 70);
+        //new BouncingFrame("animated/cleo_sit.gif", 155, 70);
+        //new BouncingFrame("animated/cleo_sleep.gif", 155, 70);
+        
+        
+        //GameDetection gameDetection = new GameDetection();
+        //gameDetection.startDetection();
+            /*Runnable task2 = () -> {
+                Robot robot;   
+                try {
+                    robot = new Robot();
+                    //pressing key by invoking the keyPress() method  
+                    robot.keyPress(KeyEvent.VK_SPACE);   
+
+                } catch (AWTException ex) {
+                    Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            };
+            */
+                        
+        
+        
         
         /*
-        try {
-            String line;
-            Process p = Runtime.getRuntime().exec
-    (System.getenv("windir") +"\\system32\\"+"tasklist.exe");
-            BufferedReader input =
-                    new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
-                //if (line.toLowerCase().contains("TETR.IO.exe") )
-                    System.out.println(line); //<-- Parse data here.
-            }
-            input.close();
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
+        String command = "notepad.exe";   
+        Runtime run = Runtime.getRuntime();   
+        run.exec(command);   
+        try   
+        {   
+        //delay 4ms  
+        Thread.sleep(4000);   
+        }   
+        catch (InterruptedException e)   
+        {   
+        // TODO Auto-generated catch block   
+        e.printStackTrace();   
+        }   
 */
+        //creating a constructor of the Robot class  
+
         
-        new Main();
         
     }
 }

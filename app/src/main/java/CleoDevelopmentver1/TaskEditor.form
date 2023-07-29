@@ -150,7 +150,7 @@
         </Component>
         <Component class="UIStuff.ColoredTextBox" name="mainTextBox">
           <Properties>
-            <Property name="text" type="java.lang.String" value="coloredTextBox1"/>
+            <Property name="text" type="java.lang.String" value="Main Task"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainTextBoxActionPerformed"/>
@@ -206,9 +206,6 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="warning">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel5"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -10,12 +10,12 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.time.LocalDate;
 import javax.swing.DefaultComboBoxModel;
 
  
@@ -98,7 +98,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         }
         
         if (e.getSource() == button5) {  // user choses to move into rest session
-            ProgressPanel1.updateStudy(k);
+            ProgressPanel.updateStudy(k);
             k = 0;
             timer.start();
             isWorking = false;
@@ -115,7 +115,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         }
         if (e.getSource() == button7) { //user choses to move into work session
             
-            ProgressPanel1.updateRest(k);
+            ProgressPanel.updateRest(k);
             k = 0;
             timer.start();
             isWorking = true;
@@ -245,7 +245,8 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         TimerSpecification timerUsed = (TimerSpecification) jComboBox1.getSelectedItem();
         studyDurationInt = timerUsed.studyTime * 60;
         restDurationInt = timerUsed.breakTime * 60;
-        Panel.ProgressPanel1.addDate(LocalDate.now());
+        //Panel.ProgressPanel.addDate(LocalDate.now());
+        Data.DaysData.addDate(LocalDate.now());
         timer.start();
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -254,9 +255,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         // TODO add your handling code here:
         timer.stop();
         if (isWorking) {
-            ProgressPanel1.updateStudy(k);
+            ProgressPanel.updateStudy(k);
         } else if (!isWorking) {
-            ProgressPanel1.updateRest(k);
+            ProgressPanel.updateRest(k);
         }
         
         k = 0;

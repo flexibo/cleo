@@ -28,7 +28,7 @@ public class WeekView extends javax.swing.JPanel {
         for (int i = 0; i < data.size(); i++) {
             int hoursStudy = data.get(i).durationStudy;
             int hoursRest = data.get(i).durationRest;
-            LocalDate date = data.get(i).date;
+            LocalDate date = data.get(i).getLocalDate();
             progressGraph1.addData(new ChartStuff.ModelChart(date.getDayOfWeek().toString(), new double[]{hoursStudy, hoursRest}));
         }
         

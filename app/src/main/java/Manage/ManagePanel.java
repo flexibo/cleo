@@ -5,7 +5,7 @@
 package Manage;
 
 import Panel.CalendarPanel;
-import Panel.ProgressPanel1;
+import Panel.ProgressPanel;
 import Panel.TasksPanel;
 import Panel.TimerPanel;
 
@@ -23,7 +23,7 @@ public class ManagePanel {
         timerPanel = aTimerPanel;
     }
     private static CalendarPanel calendarPanel;
-    private static ProgressPanel1 progressPanel;
+    private static ProgressPanel progressPanel;
     private static TasksPanel tasksPanel;
     private static TimerPanel timerPanel;
     
@@ -35,7 +35,7 @@ public class ManagePanel {
     public static void initPanels() {
         tasksPanel = new TasksPanel();
         calendarPanel = new CalendarPanel();
-        progressPanel = new ProgressPanel1();
+        progressPanel = new ProgressPanel();
         timerPanel = new TimerPanel();
     }
     
@@ -62,7 +62,7 @@ public class ManagePanel {
      /**
      * @return the progressPanel
      */
-    public static ProgressPanel1 getProgressPanel() {
+    public static ProgressPanel getProgressPanel() {
         return progressPanel;
     }
 

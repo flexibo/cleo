@@ -4,6 +4,7 @@
  */
 package UIStuff;
 
+import Data.MainTasksData;
 import Model.SubTask;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -31,6 +32,9 @@ public class SubTaskItem extends javax.swing.JPanel {
         initComponents();
         this.mainTaskItem = mainTaskItem;
         this.subTaskObject = mainTaskItem.getSubTask(index);
+        showDone(subTaskObject.done);
+        subtask.setSelected(subTaskObject.done);
+        
         this.prevDone = false;
         
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -44,12 +48,11 @@ public class SubTaskItem extends javax.swing.JPanel {
      * @param bool set true if task is done, and false otherwise.
      */
     protected void toggleDone(boolean bool) {
- 
-        //TODO: simplify this code somehow
         
         if (bool){
             prevDone = subTaskObject.done;
             subTaskObject.done = true;
+            //System.out.println(subTaskObject.done);
             showDone(true);
             subtask.setSelected(true);
         } else if (prevDone){
@@ -61,6 +64,7 @@ public class SubTaskItem extends javax.swing.JPanel {
             subTaskObject.done = false;
             subtask.setSelected(false);
         }
+        
     } 
     
     protected boolean getDone() {
@@ -98,8 +102,8 @@ public class SubTaskItem extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(subtask, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                .addGap(65, 65, 65)
+                .addComponent(subtask, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dueDate)
                 .addGap(47, 47, 47))
         );
@@ -125,6 +129,7 @@ public class SubTaskItem extends javax.swing.JPanel {
             subTaskObject.done = false;
         }
         
+        MainTasksData.saveTasks();
         mainTaskItem.updateProgressBar();
     }//GEN-LAST:event_subtaskActionPerformed
 

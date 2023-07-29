@@ -26,6 +26,8 @@ public class CloseButton extends JButton {
         
         this.backColor = new Color(0,0,0,0);
         setContentAreaFilled(false);
+        setBorderPainted(false);
+        setFocusPainted(false);
         
         // Add event mouse
         addMouseListener(new MouseAdapter() {

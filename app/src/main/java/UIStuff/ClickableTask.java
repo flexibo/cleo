@@ -32,8 +32,12 @@ public class ClickableTask extends javax.swing.JPanel {
      * Creates new form ClickableTask
      */
     int size;
+    
+    
     public ClickableTask(MainTask mainTask, int index, boolean enableMenu) {
         initComponents();
+        
+        setOpaque(false);
         
         MainTaskItem mainTaskItem = new MainTaskItem(mainTask);
         ArrayList<SubTaskItem> subtaskItems = mainTaskItem.getSubTaskItems();
@@ -58,7 +62,7 @@ public class ClickableTask extends javax.swing.JPanel {
         add(subTaskPanels);
         
         
-        jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/downArrow.png"));
+        jLabel1.setIcon(new ImageIcon("TempIcons/downArrow.png"));
         jLabel1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -84,10 +88,10 @@ public class ClickableTask extends javax.swing.JPanel {
     
     public final void toggleVisibility(JPanel panel) {
         if (panel.isVisible()) {
-            jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/downArrow.png"));
+            jLabel1.setIcon(new ImageIcon("TempIcons/downArrow.png"));
             setPreferredSize(new java.awt.Dimension(600, 55));
         } else{
-            jLabel1.setIcon(new ImageIcon("src/main/java/TempIcons/upArrow.png"));
+            jLabel1.setIcon(new ImageIcon("TempIcons/upArrow.png"));
             setPreferredSize(new java.awt.Dimension(600, 50 * size + 80));
         }
         
@@ -112,7 +116,7 @@ public class ClickableTask extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 517, Short.MAX_VALUE))
+                .addGap(0, 904, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

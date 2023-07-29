@@ -24,8 +24,10 @@ public class ProgressGraphCurved extends javax.swing.JPanel {
     public ProgressGraphCurved() {
         initComponents();
         chart.setBackground(new Color(255, 255, 255));
-        chart.addLegend("Study", new Color(255, 204, 204), new Color(255, 204, 204));
-        chart.addLegend("Rest",  new Color(204, 204, 255),  new Color(204, 204, 255));
+        //chart.setTitle("Chart Data");
+        chart.addLegend("Study",  new Color(255, 204, 204), new Color(255, 204, 204));
+        
+        chart.addLegend("Rest", new Color(204, 204, 255),  new Color(204, 204, 255));
         chart.clear();
         chart.start();
     }
@@ -35,17 +37,17 @@ public class ProgressGraphCurved extends javax.swing.JPanel {
     }
     
     public void generateGraph(ArrayList<Model.Day> data) {
-        chart.clear();
+        clear();
         for (int i = 0; i < data.size(); i++) {
             int hoursStudy = data.get(i).durationStudy;
             int hoursRest = data.get(i).durationRest;
-            LocalDate date = data.get(i).date;
+            LocalDate date = data.get(i).getLocalDate();
             if (i == date.lengthOfMonth() / 2) {
                 chart.addData(new ModelChart(date.getMonth() + "", new double[]{hoursStudy, hoursRest}));
             } else {
                 chart.addData(new ModelChart("", new double[]{hoursStudy, hoursRest}));
             }
-        chart.start();
+            chart.start();
         }
     }
 

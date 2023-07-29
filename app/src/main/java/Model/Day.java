@@ -4,6 +4,9 @@
  */
 package Model;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 /**
  *
  * @author sidneylawther
@@ -11,16 +14,22 @@ import java.time.LocalDate;
 public class Day {
     public int durationStudy;
     public int durationRest;
-    public LocalDate date;
+    public Date date;
     
-    public Day(int durationStudy, int durationRest, LocalDate date) {
+    public Day(int durationStudy, int durationRest, Date date) {
         this.durationStudy = durationStudy;
         this.durationRest = durationRest;
         this.date = date;
     }
     
-    public LocalDate getDate() {
-        return this.date;
+    
+    private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+          .atZone(ZoneId.systemDefault())
+          .toLocalDate();
     }
     
+    public LocalDate getLocalDate(){
+        return convertToLocalDateViaInstant(date);
+    }
 }

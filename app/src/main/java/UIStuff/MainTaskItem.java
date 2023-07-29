@@ -4,6 +4,7 @@
  */
 package UIStuff;
 
+import Data.MainTasksData;
 import Model.MainTask;
 import Model.SubTask;
 import java.awt.Color;
@@ -31,6 +32,7 @@ public class MainTaskItem extends javax.swing.JPanel {
             protected void paintBorder(Graphics g) {
                 // Override to remove border painting
             }
+            
         };
     
      /**
@@ -38,6 +40,7 @@ public class MainTaskItem extends javax.swing.JPanel {
      */
     public MainTaskItem(MainTask mainTask) {
         initComponents();
+        
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         dueDate.setText(df.format(mainTask.deadline));
         priority.setText(String.valueOf(mainTask.priority));
@@ -51,9 +54,10 @@ public class MainTaskItem extends javax.swing.JPanel {
             subTaskItems.add(new SubTaskItem(this, i));
         }
         
-        setOpaque(true);
+        setOpaque(false);
         
-        bar.setBounds(10,40,500,2);
+        bar.setBounds(10,40,500,4);
+        bar.setForeground(new Color(245, 156, 255));
         
         updateProgressBar();
         add(bar); 
@@ -112,7 +116,6 @@ public class MainTaskItem extends javax.swing.JPanel {
     private void toggleDone(boolean bool) {
         mainTask.done = bool;
         showDone(bool);
-
     }
 
     /**
@@ -145,8 +148,8 @@ public class MainTaskItem extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(task, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                .addGap(64, 64, 64)
+                .addComponent(task, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dueDate)
                 .addGap(18, 18, 18)
                 .addComponent(priority)
@@ -177,6 +180,8 @@ public class MainTaskItem extends javax.swing.JPanel {
                 subTaskItems.get(i).toggleDone(false);
             } 
         }
+        
+        MainTasksData.saveTasks();
         
         updateProgressBar();
     }//GEN-LAST:event_taskActionPerformed

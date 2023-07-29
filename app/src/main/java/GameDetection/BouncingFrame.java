@@ -2,53 +2,77 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package CleoDevelopmentver1;
+package GameDetection;
 
 import java.awt.Color;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Random;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
 /**
  *
  * @author peach
  */
-public class Test extends javax.swing.JFrame {
+public class BouncingFrame extends javax.swing.JFrame {
 
-    int x;
-    int y;
+    private int x;
+    private int y;
+    private int x_move = 10;
+    private int y_move = 10;
+    
+    // Get the default screen device
+    private static final GraphicsDevice graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+
+    // Get the current display mode of the screen
+    // Get the screen dimensions
+    private static final int SCREEN_WIDTH = graphicsDevice.getDisplayMode().getWidth();
+    private static final int SCREEN_HEIGHT = graphicsDevice.getDisplayMode().getHeight();
+    
+    private final int N_OFFSET;
+    private final int P_OFFSET;
+    
+    private final int MIN_SPEED = 3;
+    private final int MAX_SPEED = 100;
+    
+    
+    private final Timer timer;
     /**
      * Creates new form Test
      */
-    public Test(String filename) {
+    public BouncingFrame(String filename, int nOffset, int pOffset) {
+        this.N_OFFSET = nOffset;
+        this.P_OFFSET = pOffset;
+        
+        Random r = new Random();
+        x_move =  (r.nextInt(MAX_SPEED-MIN_SPEED) + MIN_SPEED);
+        y_move = (r.nextInt(MAX_SPEED-MIN_SPEED) + MIN_SPEED);
+        
         setUndecorated(true);
         initComponents();
+        pack();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
         jLabel1.setIcon(new ImageIcon(filename));
         setBackground(new Color(0,0,0,0));
         setAlwaysOnTop(true);
         setVisible(true);
-        Timer timer = new Timer(30, (ActionEvent e) -> {
+        timer = new Timer(30, (ActionEvent e) -> {
             move();
         });
         
-         Timer stopTimer = new Timer(5000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                timer.stop();
-            }
-        });
-        stopTimer.setRepeats(false);
-        stopTimer.start();
+         //Timer stopTimer = new Timer(15000, (ActionEvent e) -> {
+           //  timer.stop();
+        //});
+        //stopTimer.setRepeats(false);
+        //stopTimer.start();
         
         timer.start();
         jLabel1.addMouseListener(new MouseAdapter() {
@@ -67,14 +91,40 @@ public class Test extends javax.swing.JFrame {
             }
         });
         
+
+
+    }
+   
+    private void move() {
+        if (x  > SCREEN_WIDTH - N_OFFSET) {
+            Random r = new Random();
+            x_move =  (r.nextInt(MAX_SPEED-MIN_SPEED) + MIN_SPEED) * (-1);
+        } else if (y > SCREEN_HEIGHT - N_OFFSET) {
+            Random r = new Random();
+            y_move = (r.nextInt(MAX_SPEED-MIN_SPEED) + MIN_SPEED) * (-1);
+        } else if (x < 0 - P_OFFSET) {
+            Random r = new Random();
+            x_move = (r.nextInt(MAX_SPEED-MIN_SPEED) + MIN_SPEED);
+        } else if (y < 0 - P_OFFSET) {
+            Random r = new Random();
+            y_move = (r.nextInt(MAX_SPEED-MIN_SPEED) + MIN_SPEED);
+        }
+        
+        x += x_move;
+        y += y_move;
+        setLocation(x, y);
         
     }
     
-    private void move() {
-        x += 1;
-        y += 1;
-        setLocation(x, y);
+    @Override
+    public void dispose() {
+        // Stop the timer before disposing of the frame
+        timer.stop();
+        super.dispose();
     }
+    
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,6 +153,7 @@ public class Test extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

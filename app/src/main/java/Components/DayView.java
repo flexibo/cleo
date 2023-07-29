@@ -24,12 +24,16 @@ public class DayView extends javax.swing.JPanel {
     }
     
     public void generateGraph(ArrayList<Model.Day> data) {
+        //System.out.println(data.size());
         for (int i = 0; i < data.size(); i++) {
             int hoursStudy = data.get(i).durationStudy;
             int hoursRest = data.get(i).durationRest;
-            LocalDate date = data.get(i).date;
+            LocalDate date = data.get(i).getLocalDate();
             progressGraph1.addData(new ChartStuff.ModelChart(date.toString(), new double[]{hoursStudy, hoursRest}));
+            
         }
+        
+        
     }
     
     public void removeData() {

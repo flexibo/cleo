@@ -6,6 +6,7 @@ package Data;
 
 import Manage.ManagePanel;
 import Model.MainTask;
+import Model.SubTask;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -27,9 +28,15 @@ public class MainTasksData {
     private static ArrayList<MainTask> mainTasks;
     final private static String FILEPATH = "tasks.json";
     final private static String KEY = "mainTasks";
+    private static boolean loaded = false;
+    
     
     public static ArrayList<MainTask> getMainTasks() {
-        loadTasks();
+        if (!loaded) {
+            loadTasks();
+            loaded = true;
+        }
+        
         return mainTasks;
     }
     
@@ -37,20 +44,19 @@ public class MainTasksData {
         mainTasks.add(mainTask);
         sortList();
         saveTasks();
-        System.out.println("size: " + mainTasks.size());
-        Manage.ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
+        //System.out.println("size: " + mainTasks.size());
         Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
     }
     
     public static void deleteDoneTasks() {
         int count = 0;
-        for(int i = 0; i < mainTasks.size(); i++) {            
+        for(int i = 0; i < mainTasks.size(); i++) {
+            //System.out.println(mainTasks.get(i));
             if (mainTasks.get(i).done) {
                 count++;
                 deleteTask(i);
             }
         }
-        Manage.ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
         Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
     }
     
@@ -69,12 +75,13 @@ public class MainTasksData {
         Manage.ManagePanel.refreshPanel(ManagePanel.CALENDAR_PANEL);
     }
     
-    public static int size() {
-        return mainTasks.size();
+    public static void updateTask(MainTask task) {
+        
+        saveTasks();
     }
     
-    public static int indexOf(MainTask task) {
-        return mainTasks.indexOf(task);
+    public static int size() {
+        return mainTasks.size();
     }
     
     private static void sortList() {
@@ -98,7 +105,7 @@ public class MainTasksData {
         } 
     }
         
-    private static void saveTasks() {
+    public static void saveTasks() {
         Gson gson = new Gson();
         JSONObject json = JsonEncode.readJsonFromFile(FILEPATH);
 
