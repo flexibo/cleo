@@ -356,6 +356,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             circleProgressBar1.setForeground(new Color(255, 204, 204));
             otherBar.setValue((int) Math.round(persentage1 * 100));
             otherBar.setForeground(new Color(255, 204, 204));
+            otherBar.setColor(new Color(255, 204, 204));
 
         } else {
             double persentage2 = ((double) k / (double) restDurationInt);
@@ -363,6 +364,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             circleProgressBar1.setForeground(new Color(204, 204, 255));
             otherBar.setValue((int) Math.round(persentage2 * 100));
             otherBar.setForeground(new Color(204, 204, 255));
+            otherBar.setColor(new Color(204, 204, 255));
         }
     }
     

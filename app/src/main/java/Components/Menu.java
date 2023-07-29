@@ -46,7 +46,7 @@ public class Menu extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
-        circleProgressBar1.setColor(new Color(255,255,255));
+        circleProgressBar1.setText("");
         //scaleImage();
         init();
         
