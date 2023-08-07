@@ -5,6 +5,8 @@
 package Components;
 
 import Model.SubTask;
+import com.toedter.calendar.JTextFieldDateEditor;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -21,16 +23,27 @@ public class SubTaskInput extends javax.swing.JPanel {
     
     public SubTaskInput() {
         initComponents();
-        coloredTextBox1.setLimit(70);
+        init();
+        
+        Calendar calendar = Calendar.getInstance();
+        jDateChooser1.setDate(calendar.getTime());
+        jDateChooser1.getJCalendar().setMinSelectableDate(calendar.getTime());
         setOpaque(false);
     }
     
     public SubTaskInput(SubTask subTask) {
         initComponents();
-        coloredTextBox1.setLimit(70);
+        init();
         coloredTextBox1.setText(subTask.task);
         jDateChooser1.setDate(subTask.deadline);
         jSpinner1.setValue(subTask.weight);
+        setOpaque(false);
+    }
+    
+    private void init() {
+        coloredTextBox1.setLimit(70);
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) jDateChooser1.getDateEditor();
+        editor.setEditable(false);
     }
 
     /**

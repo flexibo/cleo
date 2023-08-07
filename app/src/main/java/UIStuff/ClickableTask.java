@@ -12,6 +12,8 @@ import Model.Task;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -33,12 +35,14 @@ public class ClickableTask extends javax.swing.JPanel {
      */
     int size;
     
-    
+    private final GridBagConstraints c;
+        
     public ClickableTask(MainTask mainTask, int index) {
         initComponents();
         
-        setOpaque(false);
-        
+        setLayout(new GridBagLayout());
+        c = new GridBagConstraints();
+        c.gridy = 0;
         MainTaskItem mainTaskItem = new MainTaskItem(mainTask);
         ArrayList<SubTaskItem> subtaskItems = mainTaskItem.getSubTaskItems();
         
@@ -48,18 +52,29 @@ public class ClickableTask extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(600, 50 * this.size + 70));
         setLayout(new FlowLayout());
         
-        add(mainTaskItem);
+        add(mainTaskItem, c);
         
         JPanel subTaskPanels = new JPanel();
+        subTaskPanels.setLayout(new GridBagLayout());
+        subTaskPanels.setOpaque(false);
+        
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.1;
+        c.weighty = 0;
         for (int i = 0; i < this.size; i++) {
-            subTaskPanels.add(subtaskItems.get(i));
+            subTaskPanels.add(subtaskItems.get(i), c);
+            c.gridy++;
         }
         subTaskPanels.setPreferredSize(new Dimension(550, 50 * this.size));
         
-        subTaskPanels.setLayout(new FlowLayout());
-        subTaskPanels.setOpaque(false);
+
+        setOpaque(false);
+        
         toggleVisibility(subTaskPanels);
-        add(subTaskPanels);
+        c.gridy = 1;
+        add(subTaskPanels, c);
         
         
         jLabel1.setIcon(new ImageIcon("TempIcons/downArrow.png"));

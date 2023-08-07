@@ -9,6 +9,7 @@ import Manage.ManagePanel;
 import Model.MainTask;
 import Model.SubTask;
 import UIStuff.ClickableTask;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -42,29 +43,31 @@ public class TaskView extends javax.swing.JPanel {
         DateTimeComparator dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
         
         c.gridy = 0;
+        add(new TaskViewHeader(), c);
+        c.gridy = 1;
+        
         mainTasks = MainTasksData.getMainTasks();
-        for (int i=0; i < mainTasks.size(); i++ ){
-            if (dateTimeComparator.compare(date, mainTasks.get(i).deadline)== 0) {
-                ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
-                c.gridy++;
-                add(clickableTask,c);
-            } else {
-                for (SubTask subtask : mainTasks.get(i).subTasks) {
-                    if (dateTimeComparator.compare(date, subtask.deadline)== 0) {
-                        ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
-                        c.gridy++;
-                        add(clickableTask,c);
+        if (mainTasks.isEmpty()) {
+            noTasks();
+        } else {
+            for (int i=0; i < mainTasks.size(); i++ ){
+                if (dateTimeComparator.compare(date, mainTasks.get(i).deadline)== 0) {
+                    ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
+                    c.gridy++;
+                    add(clickableTask,c);
+                } else {
+                    for (SubTask subtask : mainTasks.get(i).subTasks) {
+                        if (dateTimeComparator.compare(date, subtask.deadline)== 0) {
+                            ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
+                            c.gridy++;
+                            add(clickableTask,c);
+                        }
                     }
                 }
+                revalidate();
+                repaint();
+                setVisible(true);
             } 
-        } 
-        
-        if (c.gridy == 0)
-            noTasks();
-        else {
-            revalidate();
-            repaint();
-            setVisible(true);
         }
     }
     
@@ -78,6 +81,9 @@ public class TaskView extends javax.swing.JPanel {
     public void updateTasks() {
         removeAll();
         c.gridy = 0;
+        add(new TaskViewHeader(), c);
+        c.gridy = 1;
+        
         mainTasks = MainTasksData.getMainTasks();
         
         if (!mainTasks.isEmpty()) {

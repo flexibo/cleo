@@ -9,14 +9,19 @@ import Data.MainTasksData;
 import Manage.ManagePanel;
 import Model.MainTask;
 import Model.SubTask;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 /**
  *
  * @author peach
@@ -37,21 +42,28 @@ public class TaskEditor extends javax.swing.JFrame {
     public TaskEditor() {
         initComponents();
         init();
+        
+        Calendar calendar = Calendar.getInstance();
+        dateChooser.setDate(calendar.getTime());
+        dateChooser.getJCalendar().setMinSelectableDate(calendar.getTime());
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
+        editor.setEditable(false);
+
         this.index = MainTasksData.size() - 1;
     }
     
     public TaskEditor(MainTask mainTask, int index) {
         initComponents();
         init();
-        
+
         jLabel4.setText("Edit your task here!");
         
         this.index = index;
         this.mainTask = mainTask;
         added = true;
         
-        mainTextBox.setText(mainTask.task);
         mainTextBox.setLimit(62);
+        mainTextBox.setText(mainTask.task);
         dateChooser.setDate(mainTask.deadline);
         priorityChooser.setValue(mainTask.priority);
         
@@ -87,7 +99,6 @@ public class TaskEditor extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cal = new Components.CalendarCustom();
         dateChooser = new com.toedter.calendar.JDateChooser();
-        refreshButton = new UIStuff.CustomColorButton();
         jLabel4 = new javax.swing.JLabel();
         subTasksComponent = new Components.SubTasksComponent();
         confirmButton = new UIStuff.CustomColorButton();
@@ -112,13 +123,6 @@ public class TaskEditor extends javax.swing.JFrame {
         jLabel2.setText("Deadline");
 
         jLabel3.setText("Priority");
-
-        refreshButton.setText("Refresh");
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Add your task here!");
 
@@ -161,11 +165,7 @@ public class TaskEditor extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(subTasksComponent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103))))
+                .addComponent(cal, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,11 +197,8 @@ public class TaskEditor extends javax.swing.JFrame {
                                     .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addComponent(subTasksComponent, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(cal, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cal, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(warning, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -228,15 +225,11 @@ public class TaskEditor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mainTextBoxActionPerformed
 
-    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        // TODO add your handling code here:
-        cal.refresh();
-    }//GEN-LAST:event_refreshButtonActionPerformed
-
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
          ArrayList<SubTask> subtasks = subTasksComponent.getSubtasks();
          mainTask = new MainTask(mainTextBox.getText(), dateChooser.getDate(), (int)priorityChooser.getValue(), subtasks);
+         
          if (!subtasks.isEmpty()) {
             if (!added) {
                 MainTasksData.addTask(mainTask);
@@ -286,7 +279,6 @@ public class TaskEditor extends javax.swing.JFrame {
     private Components.MoveableTopBar moveableTopBar2;
     private UIStuff.PanelBorder panelBorder1;
     private javax.swing.JSpinner priorityChooser;
-    private UIStuff.CustomColorButton refreshButton;
     private Components.SubTasksComponent subTasksComponent;
     private javax.swing.JLabel warning;
     // End of variables declaration//GEN-END:variables

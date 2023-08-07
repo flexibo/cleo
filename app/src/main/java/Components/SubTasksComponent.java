@@ -25,6 +25,7 @@ public class SubTasksComponent extends javax.swing.JLayeredPane {
     
     public SubTasksComponent() {
         initComponents();
+        setOpaque(false);
         
         subTaskInputs = new ArrayList<>();
        
