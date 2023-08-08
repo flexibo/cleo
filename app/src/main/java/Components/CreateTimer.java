@@ -29,9 +29,9 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         restDuration.setValue(5);
         workDuration.addChangeListener((ChangeEvent e) -> {
             int val1 = (int) workDuration.getValue();
-            if (val1 < 0) {
-                workDuration.setValue(0);
-                StudySlider.setValue(0);
+            if (val1 < 1) {
+                workDuration.setValue(1);
+                StudySlider.setValue(1);
             } else if (val1 > 120){
                 workDuration.setValue(120);
                 StudySlider.setValue(120);
@@ -42,8 +42,9 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         
         restDuration.addChangeListener((ChangeEvent e) -> {
             int val2 = (int) restDuration.getValue();
-            if (val2 < 0) {
-                RestSlider.setValue(0);
+            if (val2 < 1) {
+                restDuration.setValue(1);
+                RestSlider.setValue(1);
             } else if (val2 > 120){
                 RestSlider.setValue(120);
             } else {
@@ -179,19 +180,33 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    // update the study duration textfield to reflect the slider
+   
+    /**
+     * if the study slider is set to a value, the text field is updated  reflect the slider
+     * @param evt 
+     */
     private void StudySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_StudySliderStateChanged
         // TODO add your handling code here:
         workDuration.setValue(StudySlider.getValue());
     }//GEN-LAST:event_StudySliderStateChanged
-    
-    // update the rest duration textfield to reflect the slider
+    /**
+     * if the rest slider is set to a value, the text field is updated  reflect the slider
+     * @param evt 
+     */
     private void RestSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_RestSliderStateChanged
         // TODO add your handling code here:
         restDuration.setValue(RestSlider.getValue());
     }//GEN-LAST:event_RestSliderStateChanged
 
     // place holder for text field for name of custom timer
+    /**
+     * next 2 functions are to set a placeholder
+     * place holder for text field for the name of the custom timer so users to not have the delete "Name of Custom Timer" every time
+     * the first function is that when the user clicks on the text field it will be ready to fill in the name, no back spacing needed
+     * the second function is that when the user clicks away from the text box without filling in the name of the custom timer,
+     * the text will be set back to "Name of Custom Timer"
+     * @param evt 
+     */
     private void timerNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timerNameFocusGained
         // TODO add your handling code here:
         if (timerName.getText().equals("Name of Custom Timer")) {
@@ -207,8 +222,11 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         }
     }//GEN-LAST:event_timerNameFocusLost
 
-    
-    //create a timer with the specifications, add into combobox and reset values of slider & text field and rest fexi field
+    /**
+     * this function will create a timer specification object based on the specified duration of rest and work and name, add it into the combo box
+     * of timers and then reset the sliders and text fields to reflect the timer currently chosen from the combo box
+     * @param evt 
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         TimerSpecification newCustomTimer = new TimerSpecification(timerName.getText(),/* StudySlider.getValue()*/(int) workDuration.getValue(),(int) restDuration.getValue());
@@ -223,7 +241,10 @@ public class CreateTimer extends javax.swing.JPanel /*implements ActionListener*
         restDuration.setValue(currentlyChosen.breakTime);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
+    /**
+     * to rest the sliders values to reflect the timer specification
+     * @param tS 
+     */
     public static void setSlidersToTimer(TimerSpecification tS) {
         
         StudySlider.setValue(tS.studyTime);

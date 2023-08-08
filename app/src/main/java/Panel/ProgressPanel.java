@@ -94,19 +94,19 @@ public class ProgressPanel extends javax.swing.JPanel {
     
     
     public static void updateStudy(int k) {
-        ProgressPanel.timeStudy = ProgressPanel.timeStudy + k;
+        ProgressPanel.timeStudy = ProgressPanel.timeStudy + k / 60;
         //System.out.println(k);
-        DaysData.updateTodayStudy(k);
-        jLabel2.setText("Time Studying: "+ ProgressPanel.timeStudy);
+        DaysData.updateTodayStudy(k / 60);
+        jLabel2.setText("Time Studying: "+ ProgressPanel.timeStudy + " min");
         updateAllView(data);
         
     }
     
     public static void updateRest(int k) {
         Model.Day today = data.get(data.size() - 1);
-        ProgressPanel.timeRest = ProgressPanel.timeRest + k;
-        DaysData.updateTodayRest(k);
-        jLabel1.setText("Time Resting: "+ ProgressPanel.timeRest);
+        ProgressPanel.timeRest = ProgressPanel.timeRest + k / 60;
+        DaysData.updateTodayRest(k / 60);
+        jLabel1.setText("Time Resting: "+ ProgressPanel.timeRest + " min");
         updateAllView(data);
     }
     
