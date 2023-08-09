@@ -24,6 +24,9 @@ import javax.swing.DefaultComboBoxModel;
 /**
  *
  * @author peach
+ * 
+ * Credits: Java Swing Tips https://java-swing-tips.blogspot.com/2014/06/how-to-create-circular-progress.html
+ * (CircleProgressBar)
  */
 public class StartTimer extends javax.swing.JPanel implements ActionListener {
     //Stuff needed for the Timer and timer logic 
@@ -53,7 +56,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     JButton button7 = new JButton("Ready for Work!");
     
 
-    /**
+    /*
      * Creates new form FormTimer
      */
     public StartTimer() {
@@ -63,7 +66,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     }
     
     
-    // Timer logic eg updating the JLabel that indicates the time every minute //
+    /*  
+    Timer logic eg updating the JLabel that indicates the time every minute //
+    */
     @Override
     public void actionPerformed(ActionEvent e) {     
         if (e.getSource() == timer) {
@@ -231,8 +236,14 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         circleProgressBar1.setString("");
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    This is the button to start the timer. When timer is started, status is updated to show 
+    user is now in the work period, timer selected in the combo box is started,
+    game detection begins and button is disabled
+    */
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         // TODO add your handling code here:
+        startButton.setEnabled(false);
         currentStage.setText(isWorking? "Work Period" : "Rest Period");
         TimerSpecification timerUsed = (TimerSpecification) jComboBox1.getSelectedItem();
         studyDurationInt = timerUsed.studyTime * 60;
@@ -240,9 +251,15 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         //Panel.ProgressPanel.addDate(LocalDate.now());
         timer.start();
         gameDetection.startDetection();
-        startButton.setEnabled(false);
+        
     }//GEN-LAST:event_startButtonActionPerformed
-
+   
+    /*
+    When the timer is stopped, it is possible for a user to stop in the middle of the session so this hangover
+    time is accounted for hence why we need to reflect this in the progress panel hence the use of updateStudy() 
+    or updateRest() also need to reflect this change in the json file hence updateTime(), start timer enabled to
+    allow users to start they next session when they want
+    */
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         // TODO add your handling code here:
         timer.stop();
@@ -258,6 +275,10 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         startButton.setEnabled(true);
     }//GEN-LAST:event_stopButtonActionPerformed
 
+    /*
+    as the user selects the different timers, the sliders and textbox in the CreateTimer pannel 
+    will reflect the specefic durations and the name for user's easy reference
+    */
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         Model.TimerSpecification timerChosen =(TimerSpecification) jComboBox1.getSelectedItem();
@@ -265,6 +286,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         startButton.setEnabled(true);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    /* 
+    this is for users to delete the selected timer from the combo box and the json file
+    */
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         TimerSpecification ts = (TimerSpecification) jComboBox1.getSelectedItem();
@@ -274,7 +298,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     
-    //helper functions
+    /*
+    To convert k which is the duration in seconds to the largest minute
+    */
     private static String mins(int k) {
         if ((k / 60) < 10) {
             return "0" + (k / 60);
@@ -283,6 +309,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         }
     }
     
+    /* 
+    To get the number of seconds after getting number of minutes
+    */
     private static String secs(int k) {
         
         if (k - ((k / 60) * 60) < 10) {
@@ -293,7 +322,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     }
     
     
-    // notification frame for end of study session, users can either press the button to move to rest or extend work   
+    /* notification frame for end of study session, users can either press the button 
+    to move to rest or extend work   
+    */    
     private void moveToRest() {
         frame2.setSize(300, 120);
         frame2.setLayout(new FlowLayout(3));
@@ -307,7 +338,10 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         frame2.setVisible(true);
     }
     
-    // notification frame for end of rest session, users can either press the button to move to work or extend rest
+    /* 
+    notification frame for end of rest session, users can either 
+    press the button to move to work or extend rest
+    */
     private void moveToWork() {
         
         frame3.setSize(300, 120);
@@ -322,14 +356,18 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         frame3.setVisible(true);
     }
     
-    //helper function tp update the combox box whena  new custom timer is created
+    /*
+    function to update the combox box whena  new custom timer is created
+    */
     public static void addTimer(TimerSpecification tS) {
         TimerData.addTimer(tS);
         options = TimerData.getTimers();
         jComboBox1.setModel(new DefaultComboBoxModel<>(options));
     }
     
-    //updating the graphics used to display time as each minute passes
+    /*
+    updating the graphics(circular progress bar & time shown)as each minute passes
+    */
     private static void updateTime(int k) {
         //System.out.println(k);
         circleProgressBar1.setText(String.valueOf(mins(k) + ":" + secs(k)));
@@ -352,6 +390,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         }
     }
     
+    /*
+    set the progress bar that appears on the panel on the left hand side (not the timer panel)
+    */
     public static void set(CircleProgressBar progressBar) {
         StartTimer.otherBar = progressBar;
     }

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 /**
  *
  * @author sidneylawther
+ * credits: Ra Ven  https://www.youtube.com/watch?v=Y_T4YH9c6uw&t=240s
+ * (ProgressGraph)
  */
 public class WeekView extends javax.swing.JPanel {
 
@@ -24,6 +26,9 @@ public class WeekView extends javax.swing.JPanel {
         progressGraph1.addLegend("Rest Duration", new Color(204, 204, 255));
     }
     
+    /*
+    feeds the set(s) of data in into the graph with the day of the week as the label on the x-axis
+    */
     public void generateGraph(ArrayList<Model.Day> data) {
         removeData();
         for (int i = 0; i < data.size(); i++) {
@@ -35,6 +40,9 @@ public class WeekView extends javax.swing.JPanel {
         
     }
     
+    /*
+    clear the data from the graph
+    */
     private void removeData() {
         progressGraph1.clear();
     }

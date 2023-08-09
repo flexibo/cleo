@@ -15,6 +15,7 @@ import java.util.List;
 /**
  *
  * @author sidneylawther
+ * 
  */
 public class ProgressGraph extends javax.swing.JPanel {
     private List<ChartStuff.ModelLegend> legends = new ArrayList<>();

@@ -41,6 +41,9 @@ public class ProgressPanel extends javax.swing.JPanel {
         updateAllView();
     }
     
+    /* 
+    to toggle between the different views of progress(Day, week & month)
+    */
     private void setPanel(JPanel panel) {
         graphPanel.removeAll();
         graphPanel.add(panel);
@@ -48,6 +51,9 @@ public class ProgressPanel extends javax.swing.JPanel {
         graphPanel.revalidate();
     }
 
+    /* 
+    to generate all the updated graphs with the most recent data when this pannel is opened
+    */
     public void updateAllView() {
         updateStudy(DaysData.getToday().durationStudy);
         updateRest(DaysData.getToday().durationRest);
@@ -57,11 +63,18 @@ public class ProgressPanel extends javax.swing.JPanel {
         monthView.generateGraph(DaysData.getDays());
     }
     
-    
+    /* 
+    If a session is stoped while in a work period or the work period ends, 
+    the status will be updated to reflect durations spent working
+    */
     private void updateStudy(int k) {
-        jLabel1.setText("Time Studying: "+ k + " min");
+        jLabel1.setText("Time Working: "+ k + " min");
     }
     
+    /* 
+    If a session is stoped while in a resting period or the rest period ends, 
+    the status will be updated to reflect durations spent resting
+    */
     private void updateRest(int k) {
         jLabel2.setText("Time Resting: "+ k + " min");
     }
@@ -155,16 +168,27 @@ public class ProgressPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    Button to show the day view (Duration spent working and resting for today only)
+    */
     private void dayViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayViewButtonActionPerformed
         // TODO add your handling code here:
         setPanel(dayView);
     }//GEN-LAST:event_dayViewButtonActionPerformed
 
+    /*
+    Button to show the week view (Duration spent working and resting for that week, 
+    the first day of the week starting on sunday)
+    */
     private void weekViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weekViewButtonActionPerformed
         // TODO add your handling code here:
         setPanel(weekView);
     }//GEN-LAST:event_weekViewButtonActionPerformed
 
+    /*
+    Button to show the month view (Duration spent working and resting for that month, 
+    the first day of the month starting on the 1st)
+    */
     private void monthViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthViewButtonActionPerformed
         // TODO add your handling code here:
         setPanel(monthView);

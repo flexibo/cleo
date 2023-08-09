@@ -12,6 +12,9 @@ import java.util.ArrayList;
 /**
  *
  * @author sidneylawther
+ * 
+ * credits: Ra Ven  https://www.youtube.com/watch?v=Y_T4YH9c6uw&t=240s
+ * (ProgressGraph)
  */
 public class DayView extends javax.swing.JPanel {
 
@@ -24,7 +27,9 @@ public class DayView extends javax.swing.JPanel {
         progressGraph1.addLegend("Rest Duration", new Color(204, 204, 255));
         
     }
-    
+    /* 
+    adds in the set of data into the graph
+    */
     public void generateGraph(Day data) {
         removeData();
         int hoursStudy = data.durationStudy;
@@ -33,6 +38,9 @@ public class DayView extends javax.swing.JPanel {
         progressGraph1.addData(new ChartStuff.ModelChart(date.toString(), new double[]{hoursStudy, hoursRest}));
     }
     
+    /*
+    clears the bars from the graph
+    */
     private void removeData() {
         progressGraph1.clear();
     }

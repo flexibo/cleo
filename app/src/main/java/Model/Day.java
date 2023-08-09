@@ -12,6 +12,7 @@ import java.util.Date;
  * @author sidneylawther
  */
 public class Day {
+    
     public int durationStudy;
     public int durationRest;
     public Date date;
@@ -22,13 +23,18 @@ public class Day {
         this.date = date;
     }
     
-    
+    /* 
+    convert Date into LocalDate for Json
+    */
     private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
         return dateToConvert.toInstant()
           .atZone(ZoneId.systemDefault())
           .toLocalDate();
     }
     
+    /*
+    Converted Date to LocalDate
+    */
     public LocalDate getLocalDate(){
         return convertToLocalDateViaInstant(date);
     }

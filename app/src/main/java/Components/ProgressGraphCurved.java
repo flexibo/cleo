@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
+
 package Components;
 
 import java.awt.Color;
@@ -15,6 +16,9 @@ import java.time.LocalDate;
 /**
  *
  * @author sidneylawther
+ * 
+ * credits: Ra Ven  https://www.youtube.com/watch?v=1yMp884oJy8 
+ * (CurvedLineChart)
  */
 public class ProgressGraphCurved extends javax.swing.JPanel {
 
@@ -32,10 +36,16 @@ public class ProgressGraphCurved extends javax.swing.JPanel {
         chart.start();
     }
     
+    /*
+    clears the line graph
+    */
     public void clear() {
         chart.clear();
     }
     
+    /*
+    feeds data into the graph
+    */
     public void generateGraph(ArrayList<Model.Day> data) {
         clear();
         for (int i = 0; i < data.size(); i++) {
