@@ -71,12 +71,12 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             updateTime(k);
             currentStage.setText(isWorking? "Work Period" : "Rest Period");
             
-            if(extendedWork && k == 5 + studyDurationInt) {
+            if(extendedWork && k == (5 * 60) + studyDurationInt) {
                 extendedWork = false;
                 timer.stop();
                 moveToRest();
             }
-            else if(extendedRest && k == 5 + restDurationInt) {
+            else if(extendedRest && k == (5 * 60) + restDurationInt) {
                 extendedRest = false;
                 timer.stop();
                 moveToWork();
@@ -103,7 +103,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         }
         
         if (e.getSource() == button5) {  // user choses to move into rest session
-            DaysData.addTodayStudy(k);
+            DaysData.addTodayStudy(k/60);
             k = 0;
             timer.start();
             isWorking = false;
@@ -119,7 +119,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             
         }
         if (e.getSource() == button7) { //user choses to move into work session
-            DaysData.addTodayRest(k);
+            DaysData.addTodayRest(k/60);
             k = 0;
             timer.start();
             isWorking = true;
@@ -247,9 +247,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         // TODO add your handling code here:
         timer.stop();
         if (isWorking) {
-            DaysData.addTodayStudy(k);
+            DaysData.addTodayStudy(k/60);
         } else if (!isWorking) {
-            DaysData.addTodayRest(k);
+            DaysData.addTodayRest(k/60);
         }
         
         k = 0;
