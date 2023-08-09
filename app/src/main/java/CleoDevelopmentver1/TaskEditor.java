@@ -232,7 +232,14 @@ public class TaskEditor extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
          ArrayList<SubTask> subtasks = subTasksComponent.getSubtasks();
-         mainTask = new MainTask(mainTextBox.getText(), dateChooser.getDate(), (int)priorityChooser.getValue(), subtasks);
+         Calendar cal = Calendar.getInstance();
+         cal.setTime(dateChooser.getDate());
+         
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+         mainTask = new MainTask(mainTextBox.getText(), cal.getTime(), (int)priorityChooser.getValue(), subtasks);
          
          if (!subtasks.isEmpty()) {
             if (!added) {
@@ -242,7 +249,7 @@ public class TaskEditor extends javax.swing.JFrame {
                 MainTasksData.editTask(mainTask, index);
             }
             
-            cal.refresh();
+            this.cal.refresh();
             ManagePanel.refreshPanel(ManagePanel.TASKS_PANEL);
             dispose();
          } else {

@@ -4,6 +4,7 @@
  */
 package Model;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -66,6 +67,15 @@ public class Cell extends JButton {
        }
     }
     
+    public void indicateSubtask() {
+        subtask = true;
+    }
+    
+    public void indicateMaintask() {
+        maintask = true;
+    }
+    
+    
     public void setAsToday(){
         this.isToday = true;
     }
@@ -73,7 +83,7 @@ public class Cell extends JButton {
     public void setAsSelected(boolean bool) {
         this.selected = bool;
         if (bool)
-            setForeground(Color.WHITE);
+            setForeground(new Color(255, 54, 95));
         else {
             if (curMonth){
                 setForeground(new Color(68,68,68));
@@ -114,25 +124,46 @@ public class Cell extends JButton {
         }
         
         if(isToday) {
+            g2.setColor(new Color(255, 242, 244));
+            
+            g2.setStroke(new BasicStroke(6));
+            
+            int x = getWidth()/2-16;
+            int y = getHeight()/2-17;
+            g2.drawRoundRect(x, y, 35, 35, 100, 100);  // Use drawRoundRect to draw the circular outline
+        }
+        
+        if (selected) {
             g2.setColor(new Color(255, 255, 255,50));
             int x = getWidth()/2-19;
             int y = getHeight()/2-19;
             g2.fillRoundRect(x, y, 40, 40, 100, 100);
-        }
-        if (selected) {
-            setForeground(Color.WHITE);
-            Graphics2D g3 = (Graphics2D) g;
-            g3.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g3.setColor(new Color(181, 40, 61));
             
-            int x = getWidth()/2-16;
-            int y = getHeight()/2-17;
-            g3.fillRoundRect(x, y, 35, 35, 100, 100);
+            Graphics2D g3 = (Graphics2D) g;
+            g3.setColor(new Color(255, 54, 95));
+
+            int strokeWidth = 3; // Set your desired thickness here
+            g3.setStroke(new BasicStroke(strokeWidth));
+            x = getWidth()/2-16;
+            y = getHeight()/2-17;
+            g3.drawRoundRect(x, y, 35, 35, 100, 100);  // Use drawRoundRect to draw the circular outline
+        }
+        
+                
+        if (maintask) {
+            g2.setColor(new Color(255, 102, 125));
+            int x = getWidth()/2 + 9;
+            int y = getHeight()/2-13;
+            g2.fillRoundRect(x, y, 12, 12, 100, 100);
         }
         
         if (subtask) {
-            
+            g2.setColor(new Color(255, 242, 244));
+            int x = getWidth()/2 + 12;
+            int y = getHeight()/2-11;
+            g2.fillRoundRect(x, y, 6, 6, 100, 100);
         }
+
                 
         super.paintComponent(g); 
     }

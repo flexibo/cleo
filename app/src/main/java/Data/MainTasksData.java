@@ -16,6 +16,7 @@ import org.json.JSONArray;
 
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class MainTasksData {
     final private static String FILEPATH = "tasks.json";
     final private static String KEY = "mainTasks";
     private static boolean loaded = false;
+    private static boolean edited = false;
     
     
     public static ArrayList<MainTask> getMainTasks() {
@@ -110,11 +112,45 @@ public class MainTasksData {
                 mainTasks = gson.fromJson(mainTasksJSONArray.toString(), mainTaskListType);
             } catch (JSONException e) {
                 mainTasks = new ArrayList<>();
-                mainTasks.add(new MainTask("dummy Task", new Date(), 3));
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(new Date());
+                cal.set(Calendar.HOUR_OF_DAY, 0);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);
+                cal.set(Calendar.MILLISECOND, 0);
+                mainTasks.add(new MainTask("dummy Task", cal.getTime(), 3));
                 saveTasks();
                 loadTasks();
             }  
-        } 
+        }
+        
+
+        for(MainTask mainTask : mainTasks) {
+            mainTask.deadline = toMidnight(mainTask.deadline);
+            for (SubTask subTask : mainTask.subTasks) {
+                subTask.deadline = toMidnight(subTask.deadline);
+            }
+        }
+        if (edited) {
+            saveTasks();
+            edited = false;
+        }
+        
+    }
+    
+    private static Date toMidnight(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        if (cal.get(Calendar.HOUR_OF_DAY) != 0 || cal.get(Calendar.MINUTE) != 0 || cal.get(Calendar.SECOND) != 0 || cal.get(Calendar.MILLISECOND) != 0) {
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+        }
+        
+        edited = true;
+        
+        return cal.getTime();
     }
         
     public static void saveTasks() {

@@ -44,7 +44,7 @@ public class ManagePanel {
             case CALENDAR_PANEL -> calendarPanel.refreshCal();
             case PROGRESS_PANEL -> {
             }
-            case TASKS_PANEL -> {tasksPanel.refresh(); System.out.println("sdf");}
+            case TASKS_PANEL -> tasksPanel.refresh();
             case TIMER_PANEL -> {
             }
             default -> {

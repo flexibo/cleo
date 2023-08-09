@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  *
@@ -34,6 +35,9 @@ public class DateComponent extends javax.swing.JLayeredPane {
     private final int year;
     private final HashMap<String, Integer> weightWeekMap; 
     private final ArrayList<MainTask> mainTasks;
+    private final HashSet<Date> mainTaskIndicator;
+    private final HashSet<Date> subTaskIndicator;
+
     private Cell selectedCell = null;
     
     public DateComponent(int month, int year) {
@@ -43,11 +47,11 @@ public class DateComponent extends javax.swing.JLayeredPane {
         this.month = month;
         this.year = year;
         weightWeekMap = new HashMap<>();
-        init();
-        revalidate();
-        repaint();
-        setVisible(true);
         
+        mainTaskIndicator = new HashSet<>();
+        subTaskIndicator = new HashSet<>();
+        
+        init();
     }
 
     
@@ -63,6 +67,10 @@ public class DateComponent extends javax.swing.JLayeredPane {
         Calendar cal = Calendar.getInstance();
         if (mainTasks != null) {
             for (MainTask mainTask : mainTasks) {
+                if (!mainTaskIndicator.contains(mainTask.deadline)) {
+                    mainTaskIndicator.add(mainTask.deadline);
+                }
+                
                 for (int i = 0; i < mainTask.numOfSubTasks(); i++) {
                     SubTask subTask = mainTask.getSubTask(i);
                     cal.setTime(subTask.deadline);
@@ -76,10 +84,13 @@ public class DateComponent extends javax.swing.JLayeredPane {
                     } else {
                         weightWeekMap.put(weekYear, weight);
                     }
+                    
+                    if (!subTaskIndicator.contains(subTask.deadline)) 
+                        subTaskIndicator.add(subTask.deadline);
                 }
             }
             setDate();
-        }  
+        }
     }
     
     private void setDate() {
@@ -87,7 +98,10 @@ public class DateComponent extends javax.swing.JLayeredPane {
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month - 1); // month jan as 0 so start from 0
         cal.set(Calendar.DATE, 1);
-        
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.HOUR,0);
         int startDay = cal.get(Calendar.DAY_OF_WEEK) - 1; // get day of week -1 to index
         cal.add(Calendar.DATE, -startDay);
         
@@ -114,12 +128,17 @@ public class DateComponent extends javax.swing.JLayeredPane {
                     //System.out.println("key found: " + weekYear + "    weight: " + this.weightWeekMap.get(weekYear));
                     cell.setWeekWeight(this.weightWeekMap.get(weekYear));
                 }
-
+                
+                if (this.subTaskIndicator.contains(cal.getTime())) {
+                    cell.indicateSubtask();
+                }
+                
+                if (this.mainTaskIndicator.contains(cal.getTime())) {
+                    cell.indicateMaintask();
+                }
+                
                 cal.add(Calendar.DATE, 1); // up 1 day
             }
-                    revalidate();
-            repaint();
-            setVisible(true);
         }
     }
     

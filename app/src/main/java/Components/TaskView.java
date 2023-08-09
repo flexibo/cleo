@@ -59,6 +59,7 @@ public class TaskView extends javax.swing.JPanel {
                         ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
                         c.gridy++;
                         add(clickableTask,c);
+                        break;
                     }
                 }
             }

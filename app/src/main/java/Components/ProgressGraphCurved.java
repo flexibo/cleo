@@ -29,7 +29,7 @@ public class ProgressGraphCurved extends javax.swing.JPanel {
         initComponents();
         chart.setBackground(new Color(255, 255, 255));
         //chart.setTitle("Chart Data");
-        chart.addLegend("Study",  new Color(255, 204, 204), new Color(255, 204, 204));
+        chart.addLegend("Work",  new Color(255, 204, 204), new Color(255, 204, 204));
         
         chart.addLegend("Rest", new Color(204, 204, 255),  new Color(204, 204, 255));
         chart.clear();
