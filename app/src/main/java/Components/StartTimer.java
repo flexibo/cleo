@@ -4,9 +4,9 @@
  */
 package Components;
 import CircleProgress.CircleProgressBar;
+import Data.DaysData;
 import Data.TimerData;
 import GameDetection.GameDetection;
-import Panel.*;
 import Model.TimerSpecification;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.DefaultComboBoxModel;
-import org.checkerframework.common.returnsreceiver.qual.This;
 
  
 /**
@@ -104,7 +103,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         }
         
         if (e.getSource() == button5) {  // user choses to move into rest session
-            ProgressPanel.updateStudy(k);
+            DaysData.addTodayStudy(k);
             k = 0;
             timer.start();
             isWorking = false;
@@ -120,8 +119,7 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
             
         }
         if (e.getSource() == button7) { //user choses to move into work session
-            
-            ProgressPanel.updateRest(k);
+            DaysData.addTodayRest(k);
             k = 0;
             timer.start();
             isWorking = true;
@@ -145,12 +143,11 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
 
         startButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>(options);
         currentStage = new javax.swing.JLabel();
         circleProgressBar1 = new CircleProgress.CircleProgressBar();
-        jButton3 = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         setOpaque(false);
 
@@ -182,10 +179,10 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         circleProgressBar1.setForeground(new java.awt.Color(0, 0, 0));
         circleProgressBar1.setBorderPainted(false);
 
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -194,53 +191,41 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(circleProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(165, 165, 165)
-                                    .addComponent(jLabel2)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(circleProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(startButton)
-                                .addGap(44, 44, 44)
-                                .addComponent(stopButton)))))
-                .addGap(0, 73, Short.MAX_VALUE))
+                        .addComponent(startButton)
+                        .addGap(44, 44, 44)
+                        .addComponent(stopButton))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton))
+                .addGap(23, 23, 23))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(71, 71, 71)
+                .addComponent(deleteButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(65, 65, 65)
                 .addComponent(currentStage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(circleProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(startButton)
                     .addComponent(stopButton))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         circleProgressBar1.setString("");
@@ -253,7 +238,6 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         studyDurationInt = timerUsed.studyTime * 60;
         restDurationInt = timerUsed.breakTime * 60;
         //Panel.ProgressPanel.addDate(LocalDate.now());
-        Data.DaysData.addDate(LocalDate.now());
         timer.start();
         gameDetection.startDetection();
         startButton.setEnabled(false);
@@ -263,9 +247,9 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         // TODO add your handling code here:
         timer.stop();
         if (isWorking) {
-            ProgressPanel.updateStudy(k);
+            DaysData.addTodayStudy(k);
         } else if (!isWorking) {
-            ProgressPanel.updateRest(k);
+            DaysData.addTodayRest(k);
         }
         
         k = 0;
@@ -281,13 +265,13 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
         startButton.setEnabled(true);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         TimerSpecification ts = (TimerSpecification) jComboBox1.getSelectedItem();
         jComboBox1.removeItem(ts);
         Data.TimerData.deleteTimer(ts);
         //System.out.println(jComboBox1.getSelectedIndex());
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     
     //helper functions
@@ -377,9 +361,8 @@ public class StartTimer extends javax.swing.JPanel implements ActionListener {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static CircleProgress.CircleProgressBar circleProgressBar1;
     private javax.swing.JLabel currentStage;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton deleteButton;
     public static javax.swing.JComboBox<Model.TimerSpecification> jComboBox1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton startButton;
     private javax.swing.JButton stopButton;

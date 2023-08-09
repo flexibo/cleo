@@ -4,6 +4,7 @@
  */
 package Components;
 
+import Model.Day;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,22 +22,18 @@ public class DayView extends javax.swing.JPanel {
         initComponents();
         progressGraph1.addLegend("Work Duration", new Color(255, 204, 204));
         progressGraph1.addLegend("Rest Duration", new Color(204, 204, 255));
-    }
-    
-    public void generateGraph(ArrayList<Model.Day> data) {
-        //System.out.println(data.size());
-        for (int i = 0; i < data.size(); i++) {
-            int hoursStudy = data.get(i).durationStudy;
-            int hoursRest = data.get(i).durationRest;
-            LocalDate date = data.get(i).getLocalDate();
-            progressGraph1.addData(new ChartStuff.ModelChart(date.toString(), new double[]{hoursStudy, hoursRest}));
-            
-        }
-        
         
     }
     
-    public void removeData() {
+    public void generateGraph(Day data) {
+        removeData();
+        int hoursStudy = data.durationStudy;
+        int hoursRest = data.durationRest;
+        LocalDate date = data.getLocalDate();
+        progressGraph1.addData(new ChartStuff.ModelChart(date.toString(), new double[]{hoursStudy, hoursRest}));
+    }
+    
+    private void removeData() {
         progressGraph1.clear();
     }
 
@@ -51,21 +48,23 @@ public class DayView extends javax.swing.JPanel {
 
         progressGraph1 = new Components.ProgressGraph();
 
+        setOpaque(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(progressGraph1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0)
+                .addComponent(progressGraph1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(progressGraph1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(progressGraph1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 

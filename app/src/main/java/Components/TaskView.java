@@ -47,28 +47,30 @@ public class TaskView extends javax.swing.JPanel {
         c.gridy = 1;
         
         mainTasks = MainTasksData.getMainTasks();
-        if (mainTasks.isEmpty()) {
-            noTasks();
-        } else {
-            for (int i=0; i < mainTasks.size(); i++ ){
-                if (dateTimeComparator.compare(date, mainTasks.get(i).deadline)== 0) {
-                    ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
-                    c.gridy++;
-                    add(clickableTask,c);
-                } else {
-                    for (SubTask subtask : mainTasks.get(i).subTasks) {
-                        if (dateTimeComparator.compare(date, subtask.deadline)== 0) {
-                            ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
-                            c.gridy++;
-                            add(clickableTask,c);
-                        }
+
+        for (int i=0; i < mainTasks.size(); i++ ){
+            if (dateTimeComparator.compare(date, mainTasks.get(i).deadline)== 0) {
+                ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
+                c.gridy++;
+                add(clickableTask,c);
+            } else {
+                for (SubTask subtask : mainTasks.get(i).subTasks) {
+                    if (dateTimeComparator.compare(date, subtask.deadline)== 0) {
+                        ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
+                        c.gridy++;
+                        add(clickableTask,c);
                     }
                 }
-                revalidate();
-                repaint();
-                setVisible(true);
-            } 
+            }
+        } 
+        
+        if (c.gridy ==1) {
+            noTasks();
         }
+        
+        revalidate();
+        repaint();
+        setVisible(true);
     }
     
     private String substring(String text, int length) {
@@ -86,22 +88,24 @@ public class TaskView extends javax.swing.JPanel {
         
         mainTasks = MainTasksData.getMainTasks();
         
-        if (!mainTasks.isEmpty()) {
-            for (int i=0; i < mainTasks.size(); i++ ){
-                if (mainTasks.get(i).task.length() > 62) {
-                        System.out.println("I see you edited a task illegally... well no matter, I'll just cut down to 62 characters.");
-                        mainTasks.get(i).task = substring(mainTasks.get(i).task, 62);
-                        MainTasksData.saveTasks();
-                }
-                ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
-                c.gridy++;
-                add(clickableTask,c);
-            } 
-            revalidate();
-            repaint();
-            setVisible(true);
-        } else
+        for (int i=0; i < mainTasks.size(); i++ ){
+            if (mainTasks.get(i).task.length() > 62) {
+                    System.out.println("I see you edited a task illegally... well no matter, I'll just cut down to 62 characters.");
+                    mainTasks.get(i).task = substring(mainTasks.get(i).task, 62);
+                    MainTasksData.saveTasks();
+            }
+            ClickableTask clickableTask = new ClickableTask(mainTasks.get(i), i);
+            c.gridy++;
+            add(clickableTask,c);
+        } 
+        
+        if (c.gridy ==1) {
             noTasks();
+        }
+        
+        revalidate();
+        repaint();
+        setVisible(true);
     }
     
     public void noTasks() {

@@ -4,12 +4,14 @@
  */
 package Data;
 
+import Manage.ManagePanel;
 import Model.Day;
 import Panel.ProgressPanel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,19 +51,40 @@ public class DaysData {
             //data.add(new Model.Day(0, 0 , newDate));
         }
         saveDays();
-        ProgressPanel.updateAllView(days);
+        ManagePanel.getProgressPanel().updateAllView();
     }
     
-    public static void updateTodayRest(int k) {
-        Day today = days.get(days.size()-1);
+    public static ArrayList<Day> getCurrentWeek(){
+        
+        Calendar cal = Calendar.getInstance();
+        while (cal.get(Calendar.DAY_OF_WEEK) > cal.getFirstDayOfWeek()) {
+            cal.add(Calendar.DATE, -1); // Substract 1 day until first day of week.
+        }
+        int firstDayOfWeek = cal.get(Calendar.DAY_OF_MONTH) - 1;
+        ArrayList<Day> currentWeek = new ArrayList<>();
+        for (int i=firstDayOfWeek; i < firstDayOfWeek+7; i++) {
+            currentWeek.add(days.get(i));
+        }
+        return currentWeek;
+    }
+    
+    public static Day getToday() {
+        Calendar cal = Calendar.getInstance();
+        return days.get(cal.get(Calendar.DAY_OF_MONTH) - 1);
+    }
+    
+    public static void addTodayRest(int k) {
+        Day today = getToday();
         today.durationRest += k;
         saveDays();
+        ManagePanel.getProgressPanel().updateAllView();
     }
     
-    public static void updateTodayStudy(int k) {
-        Day today = days.get(days.size()-1);
+    public static void addTodayStudy(int k) {
+        Day today = getToday();
         today.durationStudy += k;
         saveDays();
+        ManagePanel.getProgressPanel().updateAllView();
     }
     
     public static void resetDays() {
@@ -84,6 +107,28 @@ public class DaysData {
                 loadDays();
             }  
         } 
+        
+        
+        int daysInCurrentMonth = YearMonth.now().lengthOfMonth();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        
+        ArrayList<Day> newDays = new ArrayList<>();
+        
+        if (days.size() != daysInCurrentMonth || cal.getTime().compareTo(days.get(0).date) == -1) {
+            for (int i = 1; i <= daysInCurrentMonth; i++) {
+                cal.set(Calendar.DAY_OF_MONTH, i);
+                newDays.add(new Day(0, 0, cal.getTime()));
+            }
+            
+            days = newDays;        
+        }
+        
+        saveDays();
     }
         
     private static void saveDays() {

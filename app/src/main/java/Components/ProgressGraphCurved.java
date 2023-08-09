@@ -62,6 +62,8 @@ public class ProgressGraphCurved extends javax.swing.JPanel {
 
         chart = new CurveChartStuff.CurveLineChart();
 
+        setOpaque(false);
+
         chart.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

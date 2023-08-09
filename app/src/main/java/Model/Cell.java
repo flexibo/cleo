@@ -114,9 +114,7 @@ public class Cell extends JButton {
         }
         
         if(isToday) {
-            g2.setColor(new Color(255, 74, 104));
-            setForeground(new Color(255, 196, 206));
-            setFont(new Font("SansSerif", Font.BOLD, 20));
+            g2.setColor(new Color(255, 255, 255,50));
             int x = getWidth()/2-19;
             int y = getHeight()/2-19;
             g2.fillRoundRect(x, y, 40, 40, 100, 100);

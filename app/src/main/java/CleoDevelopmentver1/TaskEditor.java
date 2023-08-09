@@ -46,6 +46,7 @@ public class TaskEditor extends javax.swing.JFrame {
         Calendar calendar = Calendar.getInstance();
         dateChooser.setDate(calendar.getTime());
         dateChooser.getJCalendar().setMinSelectableDate(calendar.getTime());
+        
         JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
         editor.setEditable(false);
 
@@ -68,6 +69,9 @@ public class TaskEditor extends javax.swing.JFrame {
         priorityChooser.setValue(mainTask.priority);
         
         subTasksComponent.setSubtasks(mainTask.subTasks);
+        
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
+        editor.setEditable(false);
     }
     
     private void init() {
